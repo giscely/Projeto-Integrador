@@ -3,7 +3,7 @@ Projeto final do 4º ano
 
 # Planejamento Inicial do Projeto Integrador
 
-# 🎬 CriticaCine – Plataforma de Críticas, Avaliações e Comentários de Filmes
+#  CriticaCine – Plataforma de Críticas, Avaliações e Comentários de Filmes
 
 ## a) Qual o objetivo do seu projeto?
 
