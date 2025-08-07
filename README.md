@@ -7,7 +7,7 @@ Projeto final do 4º ano
 
 ## a) Qual o objetivo do seu projeto?
 
-O objetivo do CriticaCine é oferecer uma plataforma digital onde usuários podem avaliar filmes, escrever críticas, dar notas, comentar, montar listas e descobrir novas produções com base em recomendações e opiniões de outros usuários. A proposta é incentivar a troca de ideias e análises entre cinéfilos, criando uma comunidade apaixonada por cinema.
+O objetivo do CriticaCine é oferecer uma plataforma digital onde usuários podem avaliar filmes, escrever críticas, dar notas, comentar, montar listas e descobrir novas produções com base em recomendações e opiniões de outros usuários.
 
 ## b) Qual o seu público-alvo? Como o grupo caracteriza esse grupo?
 
