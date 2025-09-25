@@ -5,6 +5,8 @@ from typing import Annotated
 from contextlib import asynccontextmanager
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 
 
 SessionDep = Annotated[Session, Depends(get_session)]
@@ -17,6 +19,19 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
+@app.get("/")
+def index():
+    return {"user": "Eduardo", "idade": 19}
 # templates = Jinja2Templates(directory="templates")
 
 # @app.get("/", response_class=HTMLResponse)
