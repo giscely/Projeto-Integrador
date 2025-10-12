@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Inicio.css"
 import logo from '../assets/logo_XPENEM.png'
 import intro_logo from '../assets/intro_XPENEM.png'

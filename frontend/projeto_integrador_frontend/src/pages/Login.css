@@ -1,3 +1,77 @@
-h2{
-    color: blue;
+
+
+.main_login {
+    min-height: 100vh;
+    min-width: 1200px;
+    background-image: url('../assets/img_fundo_inicial.png');
+    background-size: cover;       /* cobre toda a tela */
+    background-repeat: no-repeat; /* não repete a imagem */
+    background-position: center;
+    margin:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+.login_page {
+    border: 1px solid grey;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    padding: 30px;
+    position: relative;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:3px;
+}
+
+.bt_sair{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: red;
+    font-size: 25px;
+    font-weight: bolder;
+    background-color: none;
+    cursor: pointer;
+}
+
+span {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
 }
