@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
     create_db_and_tables()
     yield
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, title="XPENEM")
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,8 +32,4 @@ app.add_middleware(
 @app.get("/")
 def index():
     return {"user": "Eduardo", "idade": 19}
-# templates = Jinja2Templates(directory="templates")
 
-# @app.get("/", response_class=HTMLResponse)
-# async def index(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request, "nome": "Usuário"})

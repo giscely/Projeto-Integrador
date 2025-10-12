@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link} from "react-router-dom";
 import "./Inicio.css"
 import logo from '../assets/logo_XPENEM.png'
 import intro_logo from '../assets/intro_XPENEM.png'
@@ -11,7 +12,7 @@ import icon_trofeu from '../assets/icon_trofeu.png'
 export default function Inicio() {
     const [dados, setDados] = useState(null)
     useEffect(() => {
-        fetch("http://127.0.0.1:5000") 
+        fetch("http://127.0.0.1:8000") 
             .then((response) => response.json())
             .then((data) => setDados(data))
             .catch((err) => console.error("Erro:", err));
@@ -28,7 +29,7 @@ export default function Inicio() {
                     <button>Início</button>
                     <button>Quiz</button>
                     <button>Sobre</button>
-                    <button>login</button>
+                    <button><Link to="/login">Login</Link></button>
                     <div>icon</div>
                 </nav>
             </header>
