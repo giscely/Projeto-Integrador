@@ -5,6 +5,7 @@ import "./App.css"
 
 export default function App() {
   return (
+<<<<<<< Updated upstream
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Inicio />} />
@@ -12,4 +13,12 @@ export default function App() {
       </Routes>
     </BrowserRouter>
   );
+=======
+    <>
+
+      {/* <Index/> */}
+      <Inicio/>
+    </>
+  )
+>>>>>>> Stashed changes
 }

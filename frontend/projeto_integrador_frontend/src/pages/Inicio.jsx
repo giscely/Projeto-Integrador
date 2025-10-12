@@ -69,9 +69,8 @@ export default function Inicio() {
                 </div>
 
                 <div className="description">
+
                     
-
-
                 </div>
             </section>
 
