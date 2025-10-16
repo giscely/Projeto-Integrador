@@ -5,7 +5,7 @@ import "./Login.css"
 export default function Login() {
     const [dados, setDados] = useState(null)
     useEffect(() => {
-        fetch("http://127.0.0.1:5000") 
+        fetch("http://127.0.0.1:8080") 
             .then((response) => response.json())
             .then((data) => setDados(data))
             .catch((err) => console.error("Erro:", err));
@@ -35,8 +35,7 @@ export default function Login() {
                 return
         }
 
-        const User = {
-            // id: Math.floor(Math.random()*10000), 
+        const User = { 
             nome: nome,
             email: email,
             senha: senha
