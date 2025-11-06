@@ -23,7 +23,6 @@ export default function Inicio() {
             <button>Início</button>
             <button>Quiz</button>
             <button>Sobre</button>
-            <button><Link to="/cadastro">Cadastro</Link></button>
             <button onClick={() => setMostrarLogin(true)}>Login</button>
 
             <div>icon</div>
@@ -32,9 +31,9 @@ export default function Inicio() {
         <section>
           <div className="intro">
             <div className="div_info_intro">
-              <h1>Prepare-se para o ENEM</h1>
-              <p>Vamos juntos transformar a forma de se preparar!</p>
-              <button>começar agora</button>
+              <h1>Domine o Enem com confiança!</h1>
+              <p>Aprenda no seu ritmo e conquiste o seu futuro.</p>
+              <button>Começar agora</button>
             </div>
             <div className="div_img_intro">
               <img src={img_intro} alt="" />
@@ -43,20 +42,40 @@ export default function Inicio() {
 
           <div className="info">
             <div>
-              <span><img src={icon_alvo} alt="" /></span>
-              <p>Questoes no estilo enem</p>
+              <div className="info-titulo">
+                <span><img src={icon_alvo} alt="" /></span>
+                <h2>Questoes no estilo enem</h2>
+              </div>
+              <div className="info-detalhe">
+                <p>Simule a prova real com perguntas de provas passadas</p>
+              </div>
             </div>
             <div>
-              <span><img src={icon_cronometro} alt="" /></span>
-              <p>Estude no seu ritmo</p>
+              <div className="info-titulo">
+                <span><img src={icon_cronometro} alt="" /></span>
+                <h2>Estude no seu ritmo</h2>
+              </div>
+              <div className="info-detalhe">
+                <p>Simule a prova real com perguntas de provas passadas</p>
+              </div>
             </div>
             <div>
-              <span><img src={icon_grafico} alt="" /></span>
-              <p>Relatorios de desempenho</p>
+              <div className="info-titulo">
+                <span><img src={icon_grafico} alt="" /></span>
+                <h2>Veja seu desempenho</h2>
+              </div>
+              <div className="info-detalhe">
+                <p>Simule a prova real com perguntas de provas passadas</p>
+              </div>
             </div>
             <div>
-              <span><img src={icon_trofeu} alt="" /></span>
-              <p>Ganhe trofeus e recompensas</p>
+              <div className="info-titulo">
+                <span><img src={icon_trofeu} alt="" /></span>
+                <h2>Ganhe recompensas</h2>
+              </div>
+              <div className="info-detalhe">
+                <p>Simule a prova real com perguntas de provas passadas</p>
+              </div>
             </div>
           </div>
 

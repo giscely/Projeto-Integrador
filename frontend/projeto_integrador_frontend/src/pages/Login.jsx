@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Login.css";
 
-export default function Login({ fecharModal }) { // 🔹 Recebe prop
+export default function Login({ fecharModal }) {
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -44,7 +44,7 @@ export default function Login({ fecharModal }) { // 🔹 Recebe prop
           <button className="bt_enviar" type="submit">Entrar</button>
         </form>
         <p className="cadastro_link">
-          Ainda não tem conta? <a href="/cadastro">Cadastre-se</a>
+          Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a>
         </p>
       </div>
     </>
