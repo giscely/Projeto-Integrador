@@ -109,12 +109,13 @@ section {
   margin-left: 10%;
   width: 100%;
   height: 100%;
+
 }
 
 .intro .div_info_intro p {
-  font-size: 28px;
+  font-size: 23px;
   color: #1e3a8a;
-  line-height: 1.3;
+
 }
 .intro .div_info_intro h1 {
   font-size: 60px;
@@ -131,15 +132,15 @@ section {
   border: none;
   padding: 1rem 1rem;
   border-radius: 30px;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
-  width: 50%;
+  width: 40%;
   transition: background-color 0.3s;
 }
 
 .intro button:hover {
-  background-color: #dc2626;
+  background-color: #ff6d6d;
 }
 
 .intro > div:last-child {
@@ -150,7 +151,7 @@ section {
 
 .intro > div:last-child img {
   max-width: 100%;
-  height: 400px;
+  height: 500px;
 }
 
 /* Info Cards */
@@ -170,7 +171,7 @@ section {
   gap: 1rem;
   transition: border-color 0.3s, transform 0.3s;
   cursor: pointer;
-  height: 180px;
+  height: 270px;
 }
 
 .info > div:hover {
@@ -180,34 +181,34 @@ section {
 
 .info-titulo {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: left;
   width: 100%;
 }
 
 .info > div span {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   flex-shrink: 0;
+ 
 }
 
 div span > img{
-  height: 100%;
+  height: 60%;
   width: 100%;
-  left: -15%;
 }
 
 .info > div h2 {
   color: #335686;
-  font-size: 23px;
+  font-size: 28px;
   font-weight: 700;
-  margin-left: 20px;
+  margin-top: 2%;
 }
 
 .info-detalhe {
