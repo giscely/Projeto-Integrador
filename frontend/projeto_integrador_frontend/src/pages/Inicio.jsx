@@ -47,7 +47,7 @@ export default function Inicio() {
                 <h2>Questoes no estilo enem</h2>
               </div>
               <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas</p>
+                <p>Simule a prova real com perguntas de provas passadas.</p>
               </div>
             </div>
             <div>
@@ -56,16 +56,16 @@ export default function Inicio() {
                 <h2>Estude no seu ritmo</h2>
               </div>
               <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas</p>
+                <p>Organize seu tempo e estude conforme sua rotina.</p>
               </div>
             </div>
             <div>
               <div className="info-titulo">
                 <span><img src={icon_grafico} alt="" /></span>
-                <h2>Veja seu desempenho</h2>
+                <h2>Veja o seu desempenho</h2>
               </div>
               <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas</p>
+                <p>Acompanhe a evolução e melhore suas áreas deficientes.</p>
               </div>
             </div>
             <div>
@@ -74,7 +74,7 @@ export default function Inicio() {
                 <h2>Ganhe recompensas</h2>
               </div>
               <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas</p>
+                <p>Alcance suas metas e conquiste troféus.</p>
               </div>
             </div>
           </div>
