@@ -35,16 +35,13 @@ export default function Inicio() {
               <p>Aprenda no seu ritmo e conquiste o seu futuro.</p>
               <button>Começar agora</button>
             </div>
-            <div className="div_img_intro">
-              <img src={img_intro} alt="" />
-            </div>
           </div>
 
           <div className="info">
             <div>
               <div className="info-titulo">
                 <span><img src={icon_alvo} alt="" /></span>
-                <h2>Questoes no estilo enem</h2>
+                <h2>Questões no estilo enem</h2>
               </div>
               <div className="info-detalhe">
                 <p>Simule a prova real com perguntas de provas passadas.</p>
