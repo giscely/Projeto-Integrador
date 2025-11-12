@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Inicio.css";
 import logo from '../assets/logo_XPENEM.png';
-import img_intro from '../assets/img_intro_XPENEM.png';
 import icon_alvo from '../assets/icon_alvo.png';
 import icon_cronometro from '../assets/icon_cronometro.png';
 import icon_grafico from '../assets/icon_grafico.png';
@@ -16,16 +15,16 @@ export default function Inicio() {
     <>
       <div className="main_page">
         <header>
-          <div>
+          <div className="img-logo">
             <img src={logo} alt="logo" />
           </div>
           <nav>
-            <button>Início</button>
-            <button>Quiz</button>
-            <button>Sobre</button>
+            <Link to="/" className="button-menu">Inicio</Link>
+            <Link to="/quiz" className="button-menu">Quiz</Link>
+            <Link to="/sobre" className="button-menu">Sobre</Link>
             <button onClick={() => setMostrarLogin(true)}>Login</button>
 
-            <div>icon</div>
+            <Link to="/perfil" className="icon-perfil">icon</Link>
           </nav>
         </header>
         <section>
