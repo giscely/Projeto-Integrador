@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 15px;
+  background-color: #d8f1fd;
+}
+
+header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 5px 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgb(196, 196, 196);
+  
+}
+
+.img-logo img{
+  width: 200px;
+}
+
+header > div:first-child {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1e40af;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+header nav .button-menu {
+  background: none;
+  border: none;
+  color: #374151;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s;
+}
+
+header nav .button-menu:first-child {
+  color: #1e40af;
+  border-bottom: 2px solid #1e40af;
+}
+
+header nav .button-menu:hover {
+  color: #1e40af;
+}
+
+header nav button:nth-child(4),button:nth-child(5) {
+  background-color: #ef4444;
+  color: white;
+  border-radius: 25px;
+  padding: 0.6rem 1.5rem;
+}
+
+header nav button:nth-child(4):hover {
+  background-color: #942323;
+}
+
+header nav > .icon-perfil {
+  width: 40px;
+  height: 40px;
+  background-color: #60a5fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+section {
+  margin: 0 auto;
+  padding-top: 1rem;
+  width: 100%;
+  background-color: aqua;
+}
