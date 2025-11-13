@@ -76,6 +76,27 @@ export default function Inicio() {
           </div>
 
           <div className="description"></div>
+           <h1>Como funciona:</h1>
+          <div className="como-funciona">
+            <div className="informs-function">
+              <div>
+                <h1>Faça login</h1>
+              </div>
+              <div>
+                <h1>Escolha a matéria</h1>
+              </div>
+              <div>
+                <h1>Treine com questões reais</h1>
+              </div>
+              <div>
+                <h1>Veja o seu progresso</h1>
+              </div>
+              
+            </div>
+            <div>
+                <h1>Seus pontos:</h1>
+            </div>
+          </div>
         </section>
       </div>
 

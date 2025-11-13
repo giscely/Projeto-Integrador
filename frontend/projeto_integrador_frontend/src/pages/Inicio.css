@@ -220,3 +220,42 @@ div span > img{
   width: 90%;
   font-size: 18px;
 }
+
+.como-funciona {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.como-funciona > .informs-function {
+  color: #152a69;
+  margin: 10px;
+  width: 60%;
+  height: 300px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.como-funciona > .informs-function > div {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 8rem;
+  height: 100px;
+  width: 35%;
+  padding: 1rem;
+  font-size: 10px;
+}
+
+.como-funciona > div {
+  color: #44568d;
+  font-size: 13px;
+  margin: 10px;
+  margin-left: 19rem;
+  width: 20%;
+}
