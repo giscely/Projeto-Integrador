@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-export default function Index() {
+export default function Index({route}) {
     const [dados, setDados] = useState(null)
     useEffect(() => {
-        fetch("http://127.0.0.1:8080") 
+        fetch(`http://127.0.0.1:8080/${route}`)
             .then((response) => response.json())
             .then((data) => setDados(data))
             .catch((err) => console.error("Erro:", err));
