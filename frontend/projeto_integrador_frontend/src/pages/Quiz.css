@@ -86,5 +86,130 @@ section {
   margin: 0 auto;
   padding-top: 1rem;
   width: 100%;
-  background-color: aqua;
+  background-color: white;
 }
+
+
+
+/* --------------- css do chatgpt -------------------- */
+
+.quiz_filtro {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.quiz_filtro h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.div_quiz_filtro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 24px;
+}
+
+.div_areas {
+  border: 2px solid #333;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.div_areas:nth-child(1) {
+  background-color: #e6f7f7;
+}
+
+.div_areas:nth-child(2) {
+  background-color: #ffe6f0;
+}
+
+.div_areas:nth-child(3) {
+  background-color: #fff9e6;
+}
+
+.div_areas:nth-child(4) {
+  background-color: #e6f7e6;
+}
+
+.div_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.area_text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.area_text h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.area_text p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.area_img img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.info_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 2px solid #ddd;
+}
+
+.quant_questoes_area {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.quant_questoes_area h4 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.quant_questoes_area p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.info_area button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.info_area button:hover {
+  background-color: #0d8bd9;
+}
+

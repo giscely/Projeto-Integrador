@@ -1,15 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Inicio.css";
+import "./Quiz.css";
 import logo from '../assets/logo_XPENEM.png';
-import icon_alvo from '../assets/icon_alvo.png';
-import icon_cronometro from '../assets/icon_cronometro.png';
-import icon_grafico from '../assets/icon_grafico.png';
-import icon_trofeu from '../assets/icon_trofeu.png';
 import Login from "./Login";
+
+import ModalFiltro from "./ModalFiltro";
+import ModalPremium from "./ModalPremium";
+
 
 export default function Quiz() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
+
+  const [quiz, setQuiz] = useState(false)
+  const [area, setArea] = useState('');
+  const [quantQuestoes, setQuantQuestoes] = useState(0);
+  const [mostrarFiltro, setMostrarFiltro] = useState(false);
+  const [mostrarPremium, setMostrarPremium] = useState(false);
+
+  const handleArea = (area) => {
+    setArea(area)
+    setMostrarFiltro(true)
+  }
+
 
   return (
     <>
@@ -27,55 +39,110 @@ export default function Quiz() {
             <Link to="/perfil" className="icon-perfil">icon</Link>
           </nav>
         </header>
+
         <section>
-          {/* <div className="intro">
-            <div className="div_info_intro">
-              <h1>Domine o Enem com confiança!</h1>
-              <p>Aprenda no seu ritmo e conquiste o seu futuro.</p>
-              <button>Começar agora</button>
+          <div className="quiz_filtro">
+            <div>
+              <h1>Escolha a área do conhecimento e comece a praticar!</h1>
             </div>
-          </div> */}
+            <div className="div_quiz_filtro">
 
-          <div className="info">
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_alvo} alt="" /></span>
-                <h2>Questões no estilo enem</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas.</p>
-              </div>
-            </div>
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_cronometro} alt="" /></span>
-                <h2>Estude no seu ritmo</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Organize seu tempo e estude conforme sua rotina.</p>
-              </div>
-            </div>
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_grafico} alt="" /></span>
-                <h2>Veja o seu desempenho</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Acompanhe a evolução e melhore suas áreas deficientes.</p>
-              </div>
-            </div>
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_trofeu} alt="" /></span>
-                <h2>Ganhe recompensas</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Alcance suas metas e conquiste troféus.</p>
-              </div>
-            </div>
-          </div>
+              <div className="div_areas">
 
-          <div className="description"></div>
+                <div className="div_area">
+
+                  <span className="area_text">
+                    <h2>Linguagens</h2>
+                    <p>Língua Portuguesa e Estrangeira, Artes e Educação Física.</p>
+                  </span>
+                  <span className="area_img">
+                    <img src="" alt="" />
+                  </span>
+
+                </div>
+                <div className="info_area">
+                  <div className="quant_questoes_area">
+                    <h4>0</h4>
+                    <p>Questões feitas</p>
+                  </div>
+                  <button onClick={() => handleArea('Linguagens')}> 
+                    Praticar</button>
+                </div>
+
+              </div>
+
+              <div className="div_areas">
+
+                <div className="div_area">
+
+                  <span className="area_text">
+                    <h2>Ciências Humanas</h2>
+                    <p>Filosofia, Geografia, História e Sociologia.</p>
+                  </span>
+                  <span className="area_img">
+                    <img src="" alt="" />
+                  </span>
+
+                </div>
+                <div className="info_area">
+                  <div className="quant_questoes_area">
+                    <h4>0</h4>
+                    <p>Questões feitas</p>
+                  </div>
+                  <button>Praticar</button>
+                </div>
+
+              </div>
+
+              <div className="div_areas">
+
+                <div className="div_area">
+
+                  <span className="area_text">
+                    <h2>Matemática</h2>
+                    <p>Matemática aplicada à realidade.</p>
+                  </span>
+                  <span className="area_img">
+                    <img src="" alt="" />
+                  </span>
+
+                </div>
+                <div className="info_area">
+                  <div className="quant_questoes_area">
+                    <h4>0</h4>
+                    <p>Questões feitas</p>
+                  </div>
+                  <button>Praticar</button>
+                </div>
+
+              </div>
+              
+              <div className="div_areas">
+
+                <div className="div_area">
+
+                  <span className="area_text">
+                    <h2>Ciências da Natureza</h2>
+                    <p>Biologia, Física e Química.</p>
+                  </span>
+                  <span className="area_img">
+                    <img src="" alt="" />
+                  </span>
+
+                </div>
+                <div className="info_area">
+                  <div className="quant_questoes_area">
+                    <h4>0</h4>
+                    <p>Questões feitas</p>
+                  </div>
+                  <button>Praticar</button>
+                </div>
+
+              </div>
+            
+            </div>
+          </div> 
+
         </section>
       </div>
 
@@ -83,6 +150,12 @@ export default function Quiz() {
         {mostrarLogin && (
             <Login fecharModal={() => setMostrarLogin(false)} />
         )}
+
+        {/* MOSTRAR MODAL DE FILTRAR O QUIZ */}
+        {mostrarFiltro && <ModalFiltro setMostrarFiltro={setMostrarFiltro} setMostrarPremium={setMostrarPremium} setQuantQuestoes={setQuantQuestoes} setQuiz={setQuiz}/>}
+
+        {/* MOSTRAR MODAL DE PREMIUM O QUIZ */}
+        {mostrarPremium && <ModalPremium setMostrarPremium={setMostrarPremium}/>}
 
     </>
   );
