@@ -1,14 +1,16 @@
 from fastapi import FastAPI
-from database import get_session, create_db_and_tables
+from database import create_db_and_tables
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
-from auth_routes import auth_router
+from fastapi.security import OAuth2PasswordBearer
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
 
 @asynccontextmanager
@@ -18,6 +20,9 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, title="XPENEM")
 
+
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="auth/login-form")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -26,5 +31,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from auth_routes import auth_router
 app.include_router(auth_router)
 
