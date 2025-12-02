@@ -1,22 +1,31 @@
-from sqlmodel import SQLModel, Field, Relationship
+from sqlalchemy  import create_engine
+from sqlalchemy.orm import Session,Mapped, mapped_column, relationship,DeclarativeBase
 
 
-class Usuario(SQLModel, table=True):
-    usu_id: int =  Field(default=None,primary_key=True)
-    usu_nome: str = Field(index=False)
-    usu_email: str = Field(index=False, unique=True)
-    usu_senha: str = Field(index=False)
+engine = create_engine('sqlite:///database.db')
 
-class Area_Conhecimento(SQLModel, table=True):
-    acc_id: int = Field(default=None,primary_key=True)
-    acc_nome: str = Field(index=False)
-    acc_tipo: str = Field(index=False)
-    questoes: list["Questao"] = Relationship(back_populates="area_conhecimento")
+class Base(DeclarativeBase):
+    pass
 
-class Questao(SQLModel, table=True):
-    qst_id: int = Field(default=None,primary_key=True)
-    qst_descricao: str = Field(index=False)
-    qst_dificuldade: str = Field(index=False)
-    qst_assunto: str = Field(index=False)
-    area_conhecimento_id: int = Field(foreign_key="area_conhecimento.acc_id")
-    area_conhecimento: "Area_Conhecimento" = Relationship(back_populates="questoes")
+class Usuario(Base):
+    __tablename__ = 'usuarios'
+    usu_id:Mapped[int] = mapped_column(primary_key=True)
+    usu_nome:Mapped[str]
+    usu_email:Mapped[str] = mapped_column(unique=True)
+    usu_senha:Mapped[str]
+
+# class Area_Conhecimento(Base):
+#     __tablename__ = 'area_conhecimento'
+#     acc_id:Mapped[int] = mapped_column(primary_key=True)
+#     acc_nome:Mapped[str]
+#     acc_tipo:Mapped[str]
+#     questoes: list["Questao"] = relationship(back_populates="area_conhecimento")
+
+# class Questao(Base):
+#     __tablename__ = 'questoes'
+#     qst_id:Mapped[int] = mapped_column(primary_key=True)
+#     qst_descricao:Mapped[str]
+#     qst_dificuldade:Mapped[str]
+#     qst_assunto:Mapped[str]
+#     area_conhecimento_id:Mapped[int] = mapped_column(foreign_key="area_conhecimento.acc_id")
+#     area_conhecimento: "Area_Conhecimento" = relationship(back_populates="questoes")
