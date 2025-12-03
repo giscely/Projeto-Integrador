@@ -9,7 +9,6 @@ anos = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 
 order_router = APIRouter(prefix="/questoes", tags=["questoes"])
 
 
-@order_router.post("/armazenar-questoes")
 async def armazenar_questoes(session: SessionDep, year: int):
     limit = 50
     offset = 0
@@ -55,6 +54,19 @@ async def armazenar_questoes(session: SessionDep, year: int):
     return {"mensagem": f"{total_adicionadas} questões adicionadas do ENEM {year}."}
 
 
+@order_router.post("/carregar_todos_os_dados")
+async def carregar_todos_os_dados(session: SessionDep):
+    resultados = []
+
+    for ano in anos:
+        resultado = await armazenar_questoes(session, ano)
+        resultados.append(resultado)
+
+    return {
+        "status": "concluído",
+        "anos_processados": anos,
+        "detalhes": resultados
+    }
 
 
 @order_router.get("/listar-questoes")
