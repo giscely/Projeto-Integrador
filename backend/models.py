@@ -20,13 +20,13 @@ class Questao(Base):
     __tablename__ = 'questoes'
 
     qst_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    qst_title: Mapped[str] 
-    qst_index: Mapped[int] 
+    qst_title: Mapped[str] = mapped_column(nullable=True)
+    qst_index: Mapped[int] = mapped_column(nullable=True)
     qst_language: Mapped[str] = mapped_column(nullable=True)
-    qst_discipline: Mapped[str]
-    qst_year: Mapped[int]
-    qst_context: Mapped[str]
-    qst_question: Mapped[str]
+    qst_discipline: Mapped[str] = mapped_column(nullable=True)
+    qst_year: Mapped[int] = mapped_column(nullable=True)
+    qst_context: Mapped[str] = mapped_column(nullable=True)
+    qst_question: Mapped[str] = mapped_column(nullable=True)
     qst_alternatives: Mapped[list] = mapped_column(JSON)
-    qst_correct_alternative: Mapped[str]
+    qst_correct_alternative: Mapped[str] = mapped_column(nullable=True)
     qst_file_url: Mapped[list] = mapped_column(JSON, nullable=True)

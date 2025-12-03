@@ -1,8 +1,7 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends
 from main import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
 from dependencies import SessionDep, verificar_token
-from models import Usuario, Questao
-import requests
+from models import Usuario
 from schemas import SignUp, SignIn
 from sqlalchemy import select
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -102,34 +101,3 @@ async def use_refresh_token(usuario:Usuario = Depends(verificar_token)):
         "access_token": access_token,
         "token_type": "bearer"
     }
-
-
-@auth_router.post("/questions")
-async def Adicionar_questoes(session: SessionDep, year: int, index: int):
-
-    URI = "https://api.enem.dev/v1/exams/{year}/questions?limit=50&offset={index}"
-
-    r = requests.get(URI.format(year=year, index=index))
-    dados = r.json()
-
-    for item in dados["questions"]:
-
-        questao = Questao(
-            qst_title=item["title"],
-            qst_index=item["index"],
-            qst_language=item.get("language"),
-            qst_discipline=item["discipline"],
-            qst_year=item["year"],
-            qst_context=item["context"],
-            qst_question=item["alternativesIntroduction"],
-            qst_alternatives=item["alternatives"],
-            qst_correct_alternative=item["correctAlternative"],
-            qst_file_url=item.get("files")
-        )
-
-        session.add(questao)
-
-    session.commit() 
-    session.close()
-
-    return {"mensagem": f"{len(dados['questions'])} questões adicionadas ao banco."}
