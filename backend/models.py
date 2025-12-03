@@ -1,5 +1,6 @@
-from sqlalchemy  import create_engine
+from sqlalchemy  import create_engine, JSON
 from sqlalchemy.orm import Session,Mapped, mapped_column, relationship,DeclarativeBase
+from typing import List
 
 
 engine = create_engine('sqlite:///database.db')
@@ -14,18 +15,18 @@ class Usuario(Base):
     usu_email:Mapped[str] = mapped_column(unique=True)
     usu_senha:Mapped[str]
 
-# class Area_Conhecimento(Base):
-#     __tablename__ = 'area_conhecimento'
-#     acc_id:Mapped[int] = mapped_column(primary_key=True)
-#     acc_nome:Mapped[str]
-#     acc_tipo:Mapped[str]
-#     questoes: list["Questao"] = relationship(back_populates="area_conhecimento")
 
-# class Questao(Base):
-#     __tablename__ = 'questoes'
-#     qst_id:Mapped[int] = mapped_column(primary_key=True)
-#     qst_descricao:Mapped[str]
-#     qst_dificuldade:Mapped[str]
-#     qst_assunto:Mapped[str]
-#     area_conhecimento_id:Mapped[int] = mapped_column(foreign_key="area_conhecimento.acc_id")
-#     area_conhecimento: "Area_Conhecimento" = relationship(back_populates="questoes")
+class Questao(Base):
+    __tablename__ = 'questoes'
+
+    qst_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    qst_title: Mapped[str] 
+    qst_index: Mapped[int] 
+    qst_language: Mapped[str] = mapped_column(nullable=True)
+    qst_discipline: Mapped[str]
+    qst_year: Mapped[int]
+    qst_context: Mapped[str]
+    qst_question: Mapped[str]
+    qst_alternatives: Mapped[list] = mapped_column(JSON)
+    qst_correct_alternative: Mapped[str]
+    qst_file_url: Mapped[list] = mapped_column(JSON, nullable=True)
