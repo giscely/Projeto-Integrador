@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database import create_db_and_tables
+from database import create_db_and_tables, create_user_admin, carregar_todos_os_dados
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
@@ -16,6 +16,8 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_db_and_tables()
+    create_user_admin()
+    await carregar_todos_os_dados()
     yield
 
 app = FastAPI(lifespan=lifespan, title="XPENEM")
@@ -34,11 +36,13 @@ app.add_middleware(
 from routes.auth_routes import auth_router
 from routes.question_routes import question_router
 from routes.simulados_routes import simulated_router
+from routes.user_routes import user_router
 
 
 app.include_router(auth_router)
 app.include_router(question_router)
 app.include_router(simulated_router)
+app.include_router(user_router)
 
 
 

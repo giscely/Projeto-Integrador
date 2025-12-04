@@ -28,7 +28,9 @@ async def criar_simulado(session: SessionDep, disciplina: str):
 
     # Escolhe 10 aleatórias
     selecionadas = random.sample(questoes_disponiveis, 10)
-    nome = f"simulado_{disciplina}_{simulado.sim_id}"
+    sim_id = session.query(Simulado).count() + 1
+
+    nome = f"simulado_{disciplina}_{sim_id}"
     # Cria o simulado
     simulado = Simulado(
         sim_nome=nome,
