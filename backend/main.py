@@ -31,9 +31,32 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from auth_routes import auth_router
-from order_routes import order_router
+from routes.auth_routes import auth_router
+from routes.question_routes import question_router
+from routes.simulados_routes import simulated_router
+
 
 app.include_router(auth_router)
-app.include_router(order_router)
+app.include_router(question_router)
+app.include_router(simulated_router)
 
+
+
+
+
+#Lógica para criar um usuário admin ao iniciar a aplicação
+
+# def criar_user_admin():
+#     with SessionDep() as session:
+#         query = session.query(Usuario).filter(Usuario.usu_tipo == "admin")
+#         admin_existente = session.execute(query).scalar_one_or_none()
+
+#         if not admin_existente:
+#             novo_admin = Usuario(
+#                 usu_nome=os.getenv("ADMIN_NAME"),
+#                 usu_email=os.getenv("ADMIN_EMAIL"),
+#                 usu_senha=os.getenv("ADMIN_PASSWORD"),
+#                 usu_tipo=TipoUsuarioEnum.admin
+#             )
+#             session.add(novo_admin)
+#             session.commit()

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from main import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
-from dependencies import SessionDep, verificar_token
+from dependencies import verificar_token, SessionDep
 from models import Usuario
 from schemas import SignUp, SignIn
 from sqlalchemy import select

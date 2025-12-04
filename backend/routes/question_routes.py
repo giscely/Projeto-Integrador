@@ -1,12 +1,12 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from dependencies import SessionDep
 import requests
 from models import Questao
-from dependencies import verificar_token
+
 
 anos = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
 
-order_router = APIRouter(prefix="/questoes", tags=["questoes"])
+question_router = APIRouter(prefix="/questoes", tags=["questoes"])
 
 
 async def armazenar_questoes(session: SessionDep, year: int):
@@ -54,7 +54,7 @@ async def armazenar_questoes(session: SessionDep, year: int):
     return {"mensagem": f"{total_adicionadas} questões adicionadas do ENEM {year}."}
 
 
-@order_router.post("/carregar_todos_os_dados")
+@question_router.post("/carregar-todas-as-questoes")
 async def carregar_todos_os_dados(session: SessionDep):
     resultados = []
 
@@ -69,7 +69,9 @@ async def carregar_todos_os_dados(session: SessionDep):
     }
 
 
-@order_router.get("/listar-questoes")
-async def listar_questoes(session: SessionDep, year: int,usuario: str = Depends(verificar_token)):
-    questoes = session.query(Questao).filter(Questao.qst_year == year).all()
+
+
+@question_router.get("/listar-questoes/{disciplina}")
+async def listar_questoes(session: SessionDep, disciplina: str):
+    questoes = session.query(Questao).filter(Questao.qst_discipline == disciplina).limit(10).all()
     return questoes
