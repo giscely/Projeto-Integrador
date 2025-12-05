@@ -15,6 +15,12 @@ class TipoUsuarioEnum(enum.Enum):
     premium = "premium"
     admin = "admin"
 
+class BadgesEnum(enum.Enum):
+    iniciantes = "Iniciante do ENEM"
+    desafiantes = "Desafiante de Questões"
+    mestres = "Mestre do Conhecimento"
+
+
 
 class Usuario(Base):
     __tablename__ = 'usuarios'
@@ -23,6 +29,8 @@ class Usuario(Base):
     usu_email:Mapped[str] = mapped_column(unique=True)
     usu_senha:Mapped[str]
     usu_tipo: Mapped[TipoUsuarioEnum] = mapped_column(SqlEnum(TipoUsuarioEnum, name="tipo_usuario_enum"),default=TipoUsuarioEnum.comum,nullable=False)
+    usu_badge: Mapped[BadgesEnum] = mapped_column(SqlEnum(BadgesEnum,name="badges_enum",values_callable=lambda e: [i.value for i in e]), default=BadgesEnum.iniciantes, nullable=False)
+
 
 
 
@@ -67,3 +75,15 @@ class Simulado(Base):
         secondary="simulado_questoes",
         back_populates="simulados"
     )
+
+class ResultadoSimulado(Base):
+    __tablename__ = 'resultados_simulados'
+
+    res_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    res_simulado_id: Mapped[int] = mapped_column(ForeignKey("simulados.sim_id"))
+    res_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.usu_id"))
+    res_score: Mapped[int]
+    res_tempo_gasto: Mapped[int]  # tempo em segundos
+
+    simulado: Mapped["Simulado"] = relationship()
+    usuario: Mapped["Usuario"] = relationship()

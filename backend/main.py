@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database import create_db_and_tables, create_user_admin, carregar_todos_os_dados
+from database import create_db_and_tables, create_user_admin
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
@@ -17,7 +17,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 async def lifespan(app: FastAPI):
     create_db_and_tables()
     create_user_admin()
-    await carregar_todos_os_dados()
     yield
 
 app = FastAPI(lifespan=lifespan, title="XPENEM")

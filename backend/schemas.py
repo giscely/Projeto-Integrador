@@ -1,12 +1,10 @@
 from pydantic import BaseModel
 from typing import List, Optional
-from models import TipoUsuarioEnum
 
 class SignUp(BaseModel):
     nome: str
     email: str
     senha: str
-    tipo: TipoUsuarioEnum
 
 class SignIn(BaseModel):
     email: str
