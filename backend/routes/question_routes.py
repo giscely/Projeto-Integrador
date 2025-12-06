@@ -56,7 +56,7 @@ async def armazenar_questoes(session: SessionDep, year: int):
 
 @question_router.post("/carregar-todas-as-questoes")
 async def carregar_todos_os_dados(session: SessionDep, usuario = Depends(verificar_token)):
-    if usuario.usu_tipo != "admin":
+    if usuario.usu_id != 1:
         return {"mensagem": "Acesso negado. Apenas administradores podem executar esta ação."}
     resultados = []
 
