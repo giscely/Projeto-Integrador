@@ -45,3 +45,13 @@ class SimuladoSchema(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ResultadoSimuladoSchema(BaseModel):
+    res_id: int
+    res_simulado_id: int
+    res_usuario_id: int
+    res_respostas: dict
+    res_score: int
+
+    class Config:
+        from_attributes = True

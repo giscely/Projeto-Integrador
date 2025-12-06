@@ -85,8 +85,8 @@ class ResultadoSimulado(Base):
     res_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     res_simulado_id: Mapped[int] = mapped_column(ForeignKey("simulados.sim_id"))
     res_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.usu_id"))
+    res_respostas: Mapped[dict] = mapped_column(JSON)
     res_score: Mapped[int]
-    res_tempo_gasto: Mapped[int]  # tempo em segundos
 
     simulado: Mapped["Simulado"] = relationship()
     usuario: Mapped["Usuario"] = relationship()

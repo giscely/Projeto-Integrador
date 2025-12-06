@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models import Usuario, Premium, Simulado
+from models import Usuario, Premium, Simulado, ResultadoSimulado
 import datetime
 from dependencies import verificar_token, SessionDep
 
@@ -16,10 +16,28 @@ async def perfil_usuario(session: SessionDep, usuario:Usuario = Depends(verifica
         "nome": usuario.usu_nome,
         "email": usuario.usu_email,
         "tipo": usuario.usu_tipo.value,
+        "badge": usuario.usu_badge.value,
         "simulados": simulados
     }
 
+@user_router.get("/scores")
+async def user_scores(session: SessionDep, usuario: Usuario = Depends(verificar_token)):
+    user = session.get(Usuario, usuario.usu_id)
+    resultados = (
+        session.query(ResultadoSimulado)
+        .join(Simulado, ResultadoSimulado.res_simulado_id == Simulado.sim_id)
+        .filter(Simulado.sim_usuario_id == usuario.usu_id)
+        .all()
+    )
 
+    total_score = sum(r.res_score for r in resultados)
+    if total_score >= 200:
+        user.usu_badge.value = "Desafiante de Questões"
+    if total_score >= 1000:
+        user.usu_badge.value = "Mestre do Conhecimento"
+    return {
+        "total_score": total_score,
+    }
 
 @user_router.get('/premium')
 async def activated_premium(session:SessionDep ,usuario:Usuario = Depends(verificar_token)):
