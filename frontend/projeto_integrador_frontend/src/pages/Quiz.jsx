@@ -14,35 +14,72 @@ export default function Quiz() {
 
   const [quiz, setQuiz] = useState(false)
   const [questoesQuiz, setQuestoesQuiz] = useState()
-  const [area, setArea] = useState('');
+  const [disciplina, setDisciplina] = useState('');
   const [quantQuestoes, setQuantQuestoes] = useState(0);
   const [mostrarFiltro, setMostrarFiltro] = useState(false);
   const [mostrarPremium, setMostrarPremium] = useState(false);
   const [mostrarQuiz, setMostrarQuiz] = useState(false);
 
-  const handleArea = (area) => {
-    setArea(area)
+  const handleDisciplina = (disciplina) => {
+    setDisciplina(disciplina)
     setMostrarFiltro(true)
   }
 
-
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (quiz === true) {
-      // fetch(`http://127.0.0.1:8080/questoes?area=${area}&quant=${quantQuestoes}`)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     setQuestoesQuiz(data);
-      //     setMostrarQuiz(true);
-      //     setQuiz(false)
-      //   })
-      //   .catch((err) => console.error("Erro ao buscar questões:", err));
-    setMostrarQuiz(true);
-    setQuiz(false)
-  
-  }
-  }, [quiz]);
 
+      const criarECarregarSimulado = async () => {
+        try {
+          // CRIAR O SIMULADO (post)
+          const resposta = await fetch(`http://127.0.0.1:8080/simulados/simulados/${disciplina}?quantidade_questoes=${quantQuestoes}`,
+            {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+              }
+            }
+          );
+
+          const simulado = await resposta.json();
+          console.log("SIMULADO CRIADO:", simulado);
+
+          //  ID DO SIMULADO
+          const simId = simulado.sim_id;
+
+          if (!simId) {
+            console.error("Erro: sim_id não retornado pela API");
+            return;
+          }
+
+          // BUSCAR O SIMULADO (get)
+          const buscarSimulado = await fetch(`http://127.0.0.1:8080/simulados/${simId}`,
+            {
+              method: "GET",
+              headers: {
+                "Authorization": "Bearer " + token
+              }
+            }
+          );
+
+          const dadosSimulado = await buscarSimulado.json();
+          console.log("SIMULADO OBTIDO:", dadosSimulado);
+
+          
+          setQuestoesQuiz(dadosSimulado.sim_questoes);
+          setMostrarQuiz(true);
+          setQuiz(false);
+
+        } catch (erro) {
+          console.error("ERRO AO CRIAR/OBTER SIMULADO:", erro);
+        }
+      };
+
+      criarECarregarSimulado();
+    }
+  }, [quiz]);
 
 
 
@@ -103,7 +140,7 @@ export default function Quiz() {
                     <h4>0</h4>
                     <p>Questões feitas</p>
                   </div>
-                  <button onClick={() => handleArea('Linguagens')}> 
+                  <button onClick={() => handleDisciplina('linguagens')}> 
                     Praticar</button>
                 </div>
 
@@ -127,7 +164,7 @@ export default function Quiz() {
                     <h4>0</h4>
                     <p>Questões feitas</p>
                   </div>
-                  <button onClick={() => handleArea('Humanas')}>Praticar</button>
+                  <button onClick={() => handleDisciplina('ciencias-humanas')}>Praticar</button>
                 </div>
 
               </div>
@@ -150,7 +187,7 @@ export default function Quiz() {
                     <h4>0</h4>
                     <p>Questões feitas</p>
                   </div>
-                  <button onClick={() => handleArea('Matematica')}>Praticar</button>
+                  <button onClick={() => handleDisciplina('matematica')}>Praticar</button>
                 </div>
 
               </div>
@@ -173,7 +210,7 @@ export default function Quiz() {
                     <h4>0</h4>
                     <p>Questões feitas</p>
                   </div>
-                  <button onClick={() => handleArea('Natureza')}>Praticar</button>
+                  <button onClick={() => handleDisciplina('ciencias-natureza')}>Praticar</button>
                 </div>
 
               </div>
@@ -197,7 +234,7 @@ export default function Quiz() {
 
 
         {/* MOSTRAR MODAL DE QUESTÕES DO QUIZ */}
-        {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} area={area} quantQuestoes={quantQuestoes}/>}
+        {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes}/>}
 
     </>
   );

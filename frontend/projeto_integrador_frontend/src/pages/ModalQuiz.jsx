@@ -7,13 +7,16 @@ import "./Inicio.css";
 import "./ModalQuiz.css"
 import logo from '../assets/logo_XPENEM.png';
 
-function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
+function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes}) {
     const navigate = useNavigate();
 
     const [mostrarComecar, setMostrarComecar] = useState(true);
     const [confirmarSaida, setConfirmarSaida] = useState(false);
     const [mostrarFeedback, setMostrarFeedback] = useState(false);
+    const [finalizou, setFinalizou] = useState(false);
     const [acertouQuestao, setAcertouQuestao] = useState(false);
+
+    const [listaRespostas, setListaRespostas] = useState([])
 
 
     const [confirmarSaidaHeader, setConfirmarSaidaHeader] = useState(false);
@@ -27,9 +30,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
     useEffect(() => {
         if (mostrarComecar || mostrarFeedback) return;
 
-        const interval = setInterval(() => {
-            setSegundos((prev) => prev + 1);
-        }, 1000);
+        const interval = setInterval(() => {setSegundos((prev) => prev + 1);}, 1000);
 
         return () => clearInterval(interval);
     }, [mostrarComecar, mostrarFeedback]);
@@ -37,9 +38,10 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
     const minutos = String(Math.floor(segundos / 60)).padStart(2, "0");
     const secs = String(segundos % 60).padStart(2, "0");
 
-    // === OBJETO RESULTADO ===
+
+    // ===  RESULTADO ===
     const [resultadoQuiz, setResultadoQuiz] = useState({
-        area: area,
+        disciplina: disciplina,
         acertos: 0,
         totalQuestoes: quantQuestoes,
         tempos: [],
@@ -47,15 +49,9 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
 
     const [questaoAtual, setQuestaoAtual] = useState(0);
 
-    useEffect(() => {
-    // Se chegou na última questão
-    if (questaoAtual === quantQuestoes) {
-      alert("🎉 Parabéns! Você terminou o quiz!");
-    }
-    }, [questaoAtual]);
+    const questao = questoesQuiz[questaoAtual];
+    if (!questao) return null;
 
-
-    const respostaCerta = "B";
 
     // === RESPONDER ===
     const handleResponder = (e) => {
@@ -65,8 +61,10 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
             alert("Escolha uma alternativa!");
             return;
         }
-        
-        // const acertou = alternativaSelecionada === dados[questao_atual][resposta]
+
+        setListaRespostas(prev => [...prev, alternativaSelecionada]);
+
+        const respostaCerta = questao.qst_correct_alternative;
         const acertou = alternativaSelecionada === respostaCerta;
 
         setResultadoQuiz((prev) => ({
@@ -75,16 +73,23 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
             tempos: [...prev.tempos, segundos],
         }));
 
-        setQuestaoAtual(prev => prev + 1);
+        const proxima = questaoAtual + 1;
 
+        // === FINAL DO QUIZ ===
+        if (proxima === quantQuestoes) {
+            setMostrarFeedback(false);   // ← ESSA LINHA RESOLVE O BUG
+            setFinalizou(true);
+            return;
+        }
+
+        // === Próxima questão ===
+        setQuestaoAtual(proxima);
         setAcertouQuestao(acertou);
         setMostrarFeedback(true);
 
-        // reset
         setAlternativaSelecionada("");
         setSegundos(0);
-    };
-
+    }
 
     return (
     <div className="modalQuiz-overlay">
@@ -104,6 +109,23 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
             </div>
         </div>
         )}
+        
+        {/* === TELA FINAL === */}
+        {finalizou && (
+            <div className="quizComecar-overlay">
+                <div className="quizComecar-card">
+                    <h2>🎉 Parabéns! Você terminou o quiz!</h2>
+                    <p>Acertos: {resultadoQuiz.acertos} / {quantQuestoes}</p>
+
+                    <button onClick={() => setMostrarQuiz(false)}>
+                        Sair
+                    </button>
+
+                    <p>Respostas: {listaRespostas.join(", ")}</p>
+                </div>
+            </div>
+        )}
+
         {/* === MODAL DE FEEDBACK === */}
             {mostrarFeedback && (
                 <div className="quizComecar-overlay">
@@ -198,13 +220,14 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
     
             <div className="modalQuiz-info">
                 <h3 className="modalQuiz-examTitle">
-                QUIZ - LINGUAGENS{/* {questao.ano}  {area} */}
+                QUIZ - {disciplina}
                 </h3>
-                <p className="modalQuiz-subtitle">ENEM 2024</p>
+                <p className="modalQuiz-subtitle">{questao.qst_title}</p>
 
                 {/* Enunciado */}
+                <p className="modalQuiz-enunciado">{questao.qst_context}</p>
                 <h5 className="modalQuiz-enunciado">
-                enunciado Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum, possimus quos! Dignissimos molestias temporibus vitae perferendis cum nisi tenetur ipsam expedita, delectus nam omnis blanditiis amet. Provident expedita a accusantium!
+                    {questao.qst_question}
                 </h5>
             </div>
 
@@ -212,29 +235,23 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
 
                 <div className="modalQuiz-alternativas">
 
-                    {[
-                    { letra: "A", texto: "WBFJBJEBFJBJFJBJEBFJBJBFJBEJFBEJBFJBJEBFJBJBFJBEJFBEJBFJBJEBFJBJBFJBEJFBEJBBFJBEJFBEJBFJEBJ" },
-                    { letra: "B", texto: "WBFJBJEBFJBJBFJBEJFBEJBFJEBJ" },
-                    { letra: "C", texto: "WBFJBJEBFJBJBFJBEJFBEJBFJEBJ" },
-                    { letra: "D", texto: "WBFJBJEBFJBJBFJBEJFBEJBFJEBJ" },
-                    { letra: "E", texto: "WBFJBJEBFJBJBFJBEJFBEJBFJEBJ" },
-                    ].map((alt, index) => (
-                    <label key={index} className="modalQuiz-checkboxCard">
+                    {questao.qst_alternatives.map((alt, index) => (
+                        <label key={index} className="modalQuiz-checkboxCard">
 
-                        <input
-                        type="radio"
-                        name="alternativa"
-                        value={alt.letra}
-                        className="modalQuiz-checkbox"
-                        checked={alternativaSelecionada === alt.letra}
-                        onChange={(e) => setAlternativaSelecionada(e.target.value)}
-                        />
+                            <input
+                            type="radio"
+                            name="alternativa"
+                            value={alt.letter}
+                            className="modalQuiz-checkbox"
+                            checked={alternativaSelecionada === alt.letter}
+                            onChange={(e) => setAlternativaSelecionada(e.target.value)}
+                            />
 
-                        <span className="modalQuiz-altLetra">{alt.letra}</span>
-                        <span className="modalQuiz-altTexto">{alt.texto}</span>
+                            <span className="modalQuiz-altLetra">{alt.letter}</span>
+                            <span className="modalQuiz-altTexto">{alt.text}</span>
 
-                    </label>
-                    ))}
+                        </label>
+                        ))}
                 </div>
 
                 <button type="submit" className="modalQuiz-btnResponder">
@@ -258,3 +275,4 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, area, quantQuestoes}) {
 }
 
 export default ModalQuiz;
+

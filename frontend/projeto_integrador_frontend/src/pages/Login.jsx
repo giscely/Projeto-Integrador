@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Login.css";
 
-export default function Login({ fecharModal, onLogin }) { // <-- adicionei onLogin
+export default function Login({ fecharModal }) {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -29,10 +29,6 @@ export default function Login({ fecharModal, onLogin }) { // <-- adicionei onLog
         localStorage.setItem("refresh_token", data.refresh_token);
 
         setMensagem("Login realizado com sucesso!");
-
-        // avisa o pai que logou e fecha o modal
-        if (typeof onLogin === "function") onLogin();
-        if (typeof fecharModal === "function") fecharModal();
       } else {
         setMensagem(data.mensagem || "Erro ao fazer login");
       }
@@ -42,6 +38,7 @@ export default function Login({ fecharModal, onLogin }) { // <-- adicionei onLog
       setMensagem("Erro ao conectar ao servidor.");
     }
 
+    setNome("");
     setEmail("");
     setSenha("");
   };

@@ -45,16 +45,6 @@ function ModalFiltro({ setMostrarFiltro, setMostrarPremium, setQuantQuestoes, se
             </div>
           </button>
 
-          <button className="option-card" onClick={() => handleQuestoes(15)}>
-            <img src="/img/icon_bloco.png" alt="Icone bloco" className="option-icon" />
-            <div>
-              <h3>Bloco de 15</h3>
-              <p>
-                Pratique com um bloco de 15 questões, com questões reais do ENEM!
-              </p>
-            </div>
-          </button>
-
           <button className="option-card" onClick={() => handlePremium()}>
             <img src="/img/icon_simulado.png" alt="Icone simulado" className="option-icon" />
             <div>
