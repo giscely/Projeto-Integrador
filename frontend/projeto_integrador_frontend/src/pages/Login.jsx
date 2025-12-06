@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "./Login.css";
 
-export default function Login({ fecharModal }) {
+export default function Login({ fecharModal, onLogin }) { // <-- adicionei onLogin
 
-  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -11,7 +10,7 @@ export default function Login({ fecharModal }) {
   const enviarDados = async (e) => {
     e.preventDefault();
 
-    const dados = { nome, email, senha,};
+    const dados = { email, senha };
 
     try {
       const response = await fetch("http://127.0.0.1:8080/auth/login", {
@@ -24,17 +23,28 @@ export default function Login({ fecharModal }) {
 
       const data = await response.json();
       console.log("Resposta da API:", data);
-      setMensagem(data.mensagem);
+
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
+
+        setMensagem("Login realizado com sucesso!");
+
+        // avisa o pai que logou e fecha o modal
+        if (typeof onLogin === "function") onLogin();
+        if (typeof fecharModal === "function") fecharModal();
+      } else {
+        setMensagem(data.mensagem || "Erro ao fazer login");
+      }
+
     } catch (error) {
       console.error("Erro ao enviar:", error);
+      setMensagem("Erro ao conectar ao servidor.");
     }
 
-    setNome("");
     setEmail("");
     setSenha("");
   };
-  
-  
 
   return (
     <>
@@ -46,8 +56,6 @@ export default function Login({ fecharModal }) {
 
         <h2>LOGIN</h2>
         <form className="forms-login" onSubmit={enviarDados}>
-          <label>Nome do Usuário:</label>
-          <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)}/>
 
           <label>Email:</label>
           <input
@@ -64,9 +72,12 @@ export default function Login({ fecharModal }) {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
+
           {mensagem && <p>{mensagem}</p>}
+
           <button className="bt_enviar" type="submit">Entrar</button>
         </form>
+
         <p className="cadastro_link">
           Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a>
         </p>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // <-- adicionei useEffect aqui
 import { Link } from "react-router-dom";
 import "./Inicio.css";
 import logo from '../assets/logo_XPENEM.png';
@@ -10,6 +10,18 @@ import Login from "./Login";
 
 export default function Inicio() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [logado, setLogado] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLogado(!!token);
+  }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    setLogado(false);
+  }
 
   return (
     <>
@@ -22,7 +34,12 @@ export default function Inicio() {
             <Link to="/" className="button-menu menu-select">Inicio</Link>
             <Link to="/quiz" className="button-menu">Quiz</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
-            <button onClick={() => setMostrarLogin(true)}>Login</button>
+
+            {logado ? (
+              <button onClick={handleLogout}>Logout</button>
+            ) : (
+              <button onClick={() => setMostrarLogin(true)}>Login</button>
+            )}
 
             <Link to="/perfil" className="icon-perfil">icon</Link>
           </nav>
@@ -76,7 +93,7 @@ export default function Inicio() {
           </div>
 
           <div className="description"></div>
-           <h1>Como funciona:</h1>
+          <h1>Como funciona:</h1>
           <div className="como-funciona">
             <div className="informs-function">
               <div>
@@ -91,20 +108,20 @@ export default function Inicio() {
               <div>
                 <h1>Veja o seu progresso</h1>
               </div>
-              
             </div>
             <div>
-                <h1>Seus pontos:</h1>
+              <h1>Seus pontos:</h1>
             </div>
           </div>
         </section>
       </div>
 
-        {/* MOSTRAR O MODAL */}
-        {mostrarLogin && (
-            <Login fecharModal={() => setMostrarLogin(false)} />
-        )}
-
+      {mostrarLogin && (
+        <Login 
+          fecharModal={() => setMostrarLogin(false)} 
+          onLogin={() => setLogado(true)} // <-- passa a função que atualiza estado
+        />
+      )}
     </>
   );
 }
