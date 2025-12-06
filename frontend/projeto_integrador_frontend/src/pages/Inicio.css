@@ -51,9 +51,10 @@ header nav .button-menu {
   cursor: pointer;
   padding: 0.5rem 1rem;
   transition: color 0.3s;
+  border-radius: 0;
 }
 
-header nav .button-menu:first-child {
+header nav .menu-select {
   color: #1e40af;
   border-bottom: 2px solid #1e40af;
 }

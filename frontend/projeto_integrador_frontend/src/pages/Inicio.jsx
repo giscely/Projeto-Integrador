@@ -19,7 +19,7 @@ export default function Inicio() {
             <img src={logo} alt="logo" />
           </div>
           <nav>
-            <Link to="/" className="button-menu">Inicio</Link>
+            <Link to="/" className="button-menu menu-select">Inicio</Link>
             <Link to="/quiz" className="button-menu">Quiz</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
             <button onClick={() => setMostrarLogin(true)}>Login</button>

@@ -15,7 +15,7 @@ return (
             <nav>
                 <Link to="/" className="button-menu">Inicio</Link>
                 <Link to="/quiz" className="button-menu">Quiz</Link>
-                <Link to="/sobre" className="button-menu">Sobre</Link>
+                <Link to="/sobre" className="button-menu menu-select">Sobre</Link>
                 <button onClick={() => setMostrarLogin(true)}>Login</button>
 
                 <Link to="/perfil" className="icon-perfil">icon</Link>

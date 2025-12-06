@@ -50,7 +50,7 @@ header nav .button-menu {
   transition: color 0.3s;
 }
 
-header nav .button-menu:first-child {
+header nav .menu-select {
   color: #1e40af;
   border-bottom: 2px solid #1e40af;
 }
@@ -105,37 +105,59 @@ header nav > .icon-perfil {
   gap: 24px;
 }
 
+
+
+/* ------------------------------------------------ */
+
 .div_areas {
-  border: 2px solid #333;
+  background: #ffffff;          /* fundo branco */
   border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  border: 3px solid transparent;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
 }
 
+/* 1 - Linguagens → azul */
 .div_areas:nth-child(1) {
-  background-color: #e6f7f7;
+  border-color: #0047AB;
 }
 
+/* 2 - Humanas → vermelho */
 .div_areas:nth-child(2) {
-  background-color: #ffe6f0;
+  border-color: #FF4D4D;
 }
 
+/* 3 - Matemática → amarelo */
 .div_areas:nth-child(3) {
-  background-color: #fff9e6;
+  border-color: #FFB800;
 }
 
+/* 4 - Natureza → verde */
 .div_areas:nth-child(4) {
-  background-color: #e6f7e6;
+  border-color: #00A36C;
 }
-
 .div_area {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
 }
+
+
+/* HOVER: card sobe e aplica o degradê */
+.div_areas:hover {
+  transform: translateY(-6px);
+  border-width: 3px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
 .area_text {
   display: flex;
   justify-content: flex-start;

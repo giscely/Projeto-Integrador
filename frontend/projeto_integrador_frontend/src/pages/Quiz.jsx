@@ -29,20 +29,37 @@ export default function Quiz() {
 
   useEffect(() => {
     if (quiz === true) {
-
-    //   fetch(`http://127.0.0.1:8080/questoes?area=${area}&quant=${quantQuestoes}`)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       setQuestoesQuiz(data);
-    //       setMostrarQuiz(true);
-    //       setQuiz(false)
-    //     })
-    //     .catch((err) => console.error("Erro ao buscar questões:", err));
+      // fetch(`http://127.0.0.1:8080/questoes?area=${area}&quant=${quantQuestoes}`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setQuestoesQuiz(data);
+      //     setMostrarQuiz(true);
+      //     setQuiz(false)
+      //   })
+      //   .catch((err) => console.error("Erro ao buscar questões:", err));
     setMostrarQuiz(true);
     setQuiz(false)
   
   }
   }, [quiz]);
+
+
+
+
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ""; // obrigatório para exibir o alerta
+    };
+    // Quando o modal abrir, ativa o alerta
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    // Quando o modal fechar, remove o alerta
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
 
   return (
     <>
@@ -53,7 +70,7 @@ export default function Quiz() {
           </div>
           <nav>
             <Link to="/" className="button-menu">Inicio</Link>
-            <Link to="/quiz" className="button-menu">Quiz</Link>
+            <Link to="/quiz" className="button-menu menu-select">Quiz</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
             <button onClick={() => setMostrarLogin(true)}>Login</button>
 
