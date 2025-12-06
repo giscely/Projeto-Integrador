@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session,Mapped, mapped_column, relationship,Declarati
 from typing import List
 import enum
 from sqlalchemy import Enum as SqlEnum
+import datetime
 
 
 engine = create_engine('sqlite:///database.db')
@@ -30,8 +31,7 @@ class Usuario(Base):
     usu_senha:Mapped[str]
     usu_tipo: Mapped[TipoUsuarioEnum] = mapped_column(SqlEnum(TipoUsuarioEnum, name="tipo_usuario_enum"),default=TipoUsuarioEnum.comum,nullable=False)
     usu_badge: Mapped[BadgesEnum] = mapped_column(SqlEnum(BadgesEnum,name="badges_enum",values_callable=lambda e: [i.value for i in e]), default=BadgesEnum.iniciantes, nullable=False)
-
-
+    simulados: Mapped[List["Simulado"]] = relationship(back_populates="sim_usuario")
 
 
 
@@ -71,6 +71,9 @@ class Simulado(Base):
     sim_nome: Mapped[str] = mapped_column(nullable=False)
     sim_discipline: Mapped[str] = mapped_column(nullable=False)
     sim_completed: Mapped[bool] = mapped_column(default=False)
+    sim_data_criacao: Mapped[datetime.date] = mapped_column(default=datetime.date.today())
+    sim_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.usu_id"))
+    sim_usuario: Mapped["Usuario"] = relationship()
     sim_questoes: Mapped[List["Questao"]] = relationship(
         secondary="simulado_questoes",
         back_populates="simulados"
@@ -86,4 +89,15 @@ class ResultadoSimulado(Base):
     res_tempo_gasto: Mapped[int]  # tempo em segundos
 
     simulado: Mapped["Simulado"] = relationship()
+    usuario: Mapped["Usuario"] = relationship()
+
+
+class Premium(Base):
+    __tablename__ = 'premiums'
+
+    pre_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    pre_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.usu_id"))
+    pre_data_ativacao: Mapped[datetime.date]
+    pre_data_expiracao: Mapped[datetime.date]
+
     usuario: Mapped["Usuario"] = relationship()

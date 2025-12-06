@@ -43,23 +43,3 @@ app.include_router(question_router)
 app.include_router(simulated_router)
 app.include_router(user_router)
 
-
-
-
-
-#Lógica para criar um usuário admin ao iniciar a aplicação
-
-# def criar_user_admin():
-#     with SessionDep() as session:
-#         query = session.query(Usuario).filter(Usuario.usu_tipo == "admin")
-#         admin_existente = session.execute(query).scalar_one_or_none()
-
-#         if not admin_existente:
-#             novo_admin = Usuario(
-#                 usu_nome=os.getenv("ADMIN_NAME"),
-#                 usu_email=os.getenv("ADMIN_EMAIL"),
-#                 usu_senha=os.getenv("ADMIN_PASSWORD"),
-#                 usu_tipo=TipoUsuarioEnum.admin
-#             )
-#             session.add(novo_admin)
-#             session.commit()
