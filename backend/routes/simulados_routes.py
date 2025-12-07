@@ -41,7 +41,7 @@ async def criar_simulado(session: SessionDep, disciplina: str, quantidade_questo
                 .count()
         )
 
-        if simulados_today >= 2:
+        if simulados_today >= 30:
             return {"mensagem": "Limite diário de simulados atingido para usuários comuns. Torne-se premium para criar mais simulados."}
         if quantidade_questoes > 10:
             return {"mensagem": "Usuários comuns só podem criar simulados com até 10 questões. Torne-se premium para mais opções."}

@@ -49,7 +49,8 @@ export default function Inicio() {
             <div className="div_info_intro">
               <h1>Domine o Enem com confiança!</h1>
               <p>Aprenda no seu ritmo e conquiste o seu futuro.</p>
-              <button>Começar agora</button>
+              
+              <Link to="/quiz" className="button-intro">Começar agora</Link>
             </div>
           </div>
 

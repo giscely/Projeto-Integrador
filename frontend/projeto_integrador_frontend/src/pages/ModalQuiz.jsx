@@ -119,184 +119,198 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
 
     return (
-    <div className="modalQuiz-overlay">
+    <div className="modalQuiz-body">
 
-        {/* === INÍCIO DO QUIZ === */}
-        {mostrarComecar && (
-        <div className="quizComecar-overlay">
-            <div className="quizComecar-card">
-                <h2>Boa sorte! Leia cada questão com atenção.</h2>
+    
+        <div className="modalQuiz-overlay">
 
-                <button
-                    className="quizComecar-btn"
-                    onClick={() => setMostrarComecar(false)}
-                >
-                    INICIAR
-                </button>
-            </div>
-        </div>
-        )}
-        
-        {/* === TELA FINAL === */}
-        {finalizou && (
+            {/* === INÍCIO DO QUIZ === */}
+            {mostrarComecar && (
             <div className="quizComecar-overlay">
                 <div className="quizComecar-card">
-                    <h2>🎉 Parabéns! Você terminou o quiz!</h2>
-                    <p>Acertos: {resultadoQuiz.acertos} / {quantQuestoes}</p>
+                    <h2>Boa sorte! Leia cada questão com atenção.</h2>
 
-                    <button onClick={() => setMostrarQuiz(false)}>
-                        Sair
+                    <button
+                        className="quizComecar-btn"
+                        onClick={() => setMostrarComecar(false)}
+                    >
+                        INICIAR
                     </button>
-
-                    <p>Respostas: {listaRespostas.join(", ")}</p>
                 </div>
             </div>
-        )}
-
-        {/* === MODAL DE FEEDBACK === */}
-            {mostrarFeedback && (
+            )}
+            
+            {/* === TELA FINAL === */}
+            {finalizou && (
                 <div className="quizComecar-overlay">
                     <div className="quizComecar-card">
-                        <h2>{acertouQuestao ? "✔ Você acertou!" : "✖ Você errou!"}</h2>
+                        <h2>🎉 Parabéns! Você terminou o quiz!</h2>
+                        <p>Acertos: {resultadoQuiz.acertos} / {quantQuestoes}</p>
+
+                        <button onClick={() => setMostrarQuiz(false)}>
+                            Sair
+                        </button>
+
+                        <p>Respostas: {listaRespostas.join(", ")}</p>
+                    </div>
+                </div>
+            )}
+
+            {/* === MODAL DE FEEDBACK === */}
+                {mostrarFeedback && (
+                    <div className="quizComecar-overlay">
+                        <div className="quizComecar-card">
+                            <h2>{acertouQuestao ? "✔ Você acertou!" : "✖ Você errou!"}</h2>
+
+                            <button
+                                className="quizComecar-btn"
+                                onClick={() => setMostrarFeedback(false)}
+                            >
+                                CONTINUAR
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+            {confirmarSaida && (
+                <div className="quizComecar-overlay">
+                    <div className="quizComecar-card">
+                        <h2>Tem certeza que deseja sair?</h2>
+                        <p style={{ marginBottom: "15px" }}>
+                            Seu progresso no quiz será perdido.
+                        </p>
 
                         <button
                             className="quizComecar-btn"
-                            onClick={() => setMostrarFeedback(false)}
+                            style={{ backgroundColor: "#d9534f" }}
+                            onClick={() => setMostrarQuiz(false)}
                         >
-                            CONTINUAR
+                            Sair do Quiz
+                        </button>
+
+                        <button
+                            className="quizComecar-btn"
+                            style={{ backgroundColor: "#5bc0de", marginTop: "10px" }}
+                            onClick={() => setConfirmarSaida(false)}
+                        >
+                            Continuar
                         </button>
                     </div>
                 </div>
             )}
 
-        {confirmarSaida && (
-            <div className="quizComecar-overlay">
-                <div className="quizComecar-card">
-                    <h2>Tem certeza que deseja sair?</h2>
-                    <p style={{ marginBottom: "15px" }}>
-                        Seu progresso no quiz será perdido.
-                    </p>
+            {confirmarSaidaHeader && (
+                <div className="quizComecar-overlay">
+                    <div className="quizComecar-card">
+                        <h2>Tem certeza que deseja sair do quiz?</h2>
+                        <p style={{ marginBottom: "15px" }}>
+                            Você perderá seu progresso atual.
+                        </p>
 
-                    <button
-                        className="quizComecar-btn"
-                        style={{ backgroundColor: "#d9534f" }}
-                        onClick={() => setMostrarQuiz(false)}
-                    >
-                        Sair do Quiz
-                    </button>
+                        <button
+                            className="quizComecar-btn"
+                            style={{ backgroundColor: "#d9534f" }}
+                            onClick={() => navigate(rotaDestino)}
+                        >
+                            Sair
+                        </button>
 
-                    <button
-                        className="quizComecar-btn"
-                        style={{ backgroundColor: "#5bc0de", marginTop: "10px" }}
-                        onClick={() => setConfirmarSaida(false)}
-                    >
-                        Continuar
-                    </button>
+                        <button
+                            className="quizComecar-btn"
+                            style={{ backgroundColor: "#5bc0de", marginTop: "10px" }}
+                            onClick={() => setConfirmarSaidaHeader(false)}
+                        >
+                            Continuar no quiz
+                        </button>
+                    </div>
                 </div>
-            </div>
-        )}
+            )}
 
-        {confirmarSaidaHeader && (
-            <div className="quizComecar-overlay">
-                <div className="quizComecar-card">
-                    <h2>Tem certeza que deseja sair do quiz?</h2>
-                    <p style={{ marginBottom: "15px" }}>
-                        Você perderá seu progresso atual.
-                    </p>
-
-                    <button
-                        className="quizComecar-btn"
-                        style={{ backgroundColor: "#d9534f" }}
-                        onClick={() => navigate(rotaDestino)}
-                    >
-                        Sair
-                    </button>
-
-                    <button
-                        className="quizComecar-btn"
-                        style={{ backgroundColor: "#5bc0de", marginTop: "10px" }}
-                        onClick={() => setConfirmarSaidaHeader(false)}
-                    >
-                        Continuar no quiz
-                    </button>
+            <header>
+                <div className="img-logo">
+                <img src={logo} alt="logo" />
                 </div>
-            </div>
-        )}
+                <nav>
+                    <button className="button-menu" onClick={() => { setRotaDestino("/"); setConfirmarSaidaHeader(true); }}>Inicio</button>
 
-        <header>
-            <div className="img-logo">
-            <img src={logo} alt="logo" />
-            </div>
-            <nav>
-                <button className="button-menu" onClick={() => { setRotaDestino("/"); setConfirmarSaidaHeader(true); }}>Inicio</button>
+                    <button className="button-menu menu-select" >Quiz</button>
 
-                <button className="button-menu menu-select" >Quiz</button>
+                    <button className="button-menu" onClick={() => { setRotaDestino("/sobre"); setConfirmarSaidaHeader(true); }}>Sobre</button>
 
-                <button className="button-menu" onClick={() => { setRotaDestino("/sobre"); setConfirmarSaidaHeader(true); }}>Sobre</button>
+                    <button>Login</button>
 
-                <button>Login</button>
+                    <button className="icon-perfil" onClick={() => { setRotaDestino("/perfil"); setConfirmarSaidaHeader(true); }}>icon</button>
+                </nav>
+            </header>
 
-                <button className="icon-perfil" onClick={() => { setRotaDestino("/perfil"); setConfirmarSaidaHeader(true); }}>icon</button>
-            </nav>
-        </header>
-
-        <div className="modalQuiz-card">
-            <button className="modalQuiz-close" onClick={() => setConfirmarSaida(true)}>
-            ✖
-            </button>
-    
-            <div className="modalQuiz-info">
-                <h3 className="modalQuiz-examTitle">
-                QUIZ - {disciplina}
-                </h3>
-                <p className="modalQuiz-subtitle">{questao.qst_title}</p>
-
-                {/* Enunciado */}
-                <p className="modalQuiz-enunciado">{questao.qst_context}</p>
-                <h5 className="modalQuiz-enunciado">
-                    {questao.qst_question}
-                </h5>
-            </div>
-
-            <form className="modalQuiz-form" onSubmit={handleResponder}>
-
-                <div className="modalQuiz-alternativas">
-
-                    {questao.qst_alternatives.map((alt, index) => (
-                        <label key={index} className="modalQuiz-checkboxCard">
-
-                            <input
-                            type="radio"
-                            name="alternativa"
-                            value={alt.letter}
-                            className="modalQuiz-checkbox"
-                            checked={alternativaSelecionada === alt.letter}
-                            onChange={(e) => setAlternativaSelecionada(e.target.value)}
-                            />
-
-                            <span className="modalQuiz-altLetra">{alt.letter}</span>
-                            <span className="modalQuiz-altTexto">{alt.text}</span>
-
-                        </label>
-                        ))}
-                </div>
-
-                <button type="submit" className="modalQuiz-btnResponder">
-                    Responder
+            <div className="modalQuiz-card">
+                <button className="modalQuiz-close" onClick={() => setConfirmarSaida(true)}>
+                ✖
                 </button>
+        
+                <div className="modalQuiz-info">
+                    <h3 className="modalQuiz-examTitle">
+                    QUIZ - {disciplina}
+                    </h3>
+                    <p className="modalQuiz-subtitle">{questao.qst_title}</p>
 
-            </form>
+                    {/* Enunciado */}
+                    <p className="modalQuiz-enunciado">{questao.qst_context.replace(/!\[[^\]]*\]\([^\)]+\.(png|jpg|jpeg)\)/gi, "")}</p>
+                    <h5 className="modalQuiz-enunciado">
+                        {questao.qst_question}
+                    </h5>
 
-        <span className="quiz-tempo">
-            ⏱ {minutos}:{secs}
-        </span>
+                    {/* Imagem da questão (se houver) */}
+                    {questao.qst_file_url && questao.qst_file_url.length > 0 && (
+                        <img
+                        src={questao.qst_file_url[0]}
+                        alt="Imagem da questão"
+                        className="modalQuiz-image"
+                        />
+                    )}
+                    
+                </div>
 
-        {/* Contador */}
-        <div className="modalQuiz-contador">
-        {questaoAtual} / {quantQuestoes}
-    </div>
+                <form className="modalQuiz-form" onSubmit={handleResponder}>
 
-      </div>
+                    <div className="modalQuiz-alternativas">
+
+                        {questao.qst_alternatives.map((alt, index) => (
+                            <label key={index} className="modalQuiz-checkboxCard">
+
+                                <input
+                                type="radio"
+                                name="alternativa"
+                                value={alt.letter}
+                                className="modalQuiz-checkbox"
+                                checked={alternativaSelecionada === alt.letter}
+                                onChange={(e) => setAlternativaSelecionada(e.target.value)}
+                                />
+
+                                <span className="modalQuiz-altLetra">{alt.letter}</span>
+                                <span className="modalQuiz-altTexto">{alt.text}</span>
+
+                            </label>
+                            ))}
+                    </div>
+
+                    <button type="submit" className="modalQuiz-btnResponder">
+                        Responder
+                    </button>
+
+                </form>
+
+            <span className="quiz-tempo">
+                ⏱ {minutos}:{secs}
+            </span>
+
+            {/* Contador */}
+            <div className="modalQuiz-contador">
+            {questaoAtual} / {quantQuestoes}
+        </div>
+
+        </div>
+        </div>
     </div>
   );
 }
