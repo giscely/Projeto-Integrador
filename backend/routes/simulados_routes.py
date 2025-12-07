@@ -121,8 +121,8 @@ async def listar_simulados(session: SessionDep, usuario: Usuario = Depends(verif
     simulados = session.query(Simulado).filter(Simulado.sim_usuario_id == usuario.usu_id).all()
     return simulados
 
-
-@simulated_router.post("/{sim_id}/resultado", response_model=ResultadoSimuladoSchema)
+# marcella: retirei o response model pois dava erro no console, embora salvasse as informações no branco - , response_model=ResultadoSimuladoSchema
+@simulated_router.post("/{sim_id}/resultado")
 async def resultado_simulado(sim_id: int, respostas: dict, session: SessionDep, usuario: Usuario = Depends(verificar_token)):
 
     simulado = (

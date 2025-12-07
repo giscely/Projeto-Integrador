@@ -19,6 +19,7 @@ export default function Quiz() {
   const [mostrarFiltro, setMostrarFiltro] = useState(false);
   const [mostrarPremium, setMostrarPremium] = useState(false);
   const [mostrarQuiz, setMostrarQuiz] = useState(false);
+  const [simId, setSimId] = useState(0)
 
   const handleDisciplina = (disciplina) => {
     setDisciplina(disciplina)
@@ -54,6 +55,7 @@ export default function Quiz() {
             return;
           }
 
+          setSimId(simId);
           // BUSCAR O SIMULADO (get)
           const buscarSimulado = await fetch(`http://127.0.0.1:8080/simulados/${simId}`,
             {
@@ -234,7 +236,7 @@ export default function Quiz() {
 
 
         {/* MOSTRAR MODAL DE QUESTÕES DO QUIZ */}
-        {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes}/>}
+        {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes} sim_id={simId}/>}
 
     </>
   );

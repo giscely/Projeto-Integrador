@@ -7,8 +7,10 @@ import "./Inicio.css";
 import "./ModalQuiz.css"
 import logo from '../assets/logo_XPENEM.png';
 
-function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes}) {
+function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, sim_id}) {
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+
 
     const [mostrarComecar, setMostrarComecar] = useState(true);
     const [confirmarSaida, setConfirmarSaida] = useState(false);
@@ -77,8 +79,9 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes}) {
 
         // === FINAL DO QUIZ ===
         if (proxima === quantQuestoes) {
-            setMostrarFeedback(false);   // ← ESSA LINHA RESOLVE O BUG
+            setMostrarFeedback(false);   
             setFinalizou(true);
+            enviarResultado(sim_id);
             return;
         }
 
@@ -90,6 +93,30 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes}) {
         setAlternativaSelecionada("");
         setSegundos(0);
     }
+
+
+    async function enviarResultado(sim_id) {
+        const respostas = { respostas: listaRespostas };
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8080/simulados/${sim_id}/resultado`, 
+            {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(respostas)
+            });
+
+            const data = await response.json();
+            console.log("Resultado enviado:", data);
+
+        } catch (error) {
+            console.error("Erro ao enviar resultado:", error);
+        }
+    }
+
 
     return (
     <div className="modalQuiz-overlay">
