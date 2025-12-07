@@ -28,15 +28,12 @@ header {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 10px 2rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   border: 1px solid rgb(196,196,196);
   border-radius: 10px;
-
-  width: 100%;           /* <<< CORRIGIDO */
+  width: 100%;     
 }
 
 .img-logo img {
@@ -196,6 +193,8 @@ section {
   transition: border-color 0.3s, transform 0.3s;
   cursor: pointer;
   height: 270px;
+  border: 1px solid rgb(196,196,196);
+  box-shadow: 0 4px 4px rgba(0,0,0,0.1);
 }
 
 .info > div:hover {

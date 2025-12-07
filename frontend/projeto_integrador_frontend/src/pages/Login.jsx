@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export default function Login({ fecharModal }) {
@@ -6,6 +7,8 @@ export default function Login({ fecharModal }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
+
+  const navigate = useNavigate();
 
   const enviarDados = async (e) => {
     e.preventDefault();
@@ -29,6 +32,8 @@ export default function Login({ fecharModal }) {
         localStorage.setItem("refresh_token", data.refresh_token);
 
         setMensagem("Login realizado com sucesso!");
+
+        navigate("/");
       } else {
         setMensagem(data.mensagem || "Erro ao fazer login");
       }

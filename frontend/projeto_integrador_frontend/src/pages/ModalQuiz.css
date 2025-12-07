@@ -15,23 +15,20 @@
   z-index: 9000;
 }
 .modalQuiz-overlay {
-
   width: 100%;
   height: 100%;
   background-color: #d8f1fd;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  max-width: 95%;
+  max-width: 90%;
   margin: 0 auto;
-  padding: 15px;
 }
 
 /* === CARD PRINCIPAL === */
 .modalQuiz-card {
   margin-top: 50px;
-  width: 90%;
+  width: 100%;
   max-width: 670px;
   background: #fff;
   border-radius: 14px;

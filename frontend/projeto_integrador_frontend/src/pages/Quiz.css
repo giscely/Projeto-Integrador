@@ -4,23 +4,30 @@
   box-sizing: border-box;
 }
 
+/* BODY */
 body {
-  text-align: center;
   max-width: 100%;
-  max-height: 100%;
-  padding: 15px;
   background-color: #d8f1fd;
+  font-family: sans-serif;
+}
+
+/* LIMITA E CENTRALIZA TUDO */
+.main_page {
+  width: 100vw;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 header {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 5px 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 10px 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid rgb(196, 196, 196);
-  
+  border: 1px solid rgb(196,196,196);
+  border-radius: 10px;
+  width: 100%;     
 }
 
 .img-logo img{
@@ -86,9 +93,9 @@ header nav > .icon-perfil {
 /* --------------- css do chatgpt -------------------- */
 
 .quiz_filtro {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 40px 20px;
+  border-radius: 10px;
 }
 
 .quiz_filtro h1 {
@@ -103,9 +110,11 @@ header nav > .icon-perfil {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 24px;
+  background-color: white;
+  padding: 3%;
+  border-radius: 10px;
+  border: 1px solid rgb(196,196,196);
 }
-
-
 
 /* ------------------------------------------------ */
 
@@ -227,3 +236,18 @@ header nav > .icon-perfil {
   background-color: #0d8bd9;
 }
 
+.div_areas:nth-child(1) .info_area button {
+  background-color: #007BFF; /* Linguagens */
+}
+
+.div_areas:nth-child(2) .info_area button {
+  background-color: #FF4D4D; /* Humanas */
+}
+
+.div_areas:nth-child(3) .info_area button {
+  background-color: #F4B400; /* Matemática */
+}
+
+.div_areas:nth-child(4) .info_area button {
+  background-color: #00A36C; /* Natureza */
+}
