@@ -26,6 +26,10 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
     const [alternativaSelecionada, setAlternativaSelecionada] = useState("");
 
+    const [letraCerta, setLetraCerta] = useState("");
+    const [textoCerto, setTextoCerto] = useState("");
+    
+
     // === TIMER ===
     const [segundos, setSegundos] = useState(0);
 
@@ -66,33 +70,37 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
         setListaRespostas(prev => [...prev, alternativaSelecionada]);
 
-        const respostaCerta = questao.qst_correct_alternative;
-        const acertou = alternativaSelecionada === respostaCerta;
+        const respostaCertatext = questao.qst_alternatives.find(a => a.isCorrect);
 
-        setResultadoQuiz((prev) => ({
-            ...prev,
-            acertos: prev.acertos + (acertou ? 1 : 0),
-            tempos: [...prev.tempos, segundos],
-        }));
+        setLetraCerta(respostaCertatext?.letter || "");
+        setTextoCerto(respostaCertatext?.text || "");
 
-        const proxima = questaoAtual + 1;
-
-        // === FINAL DO QUIZ ===
-        if (proxima === quantQuestoes) {
-            setMostrarFeedback(false);   
-            setFinalizou(true);
-            enviarResultado(sim_id);
-            return;
-        }
-
-        // === Próxima questão ===
-        setQuestaoAtual(proxima);
+        const acertou = alternativaSelecionada === questao.qst_correct_alternative;
         setAcertouQuestao(acertou);
-        setMostrarFeedback(true);
+            setResultadoQuiz((prev) => ({
+                ...prev,
+                acertos: prev.acertos + (acertou ? 1 : 0),
+                tempos: [...prev.tempos, segundos],
+            }));
 
-        setAlternativaSelecionada("");
-        setSegundos(0);
-    }
+            const proxima = questaoAtual + 1;
+
+            // === FINAL DO QUIZ ===
+            if (proxima === quantQuestoes) {
+                setMostrarFeedback(false);   
+                setFinalizou(true);
+                enviarResultado(sim_id);
+                return;
+            }
+
+            // === Próxima questão ===
+            setQuestaoAtual(proxima);
+            setAcertouQuestao(acertou);
+            setMostrarFeedback(true);
+
+            // setAlternativaSelecionada("");
+            setSegundos(0);
+        }
 
 
     async function enviarResultado(sim_id) {
@@ -116,6 +124,14 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
             console.error("Erro ao enviar resultado:", error);
         }
     }
+    const nomesDisciplinas = {
+        "linguagens": "Linguagens",
+        "ciencias-natureza": "Ciências da Natureza",
+        "ciencias-humanas": "Ciências Humanas",
+        "matematica": "Matemática"
+    };
+
+    const nomeDisciplina = nomesDisciplinas[disciplina] || disciplina;
 
 
     return (
@@ -157,74 +173,84 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
             )}
 
             {/* === MODAL DE FEEDBACK === */}
-                {mostrarFeedback && (
-                    <div className="quizComecar-overlay">
-                        <div className="quizComecar-card">
-                            <h2>{acertouQuestao ? "✔ Você acertou!" : "✖ Você errou!"}</h2>
+            {mostrarFeedback && (
+                <div className="quizFeedback-overlay">
+                    <div className="quizFeedback-card">
 
-                            <button
-                                className="quizComecar-btn"
-                                onClick={() => setMostrarFeedback(false)}
-                            >
-                                CONTINUAR
-                            </button>
+                        {/* Barra superior */}
+                        <div className={`quizFeedback-header ${acertouQuestao ? "acerto" : "erro"}`}>
+                            <span className="quizFeedback-icon">{acertouQuestao ? "✔" : "✖"}</span>
+
+                            <h3 className="quizFeedback-title">{acertouQuestao ? "Resposta correta" : "Resposta incorreta"} - Letra {alternativaSelecionada}</h3>
                         </div>
+
+                        {/* Texto da resposta correta */}
+                        <p className="quizFeedback-text">
+                            <strong>Alternativa correta:</strong> {letraCerta} — {textoCerto}
+                        </p>
+
+                        {/* Botão continuar */}
+                        <button className="quizFeedback-btn" onClick={() => {
+                            setAlternativaSelecionada("");
+                            setMostrarFeedback(false);
+                        }}> CONTINUAR </button>
                     </div>
-                )}
+                </div>
+            )}
+
 
             {confirmarSaida && (
-                <div className="quizComecar-overlay">
-                    <div className="quizComecar-card">
-                        <h2>Tem certeza que deseja sair?</h2>
-                        <p style={{ marginBottom: "15px" }}>
+                <div className="quizSaida-overlay">
+                    <div className="quizSaida-card">
+
+                        <h2 className="quizSaida-title">Tem certeza que deseja sair?</h2>
+                        <p className="quizSaida-subtitle">
                             Seu progresso no quiz será perdido.
                         </p>
 
-                        <button
-                            className="quizComecar-btn"
-                            style={{ backgroundColor: "#d9534f" }}
-                            onClick={() => setMostrarQuiz(false)}
-                        >
-                            Sair do Quiz
-                        </button>
+                        <div className="quizSaida-buttons">
+                            <button
+                                className="quizSaida-btn sair"
+                                onClick={() => setMostrarQuiz(false)}>Sair do Quiz
+                            </button>
 
-                        <button
-                            className="quizComecar-btn"
-                            style={{ backgroundColor: "#5bc0de", marginTop: "10px" }}
-                            onClick={() => setConfirmarSaida(false)}
-                        >
-                            Continuar
-                        </button>
+                            <button className="quizSaida-btn continuar" onClick={() => setConfirmarSaida(false)}
+                            >
+                                Continuar
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             )}
+
 
             {confirmarSaidaHeader && (
-                <div className="quizComecar-overlay">
-                    <div className="quizComecar-card">
+                <div className="quizSaida-overlay">
+                    <div className="quizSaida-card">
                         <h2>Tem certeza que deseja sair do quiz?</h2>
-                        <p style={{ marginBottom: "15px" }}>
-                            Você perderá seu progresso atual.
-                        </p>
 
-                        <button
-                            className="quizComecar-btn"
-                            style={{ backgroundColor: "#d9534f" }}
-                            onClick={() => navigate(rotaDestino)}
-                        >
-                            Sair
-                        </button>
+                        <p>Você perderá seu progresso atual.</p>
 
-                        <button
-                            className="quizComecar-btn"
-                            style={{ backgroundColor: "#5bc0de", marginTop: "10px" }}
-                            onClick={() => setConfirmarSaidaHeader(false)}
-                        >
-                            Continuar no quiz
-                        </button>
+                        <div className="quizSaida-buttons">
+                            <button
+                                className="quizSaida-btn sair"
+                                onClick={() => navigate(rotaDestino)}
+                            >
+                                Sair
+                            </button>
+
+                            <button
+                                className="quizSaida-btn continuar"
+                                onClick={() => setConfirmarSaidaHeader(false)}
+                            >
+                                Continuar no quiz
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
+
 
             <header>
                 <div className="img-logo">
@@ -250,12 +276,13 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
         
                 <div className="modalQuiz-info">
                     <h3 className="modalQuiz-examTitle">
-                    QUIZ - {disciplina}
+                    QUIZ - {nomeDisciplina}
                     </h3>
                     <p className="modalQuiz-subtitle">{questao.qst_title}</p>
 
                     {/* Enunciado */}
-                    <p className="modalQuiz-enunciado">{questao.qst_context.replace(/!\[[^\]]*\]\([^\)]+\.(png|jpg|jpeg)\)/gi, "")}</p>
+                    {questao.qst_context && (
+                        <p className="modalQuiz-enunciado">{questao.qst_context.replace(/!\[[^\]]*\]\([^\)]+\.(png|jpg|jpeg)\)/gi, "")}</p>)}
                     <h5 className="modalQuiz-enunciado">
                         {questao.qst_question}
                     </h5>

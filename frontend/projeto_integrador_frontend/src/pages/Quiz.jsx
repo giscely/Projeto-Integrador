@@ -99,7 +99,6 @@ export default function Quiz() {
     };
   }, []);
 
-
   return (
     <>
       <div className="main_page">

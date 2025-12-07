@@ -23,6 +23,7 @@
   align-items: center;
   max-width: 90%;
   margin: 0 auto;
+  padding-bottom: 3%;
 }
 
 /* === CARD PRINCIPAL === */
@@ -264,4 +265,204 @@
 @keyframes scaleIn {
     from { transform: scale(0.8); opacity: 0 }
     to { transform: scale(1); opacity: 1 }
+}
+/* === OVERLAY (copiado do seu modelo) === */
+.quizFeedback-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* === CARD (mesma base do seu quizComecar-card) === */
+.quizFeedback-card {
+    margin-top: 20%;
+    background: #ffffff;
+    padding: 0; /* removido devido ao header */
+    width: 320px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: scaleIn 0.25s ease;
+    overflow: hidden; /* garante que o header arredondado fique correto */
+}
+
+/* === HEADER DO CARD === */
+.quizFeedback-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* Verde quando acerta */
+.quizFeedback-header.acerto {
+    background: #c9f2dd;
+    color: #064f2a;
+}
+
+/* Vermelho quando erra */
+.quizFeedback-header.erro {
+    background: #f9dada;
+    color: #7a0000;
+}
+
+/* Ícone ✔ ou ✖ */
+.quizFeedback-icon {
+    font-size: 20px;
+}
+
+/* Título */
+.quizFeedback-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* === TEXTO EXPLICATIVO === */
+.quizFeedback-text {
+    padding: 22px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: black;
+    text-align: justify;
+}
+
+/* === BOTÃO CONTINUAR === */
+.quizFeedback-btn {
+    margin: 0 auto 22px auto;
+    background: #004a92;
+    color: white;
+    font-weight: bold;
+    padding: 10px 26px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+.quizFeedback-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* === ANIMAÇÕES === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Fundo escurecido */
+.quizSaida-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Card central */
+.quizSaida-card {
+    margin-top: 18%;
+    background: #ffffff;
+    padding: 32px 28px;
+    width: 330px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.28);
+    animation: scaleIn 0.25s ease;
+    border-top: 5px solid #d9534f; /* destaque superior */
+}
+
+/* Título */
+.quizSaida-card h2 {
+    margin: 0 0 10px;
+    font-size: 23px;
+    color: #222222;
+    font-weight: 700;
+}
+
+/* Texto */
+.quizSaida-card p {
+    margin-bottom: 22px;
+    font-size: 15px;
+    color: #606060;
+}
+
+/* Container dos botões */
+.quizSaida-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Botões base */
+.quizSaida-btn {
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+/* Botão SAIR — vermelho */
+.quizSaida-btn.sair {
+    background: #d9534f;
+    color: white;
+}
+
+.quizSaida-btn.sair:hover {
+    background: #ba423e;
+}
+
+/* Botão CONTINUAR — azul */
+.quizSaida-btn.continuar {
+    background: #007bff;
+    color: white;
+}
+
+.quizSaida-btn.continuar:hover {
+    background: #005fcc;
+}
+
+/* === Animações (mesmas do modal Começar) === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
