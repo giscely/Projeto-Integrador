@@ -96,25 +96,32 @@ header nav > .icon-perfil {
   width: 100%;
   margin: 0 auto;
   border-radius: 10px;
+  margin-top: 4%;
 }
 
 .quiz_filtro h1 {
   text-align: center;
   font-size: 28px;
-  color: #333;
+  color: #5f5f5f;
   margin-bottom: 40px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .div_quiz_filtro {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< HEAD
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 24px;
   background-color: white;
   padding: 3%;
   border-radius: 10px;
   border: 1px solid rgb(196,196,196);
+=======
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+  border-radius: 10px;
+>>>>>>> d11b4579c6527e2fdcb91a3621a744f48546b511
   justify-content: center;
 }
 
@@ -126,12 +133,16 @@ header nav > .icon-perfil {
   padding: 3%;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   width: 700px;
   gap: 5px;
+=======
+  gap: 2px;
+  width: 20%;
+>>>>>>> d11b4579c6527e2fdcb91a3621a744f48546b511
   border: 3px solid transparent;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-
 }
 
 /* 1 - Linguagens → azul */
@@ -141,12 +152,12 @@ header nav > .icon-perfil {
 
 /* 2 - Humanas → vermelho */
 .div_areas:nth-child(2) {
-  border-color: #FF4D4D;
+  border-color: #FFB800;
 }
 
 /* 3 - Matemática → amarelo */
 .div_areas:nth-child(3) {
-  border-color: #FFB800;
+  border-color: #FF4D4D;
 }
 
 /* 4 - Natureza → verde */
@@ -155,9 +166,11 @@ header nav > .icon-perfil {
 }
 .div_area {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
 }
 
 
@@ -168,7 +181,6 @@ header nav > .icon-perfil {
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-
 .area_text {
   display: flex;
   justify-content: flex-start;
@@ -177,7 +189,7 @@ header nav > .icon-perfil {
 }
 
 .area_text h2 {
-  font-size: 26px;
+  font-size: 25px;
   font-weight: 700;
   color: #333;
   margin-bottom: 8px;
@@ -190,8 +202,8 @@ header nav > .icon-perfil {
 }
 
 .area_img img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
 }
 
@@ -222,6 +234,10 @@ header nav > .icon-perfil {
   margin: 0;
 }
 
+.info_area {
+  flex-direction: column;
+}
+
 .info_area button {
   background-color: #1da1f2;
   color: white;
@@ -243,11 +259,11 @@ header nav > .icon-perfil {
 }
 
 .div_areas:nth-child(2) .info_area button {
-  background-color: #FF4D4D; /* Humanas */
+  background-color: #F4B400; /* Humanas */
 }
 
 .div_areas:nth-child(3) .info_area button {
-  background-color: #F4B400; /* Matemática */
+  background-color: #FF4D4D; /* Matemática */
 }
 
 .div_areas:nth-child(4) .info_area button {
