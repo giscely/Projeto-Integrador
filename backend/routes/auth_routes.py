@@ -43,13 +43,15 @@ async def cadastrar_usuario(user: SignUp, session: SessionDep):
     session.add(novo_usuario)
     session.commit()
 
+    access_token = criar_token(novo_usuario.usu_id)
+    refresh_token = criar_token(
+        novo_usuario.usu_id,
+        duracao_token=timedelta(days=7)
+    )
     return {
         "mensagem": "Usuário cadastrado com sucesso!",
-        "usuario": {
-            "id": novo_usuario.usu_id,
-            "nome": novo_usuario.usu_nome,
-            "email": novo_usuario.usu_email
-        }
+        "access_token": access_token,
+        "refresh_token": refresh_token
     }
 
 

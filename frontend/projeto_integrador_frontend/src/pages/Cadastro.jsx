@@ -28,6 +28,11 @@ export default function Cadastro() {
       const data = await response.json();
       console.log("Resposta da API:", data);
       setMensagem(data.mensagem);
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
+        navigate("/");
+      }
     } catch (error) {
       console.error("Erro ao enviar:", error);
     }

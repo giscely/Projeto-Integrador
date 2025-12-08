@@ -107,13 +107,15 @@ header nav > .icon-perfil {
 }
 
 .div_quiz_filtro {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 24px;
   background-color: white;
   padding: 3%;
   border-radius: 10px;
   border: 1px solid rgb(196,196,196);
+  justify-content: center;
 }
 
 /* ------------------------------------------------ */
@@ -121,10 +123,11 @@ header nav > .icon-perfil {
 .div_areas {
   background: #ffffff;          /* fundo branco */
   border-radius: 16px;
-  padding: 5%;
+  padding: 3%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  width: 700px;
+  gap: 5px;
   border: 3px solid transparent;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;

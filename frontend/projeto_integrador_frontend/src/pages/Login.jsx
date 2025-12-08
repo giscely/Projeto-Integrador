@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-export default function Login({ fecharModal }) {
+export default function Login({ fecharModal, onLogin }) {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -32,6 +32,7 @@ export default function Login({ fecharModal }) {
         localStorage.setItem("refresh_token", data.refresh_token);
 
         setMensagem("Login realizado com sucesso!");
+        onLogin();      // <- avisa o Inicio para fechar e atualizar o botão
 
         navigate("/");
       } else {
@@ -43,7 +44,6 @@ export default function Login({ fecharModal }) {
       setMensagem("Erro ao conectar ao servidor.");
     }
 
-    setNome("");
     setEmail("");
     setSenha("");
   };
@@ -51,12 +51,14 @@ export default function Login({ fecharModal }) {
   return (
     <>
       <div className="overlay_click" onClick={fecharModal}></div>
+
       <div className="login_modal" onClick={(e) => e.stopPropagation()}>
         <button className="btn_fechar" onClick={fecharModal}>
           &times;
         </button>
 
         <h2>LOGIN</h2>
+
         <form className="forms-login" onSubmit={enviarDados}>
 
           <label>Email:</label>
