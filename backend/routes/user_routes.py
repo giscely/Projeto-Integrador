@@ -39,7 +39,32 @@ async def user_scores(session: SessionDep, usuario: Usuario = Depends(verificar_
         "total_score": total_score,
     }
 
-@user_router.get('/premium')
+@user_router.get('/questoes_resolvidas_por_disciplina')
+async def questoes_por_disciplina(session: SessionDep,usuario: Usuario = Depends(verificar_token)):
+    
+    simulados = session.query(Simulado).filter(Simulado.sim_usuario_id == usuario.usu_id).all()
+
+    if not simulados:
+        return {}
+
+    resultado = {}
+
+    for sim in simulados:
+        disciplina = sim.sim_discipline
+        
+        qtd = len(sim.sim_questoes)
+
+        if disciplina not in resultado:
+            resultado[disciplina] = 0
+
+        resultado[disciplina] += qtd
+        
+    return resultado
+
+
+
+
+@user_router.put('/premium')
 async def activated_premium(session:SessionDep ,usuario:Usuario = Depends(verificar_token)):
     usuario_in_db = session.get(Usuario, usuario.usu_id)
     if usuario_in_db.usu_tipo != "premium":
