@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Quiz.css";
 import logo from '../assets/logo_XPENEM.png';
+import linguagem from '../assets/icon-linguagens.svg';
+import humanas from '../assets/icon-humanas.svg';
+import matematica from '../assets/icon-matematica.svg';
+import natureza from '../assets/icon-natureza.svg';
 import Login from "./Login";
-
 import ModalFiltro from "./ModalFiltro";
 import ModalPremium from "./ModalPremium";
 import ModalQuiz from "./ModalQuiz";
@@ -127,12 +130,12 @@ export default function Quiz() {
 
                 <div className="div_area">
 
+                  <span className="area_img">
+                    <img src={linguagem} alt="" />
+                  </span>
                   <span className="area_text">
                     <h2>Linguagens</h2>
                     <p>Língua Portuguesa e Estrangeira, Artes e Educação Física.</p>
-                  </span>
-                  <span className="area_img">
-                    <img src="" alt="" />
                   </span>
 
                 </div>
@@ -150,13 +153,12 @@ export default function Quiz() {
               <div className="div_areas">
 
                 <div className="div_area">
-
+                  <span className="area_img">
+                    <img src={humanas} alt="" />
+                  </span>
                   <span className="area_text">
                     <h2>Ciências Humanas</h2>
                     <p>Filosofia, Geografia, História e Sociologia.</p>
-                  </span>
-                  <span className="area_img">
-                    <img src="" alt="" />
                   </span>
 
                 </div>
@@ -173,14 +175,14 @@ export default function Quiz() {
               <div className="div_areas">
 
                 <div className="div_area">
-
+                  <span className="area_img">
+                    <img src={matematica} alt="" />
+                  </span>
                   <span className="area_text">
                     <h2>Matemática</h2>
                     <p>Matemática aplicada à realidade.</p>
                   </span>
-                  <span className="area_img">
-                    <img src="" alt="" />
-                  </span>
+
 
                 </div>
                 <div className="info_area">
@@ -196,14 +198,14 @@ export default function Quiz() {
               <div className="div_areas">
 
                 <div className="div_area">
-
+                  <span className="area_img">
+                    <img src={natureza} alt="" />
+                  </span>
                   <span className="area_text">
                     <h2>Ciências da Natureza</h2>
                     <p>Biologia, Física e Química.</p>
                   </span>
-                  <span className="area_img">
-                    <img src="" alt="" />
-                  </span>
+
 
                 </div>
                 <div className="info_area">
