@@ -11,12 +11,13 @@ body {
   max-width: 100%;
   background-color: #d8f1fd;
   font-family: sans-serif;
+  overflow-x: hidden;
 }
 
 /* LIMITA E CENTRALIZA TUDO */
 .main_page {
   width: 100%;
-  max-width: 95%;
+  max-width: 99%;
   margin: 0 auto;
   padding: 15px;
 }
@@ -69,9 +70,8 @@ header nav {
 }
 
 /* BOTÕES LOGIN/LOGOUT */
-header nav button:nth-child(4),
-header nav button:nth-child(5) {
-  background-color: #ef4444;
+header nav .bt-login {
+  background-color: blue;
   color: white;
   border-radius: 25px;
   padding: 0.6rem 1.5rem;
@@ -220,7 +220,6 @@ section {
   justify-content: center;
   font-size: 1.5rem;
   flex-shrink: 0;
- 
 }
 
 div span > img{
@@ -241,305 +240,36 @@ div span > img{
   font-size: 18px;
 }
 
-.como-funciona {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: auto;
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-.como-funciona > .informs-function {
-  color: #152a69;
-  margin: 10px;
-  width: 60%;
-  height: 300px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.como-funciona > .informs-function > div {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-left: 8rem;
-  height: 100px;
-  width: 35%;
-  padding: 1rem;
-  font-size: 10px;
-}
-
-.como-funciona > div {
-  color: #44568d;
-  font-size: 13px;
-  margin: 10px;
-  margin-left: 19rem;
-  width: 20%;
-} 
-
-
-
-/* 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  text-align: center;
-  max-width: 100%;
-  max-height: 100%;
-  padding: 15px;
-  background-color: #d8f1fd;
-}
-
-
-header {
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 5px 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid rgb(196, 196, 196);
-  border-radius: 10px;
-  width: 95vw;
-}
-
-.img-logo img{
-  width: 200px;
-}
-
-header > div:first-child {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #1e40af;
-}
-
-header nav {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-header nav .button-menu {
-  background: none;
-  border: none;
-  color: #374151;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s;
-  border-radius: 0;
-}
-
-header nav .menu-select {
-  color: #1e40af;
-  border-bottom: 2px solid #1e40af;
-}
-
-header nav .button-menu:hover {
-  color: #1e40af;
-}
-
-header nav button:nth-child(4),button:nth-child(5) {
-  background-color: #ef4444;
-  color: white;
-  border-radius: 25px;
-  padding: 0.6rem 1.5rem;
-}
-
-header nav button:nth-child(4):hover {
-  background-color: #942323;
-}
-
-header nav > .icon-perfil {
-  width: 40px;
-  height: 40px;
-  background-color: #60a5fa;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-}
-
-
-section {
-  margin: 0 auto;
-  padding-top: 1rem;
-  width: 95vw;
-}
-
-.intro {
-  background-image: url(../assets/img_intro_XPENEM.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
-  border-radius: 10px;
-  height: 450px;
-}
-
-.intro .div_info_intro {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  padding: 3rem;
-  margin-left: 10%;
-  height: 100%;
-  text-align: left;
-}
-
-.intro .div_info_intro p {
-  font-size: 23px;
-  color: #1e3a8a;
-  align-self: flex-start;
-}
-.intro .div_info_intro h1 {
-  font-size: 60px;
-  font-weight: bold;
-  color: #061541;
-  line-height: 1.3;
-  text-align: start;
-}
-
-.intro button {
-  background-color: #db2d2d;
-  color: white;
-  border: none;
-  padding: 1rem 1rem;
-  border-radius: 30px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 40%;
-  transition: background-color 0.3s;
-  align-self: flex-start;
-}
-
-.intro button:hover {
-  background-color: #ff6d6d;
-}
-
-.intro > div:last-child {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.info {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-.info > div {
+.footer {
+  margin-top: 2%;
   background-color: white;
-  padding: 1.5rem;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 1rem;
-  transition: border-color 0.3s, transform 0.3s;
-  cursor: pointer;
-  height: 270px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 15px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.08);
 }
 
-.info > div:hover {
-  border-color: grey;
-  border: 2px solid rgb(218, 218, 218);
-  transform: translateY(-5px);
+.footer-container {
+  text-align: center;
+  padding: 30px 15px;
 }
 
-.info-titulo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: left;
-  width: 100%;
+.footer-texto {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e40af;
+  margin-bottom: 6px;
 }
 
-.info > div span {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
- 
+.footer-copy {
+  font-size: 14px;
+  opacity: 0.8;
+  color: #1e40af;
 }
-
-div span > img{
-  height: 60%;
-  width: 100%;
-}
-
-.info > div h2 {
-  color: #335686;
-  font-size: 28px;
-  font-weight: 700;
-  margin-top: 2%;
-}
-
-.info-detalhe {
-  color: rgb(41, 41, 41);
-  width: 90%;
-  font-size: 18px;
-}
-
-.como-funciona {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: auto;
-}
-
-.como-funciona > .informs-function {
-  color: #152a69;
-  margin: 10px;
-  width: 60%;
-  height: 300px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.como-funciona > .informs-function > div {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-left: 8rem;
-  height: 100px;
-  width: 35%;
-  padding: 1rem;
-  font-size: 10px;
-}
-
-.como-funciona > div {
-  color: #44568d;
-  font-size: 13px;
-  margin: 10px;
-  margin-left: 19rem;
-  width: 20%;
-} */

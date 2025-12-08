@@ -56,8 +56,21 @@
   background-color: rgb(247, 207, 78);
   color: black;
   border: none;
+  border-radius: 10px;
+  margin: 5px;
 }
 
-.cadastro_link a{
+.cadastro_link{
   color: black;
+  margin: 10px;
+  margin-top: 3%;
+}
+
+.cadastro_link a {
+  color: rgb(100, 100, 255);
+}
+
+.msg-erro-login {
+  color: #dd1c1c;
+  margin: 10px;
 }

@@ -30,12 +30,12 @@
 .modalQuiz-card {
   margin-top: 50px;
   width: 100%;
-  max-width: 670px;
+  width: 100%;
   background: #fff;
   border-radius: 14px;
   padding: 25px 30px;
   position: relative;
-
+  border: 1px solid rgb(196,196,196);
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
@@ -119,18 +119,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
   height: auto;
   width: auto;
-
-
   padding: 12px 14px;
   background: #fafafa;
   border-radius: 12px;
-
   cursor: pointer;
   border: 1.5px solid #e3e3e3;
-
   transition: border 0.2s ease, background 0.2s ease;
 }
 
@@ -147,10 +142,19 @@
 
 /* Letra da alternativa */
 .modalQuiz-altLetra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #0169d9;   /* cor da borda */
+  border-radius: 50%;          /* círculo */
   font-weight: bold;
-  font-size: 17px;
-  color: black;
+  font-size: 14px;
+  color: #0169d9;
+  flex-shrink: 0;
 }
+
 
 /* Texto */
 .modalQuiz-altTexto {
@@ -163,17 +167,14 @@
 
 /* === BOTÃO RESPONDER === */
 .modalQuiz-btnResponder {
-  width: 100%;
+  width: 20%;
   padding: 14px 0;
-
   background: #0169d9;
   color: #fff;
   border: none;
   border-radius: 14px;
-
   font-size: 18px;
   font-weight: 600;
-
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -221,7 +222,7 @@
     margin-top: 20%;
     background: #ffffff;
     padding: 30px;
-    width: 320px;
+    width: 30%;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -287,7 +288,7 @@
     margin-top: 20%;
     background: #ffffff;
     padding: 0; /* removido devido ao header */
-    width: 320px;
+    width: 30%;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -465,4 +466,26 @@
         transform: scale(1);
         opacity: 1;
     }
+}
+
+/* Esconde o radio padrão */
+.modalQuiz-checkbox {
+  display: none;
+}
+
+/* Quando estiver marcado → muda o card inteiro */
+.modalQuiz-checkboxCard:has(input:checked) {
+  background-color: #e8f2ff;
+  border-color: #0169d9;
+}
+
+/* Muda a letra quando selecionada */
+.modalQuiz-checkboxCard:has(input:checked) .modalQuiz-altLetra {
+  color: #0169d9;
+  font-weight: 700;
+}
+
+/* Muda o texto quando selecionado */
+.modalQuiz-checkboxCard:has(input:checked) .modalQuiz-altTexto {
+  color: #1a365d;
 }

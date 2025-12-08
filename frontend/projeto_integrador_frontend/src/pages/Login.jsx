@@ -75,7 +75,7 @@ export default function Login({ fecharModal }) {
             onChange={(e) => setSenha(e.target.value)}
           />
 
-          {mensagem && <p>{mensagem}</p>}
+          {mensagem && <p className="msg-erro-login">{mensagem}</p>}
 
           <button className="bt_enviar" type="submit">Entrar</button>
         </form>

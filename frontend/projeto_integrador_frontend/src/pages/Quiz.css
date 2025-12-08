@@ -66,14 +66,14 @@ header nav .button-menu:hover {
   color: #1e40af;
 }
 
-header nav button:nth-child(4),button:nth-child(5) {
+header nav .bt-login {
   background-color: #ef4444;
   color: white;
   border-radius: 25px;
   padding: 0.6rem 1.5rem;
 }
 
-header nav button:nth-child(4):hover {
+header nav .bt-login:hover {
   background-color: #942323;
 }
 
@@ -121,13 +121,12 @@ header nav > .icon-perfil {
 .div_areas {
   background: #ffffff;          /* fundo branco */
   border-radius: 16px;
-  padding: 24px;
+  padding: 5%;
   display: flex;
   flex-direction: column;
   gap: 16px;
   border: 3px solid transparent;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
-
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 
 }

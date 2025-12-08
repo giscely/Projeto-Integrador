@@ -160,14 +160,13 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
             {finalizou && (
                 <div className="quizComecar-overlay">
                     <div className="quizComecar-card">
-                        <h2>🎉 Parabéns! Você terminou o quiz!</h2>
-                        <p>Acertos: {resultadoQuiz.acertos} / {quantQuestoes}</p>
+                        <h2>🎉 Parabéns! Você terminou o bloco de {quantQuestoes} questões!</h2>
+                        <p>Com um total de acertos de: {resultadoQuiz.acertos} / {quantQuestoes}</p>
 
                         <button onClick={() => setMostrarQuiz(false)}>
                             Sair
                         </button>
 
-                        <p>Respostas: {listaRespostas.join(", ")}</p>
                     </div>
                 </div>
             )}
@@ -181,7 +180,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
                         <div className={`quizFeedback-header ${acertouQuestao ? "acerto" : "erro"}`}>
                             <span className="quizFeedback-icon">{acertouQuestao ? "✔" : "✖"}</span>
 
-                            <h3 className="quizFeedback-title">{acertouQuestao ? "Resposta correta" : "Resposta incorreta"} - Letra {alternativaSelecionada}</h3>
+                            <h3 className="quizFeedback-title">A resposta da letra {alternativaSelecionada} {acertouQuestao ? "está correta" : "está incorreta"} </h3>
                         </div>
 
                         {/* Texto da resposta correta */}

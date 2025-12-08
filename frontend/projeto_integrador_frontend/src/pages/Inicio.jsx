@@ -36,9 +36,9 @@ export default function Inicio() {
             <Link to="/sobre" className="button-menu">Sobre</Link>
 
             {logado ? (
-              <button onClick={handleLogout}>Logout</button>
+              <button className="bt-login" onClick={handleLogout}>Logout</button>
             ) : (
-              <button onClick={() => setMostrarLogin(true)}>Login</button>
+              <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
             )}
 
             <Link to="/perfil" className="icon-perfil">icon</Link>
@@ -92,29 +92,18 @@ export default function Inicio() {
               </div>
             </div>
           </div>
-
-          <div className="description"></div>
-          <h1>Como funciona:</h1>
-          <div className="como-funciona">
-            <div className="informs-function">
-              <div>
-                <h1>Faça login</h1>
-              </div>
-              <div>
-                <h1>Escolha a matéria</h1>
-              </div>
-              <div>
-                <h1>Treine com questões reais</h1>
-              </div>
-              <div>
-                <h1>Veja o seu progresso</h1>
-              </div>
-            </div>
-            <div>
-              <h1>Seus pontos:</h1>
-            </div>
-          </div>
         </section>
+        <footer className="footer">
+          <div className="footer-container">
+            <p className="footer-texto">
+              XPENEM — Plataforma de estudos focada no ENEM
+            </p>
+            <p className="footer-copy">
+              © {new Date().getFullYear()} XPENEM. Todos os direitos reservados.
+            </p>
+          </div>
+        </footer>
+
       </div>
 
       {mostrarLogin && (
