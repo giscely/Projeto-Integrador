@@ -23,6 +23,12 @@ export default function Quiz() {
   const [mostrarPremium, setMostrarPremium] = useState(false);
   const [mostrarQuiz, setMostrarQuiz] = useState(false);
   const [simId, setSimId] = useState(0)
+  const [questoesResolvidas, setQuestoesResolvidas] = useState({
+    linguagens: 0,
+    ciencias_humanas: 0,
+    matematica: 0,
+    ciencias_natureza: 0
+});
 
   const handleDisciplina = (disciplina) => {
     setDisciplina(disciplina)
@@ -94,6 +100,37 @@ export default function Quiz() {
     }
   }, [quiz]);
 
+  useEffect(() => {
+    const BuscarQuestoesResolvidas = async () => {
+      try {
+        const resposta = await fetch(
+          `http://127.0.0.1:8080/user/questoes_resolvidas_por_disciplina`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": "Bearer " + token,
+              "Content-Type": "application/json"
+            }
+          }
+        );
+
+        const dados = await resposta.json();
+
+        setQuestoesResolvidas({
+          linguagens: dados.linguagens ?? 0,
+          ciencias_humanas: dados.ciencias_humanas ?? 0,
+          matematica: dados.matematica ?? 0,
+          ciencias_natureza: dados.ciencias_natureza ?? 0
+        });
+
+      } catch (erro) {
+        console.error("Erro ao buscar questões resolvidas:", erro);
+      }
+    };
+
+    BuscarQuestoesResolvidas();
+  }, []);
+
 
 
 
@@ -153,7 +190,7 @@ export default function Quiz() {
                 </div>
                 <div className="info_area">
                   <div className="quant_questoes_area">
-                    <h4>0</h4>
+                    <h4>{questoesResolvidas.linguagens}</h4>
                     <p>Questões feitas</p>
                   </div>
                   <button onClick={() => handleDisciplina('linguagens')}> 
@@ -176,7 +213,7 @@ export default function Quiz() {
                 </div>
                 <div className="info_area">
                   <div className="quant_questoes_area">
-                    <h4>0</h4>
+                    <h4>{questoesResolvidas.ciencias_humanas}</h4>
                     <p>Questões feitas</p>
                   </div>
                   <button onClick={() => handleDisciplina('ciencias-humanas')}>Praticar</button>
@@ -199,7 +236,7 @@ export default function Quiz() {
                 </div>
                 <div className="info_area">
                   <div className="quant_questoes_area">
-                    <h4>0</h4>
+                    <h4>{questoesResolvidas.matematica}</h4>
                     <p>Questões feitas</p>
                   </div>
                   <button onClick={() => handleDisciplina('matematica')}>Praticar</button>
@@ -222,7 +259,7 @@ export default function Quiz() {
                 </div>
                 <div className="info_area">
                   <div className="quant_questoes_area">
-                    <h4>0</h4>
+                    <h4>{questoesResolvidas.ciencias_natureza}</h4>
                     <p>Questões feitas</p>
                   </div>
                   <button onClick={() => handleDisciplina('ciencias-natureza')}>Praticar</button>
