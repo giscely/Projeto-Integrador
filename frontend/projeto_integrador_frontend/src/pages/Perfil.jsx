@@ -41,7 +41,7 @@ export default function Perfil() {
           </div>
           <nav>
             <Link to="/" className="button-menu">Inicio</Link>
-            <Link to="/quiz" className="button-menu">Quiz</Link>
+            <Link to="/quiz" className="button-menu">Simulado</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
 
             {logado ? (

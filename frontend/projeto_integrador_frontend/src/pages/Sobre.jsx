@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from '../assets/logo_XPENEM.png';
-import "./Inicio.css";
+import "./Sobre.css";
 import Login from "./Login";
 
 
@@ -29,7 +29,7 @@ return (
             </div>
             <nav>
                 <Link to="/" className="button-menu">Inicio</Link>
-                <Link to="/quiz" className="button-menu">Quiz</Link>
+                <Link to="/quiz" className="button-menu">Simulado</Link>
                 <Link to="/sobre" className="button-menu menu-select">Sobre</Link>
                 {logado ? (
                     <button className="bt-login" onClick={handleLogout}>Logout</button>

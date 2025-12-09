@@ -158,7 +158,7 @@ export default function Quiz() {
           </div>
           <nav>
             <Link to="/" className="button-menu">Inicio</Link>
-            <Link to="/quiz" className="button-menu menu-select">Quiz</Link>
+            <Link to="/quiz" className="button-menu menu-select">Simulado</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
             {logado ? (
               <button className="bt-login" onClick={handleLogout}>Logout</button>
