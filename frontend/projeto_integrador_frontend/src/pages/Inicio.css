@@ -273,3 +273,286 @@ select:focus {
   opacity: 0.8;
   color: #1e40af;
 }
+
+
+
+/* ================================ */
+/*      CARD: CONTADOR ENEM         */
+/* ================================ */
+
+.home-card {
+  background: #ffffff;
+  padding: 28px;
+  margin: 30px auto;
+  width: 100%;
+
+
+  border-radius: 16px;
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
+  text-align: center;
+
+  border-bottom: 3px solid #4a90e2;
+  animation: fadeIn 0.4s ease;
+}
+
+.home-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #1f3f68;
+}
+
+.home-highlight {
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* ====================================== */
+/*     LINHA ÚNICA COM TUDO LADO A LADO   */
+/* ====================================== */
+
+.home-single-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  width: 100%;
+  height: 350px;
+  margin: 40px auto;
+  gap: 30px;
+}
+
+/* ====================================== */
+/*            DESAFIO DA SEMANA           */
+/* ====================================== */
+
+.home-desafio-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  padding: 28px;
+  width: 30%;
+  height: 100%;
+
+  border-left: 6px solid #f1c40f;
+  border-radius: 18px;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+
+  animation: fadeInUp 0.5s ease;
+}
+
+/* efeito hover moderno */
+.home-desafio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+}
+
+/* título */
+.home-desafio-card h2 {
+  color: #1f2b3a;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* texto */
+.home-desafio-card p {
+  color: #0c1a33;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+
+/* lista */
+.home-desafio-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0;
+}
+
+.home-desafio-list li {
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 0;
+  font-size: 1rem;
+  border-bottom: 1px dashed rgba(0,0,0,0.08);
+}
+
+.home-desafio-list li:last-child {
+  border-bottom: none;
+}
+
+/* botão */
+.home-desafio-btn {
+  background: linear-gradient(135deg, #4a90e2, #357ABD);
+  color: #fff;
+
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+
+  transition: 0.25s ease;
+}
+
+.home-desafio-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0px 6px 12px rgba(53,122,189,0.35);
+}
+
+
+/* animação suave ao carregar */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ====================================== */
+/*            ESTATÍSTICAS                */
+/* ====================================== */
+
+.home-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  width: 22%;  /* >>> COLUNA DE ESTATÍSTICAS */
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.home-stat-card {
+  height: 50%;
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+  border-top: 5px solid #4a90e2;
+  text-align: center;
+}
+
+.home-stat-card h3 {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.home-stat-card p {
+  color: #061541;
+}
+
+.home-stat-number {
+  color: #e74c3c;
+  font-size: 2rem;
+  margin: 5px 0;
+}
+
+
+/* ====================================== */
+/*               PREMIUM                  */
+/* ====================================== */
+
+.home-premium-card {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 24px;
+  height: 100%;
+
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+/* -------- TEXTOS -------- */
+
+.premium-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #1f2a37;      /* tom mais escuro e premium */
+  font-weight: 700;
+}
+
+.premium-info p {
+  color: #2e3a45;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.premium-info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.premium-info li {
+  color: #2b3742;     /* tom mais escuro */
+  font-size: 0.95rem;
+}
+
+/* -------- BOTÃO PREMIUM -------- */
+
+.premium-btn {
+  background: linear-gradient(90deg, #1f47ad, #2575fc);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+
+  font-size: 1rem;
+  font-weight: 600;
+  
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.premium-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* -------- IMAGEM -------- */
+
+.premium-img {
+  width: 42%;
+  background: url('https://i.imgur.com/IlZ1e7Q.png') center/cover no-repeat;
+  border-radius: 16px;
+}
+
+/* -------- RESPONSIVIDADE -------- */
+
+@media (max-width: 840px) {
+  .home-premium-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .premium-img {
+    width: 100%;
+    height: 220px;
+  }
+}

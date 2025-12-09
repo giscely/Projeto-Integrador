@@ -16,9 +16,17 @@ export default function Inicio() {
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [logado, setLogado] = useState(false);
 
+  const [diasRestantes, setDiasRestantes] = useState(0);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     setLogado(!!token);
+
+    // === CONTADOR REGRESSIVO PARA O ENEM ===
+    const dataEnem = new Date("2026-11-09");
+    const hoje = new Date();
+    const diff = Math.ceil((dataEnem - hoje) / (1000 * 60 * 60 * 24));
+    setDiasRestantes(diff);
   }, []);
 
   function handleLogout() {
@@ -100,6 +108,69 @@ export default function Inicio() {
               </div>
             </div>
           </div>
+
+          {/* ====================================== */}
+          {/*     CONTADOR REGRESSIVO PARA O ENEM     */}
+          {/* ====================================== */}
+          <div className="home-card">
+            <h2 className="home-title"> Faltam <span className="home-highlight">{diasRestantes}</span> dias para o ENEM 2026!</h2>
+            <p>O tempo está passando... prepare-se diariamente!</p>
+          </div>
+          
+          <div className="home-single-row">
+
+          {/* DESAFIO DA SEMANA */}
+          <div className="home-desafio-card">
+            <h2>🏆 Desafio da Semana</h2>
+            <p>Complete as missões e ganhe +150 XP bônus!</p>
+
+            <ul className="home-desafio-list">
+              <li>✔ Responder 100 questões</li>
+              <li>✔ Responder 20 questões de Matemática</li>
+              <li>✔ Finalizar 1 simulado completo</li>
+            </ul>
+
+            <button className="home-desafio-btn">Participar do desafio</button>
+          </div>
+
+          {/* ESTATÍSTICAS */}
+          <div className="home-stats-container">
+            <div className="home-stat-card">
+              <h3>⭐ Seus pontos</h3>
+              <p className="home-stat-number">420 XP</p>
+              <p>Mantenha seu ritmo para subir de nível!</p>
+            </div>
+
+            <div className="home-stat-card">
+              <h3>🎯 Questões hoje</h3>
+              <p className="home-stat-number">18</p>
+              <p>Meta diária: 20</p>
+            </div>
+          </div>
+
+          {/* PREMIUM */}
+          <div className="home-premium-card">
+            <div className="premium-info">
+              <h2>💎 XP Premium</h2>
+              <p>Desbloqueie recursos exclusivos e acelere sua evolução.</p>
+
+              <ul>
+                <li>✨ Questões exclusivas por habilidade</li>
+                <li>📊 Estatísticas avançadas detalhadas</li>
+                <li>📘 Simulados ilimitados</li>
+                <li>🧠 Análises inteligentes por competências</li>
+              </ul>
+
+              <button className="premium-btn">Conhecer o Premium</button>
+            </div>
+
+            <div className="premium-img"></div>
+          </div>
+
+        </div>
+
+
+
         </section>
 
         <footer className="footer">
@@ -122,27 +193,25 @@ export default function Inicio() {
             setMostrarLogin(false);
           }}
           onLogin={() => {
-            setLogado(true);      // muda o botão
-            setMostrarLogin(false); // fecha o modal
+            setLogado(true);
+            setMostrarLogin(false);
           }}
         />
       )}
 
       {mostrarCadastro && (
-       <Cadastro
-         fecharModal={() => setMostrarCadastro(false)}
-         abrirLogin={() => {
+        <Cadastro
+          fecharModal={() => setMostrarCadastro(false)}
+          abrirLogin={() => {
             setMostrarCadastro(false);
             setMostrarLogin(true);
           }}
-         onLogin={() => {
-            setLogado(true);      // muda o botão
-            setMostrarCadastro(false); // fecha o modal
-          }} // <-- passa a função que atualiza estado
-       />
+          onLogin={() => {
+            setLogado(true);
+            setMostrarCadastro(false);
+          }}
+        />
       )}
-
-
     </>
   );
 }
