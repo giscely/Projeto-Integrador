@@ -71,7 +71,7 @@ header nav {
 
 /* BOTÕES LOGIN/LOGOUT */
 header nav .bt-login {
-  background-color: blue;
+  background-color: #411a1a;
   color: white;
   border-radius: 25px;
   padding: 0.6rem 1.5rem;
@@ -119,10 +119,9 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 6rem;
   align-items: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   border-radius: 10px;
-  height: 450px;
+  height: 380px;
 }
 
 .intro .div_info_intro {
@@ -140,7 +139,7 @@ section {
 .intro .div_info_intro p {
   font-size: 23px;
   color: #1e3a8a;
-  align-self: flex-start;
+  text-align: start;
 }
 .intro .div_info_intro h1 {
   font-size: 60px;
@@ -175,14 +174,29 @@ section {
   align-items: center;
 }
 
-
 .info {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  background-color: white;
+  padding: 2%;
+  border-radius: 10px;
 }
 
-.info > div {
+.info h1 {
+  color:#0c1a33;
+  font-size: 28px;
+  margin-left: 1%;
+}
+
+.info-informs {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.info-informs > div {
   background-color: white;
   padding: 1.5rem;
   border-radius: 10px;
@@ -190,14 +204,16 @@ section {
   align-items: center;
   flex-direction: column;
   gap: 1rem;
+  margin: 5px;
   transition: border-color 0.3s, transform 0.3s;
   cursor: pointer;
   height: 270px;
-  border: 1px solid rgb(196,196,196);
+  width: 35%;
+  border: 1px solid rgb(243, 243, 243);
   box-shadow: 0 4px 4px rgba(0,0,0,0.1);
 }
 
-.info > div:hover {
+.info-informs > div:hover {
   border-color: grey;
   border: 2px solid rgb(218, 218, 218);
   transform: translateY(-5px);
@@ -281,22 +297,16 @@ select:focus {
 /* ================================ */
 
 .home-card {
-  background: #ffffff;
-  padding: 28px;
   margin: 30px auto;
   width: 100%;
-
-
   border-radius: 16px;
-  box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
   text-align: center;
-
-  border-bottom: 3px solid #4a90e2;
   animation: fadeIn 0.4s ease;
+
 }
 
 .home-title {
-  font-size: 1.7rem;
+  font-size: 2.6rem;
   font-weight: 700;
   color: #1f3f68;
 }
@@ -315,10 +325,9 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-
   width: 100%;
-  height: 350px;
-  margin: 40px auto;
+  height: 327px;
+  margin: 20px auto;
   gap: 30px;
 }
 
@@ -331,13 +340,10 @@ select:focus {
   padding: 28px;
   width: 30%;
   height: 100%;
-
-  border-left: 6px solid #f1c40f;
+  border-top: 6px solid #f1c40f;
   border-radius: 18px;
-
   box-shadow: 0 6px 16px rgba(0,0,0,0.10);
   transition: transform 0.25s ease, box-shadow 0.3s ease;
-
   animation: fadeInUp 0.5s ease;
 }
 
@@ -388,18 +394,16 @@ select:focus {
 /* botão */
 .home-desafio-btn {
   background: linear-gradient(135deg, #4a90e2, #357ABD);
-  color: #fff;
-
+  color: white;
   padding: 12px 22px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-
-  font-weight: bold;
-  font-size: 0.95rem;
+  font-weight: 400;
+  font-size: 1rem;
   letter-spacing: 0.3px;
-
   transition: 0.25s ease;
+
 }
 
 .home-desafio-btn:hover {
@@ -428,8 +432,7 @@ select:focus {
 .home-stats-container {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-
+  gap: 10px;
   width: 22%;  /* >>> COLUNA DE ESTATÍSTICAS */
   height: 100%;
   flex-shrink: 0;
@@ -470,20 +473,21 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  justify-content: start;
   gap: 24px;
   height: 100%;
-
-  background: #ffffff;
-  padding: 30px;
+  width: 40%;
+  /* background: rgb(172, 145, 221); */
+  background-color: white;
+  padding: 1%;
   border-radius: 20px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .home-premium-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.14);
 }
 
 /* -------- TEXTOS -------- */
@@ -491,12 +495,14 @@ select:focus {
 .premium-info h2 {
   font-size: 1.8rem;
   margin-bottom: 10px;
-  color: #1f2a37;      /* tom mais escuro e premium */
+  /* color: white; */
+  color:#061541;
   font-weight: 700;
 }
 
 .premium-info p {
-  color: #2e3a45;
+  /* color: white; */
+  color:#061541;
   font-size: 1rem;
   margin-bottom: 16px;
 }
@@ -509,24 +515,25 @@ select:focus {
 }
 
 .premium-info li {
-  color: #2b3742;     /* tom mais escuro */
+  /* color: white; */
+  color:#061541;
   font-size: 0.95rem;
+  margin-left: 20px;
 }
 
 /* -------- BOTÃO PREMIUM -------- */
 
 .premium-btn {
-  background: linear-gradient(90deg, #1f47ad, #2575fc);
+  background: linear-gradient(135deg, #4a90e2, #357ABD);
   color: white;
   border: none;
   padding: 12px 22px;
   border-radius: 12px;
-
   font-size: 1rem;
-  font-weight: 600;
-  
+  font-weight: 400;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  letter-spacing: 0.3px;
+  transition: 0.25s ease;
 }
 
 .premium-btn:hover {
@@ -537,7 +544,7 @@ select:focus {
 /* -------- IMAGEM -------- */
 
 .premium-img {
-  width: 42%;
+  width: 40%;
   background: url('https://i.imgur.com/IlZ1e7Q.png') center/cover no-repeat;
   border-radius: 16px;
 }

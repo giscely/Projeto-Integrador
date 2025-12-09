@@ -61,60 +61,12 @@ export default function Inicio() {
         <section>
           <div className="intro">
             <div className="div_info_intro">
-              <h1>Domine o Enem com confiança!</h1>
-              <p>Aprenda no seu ritmo e conquiste o seu futuro.</p>
+            <div className="home-card">
+              <h2 className="home-title"> Faltam <span className="home-highlight">{diasRestantes}</span> dias para o ENEM 2026!</h2>
+              <p>O tempo está passando... prepare-se diariamente e domine o ENEM com confiança!</p>
+            </div>
               <Link to="/quiz" className="button-intro">Começar agora</Link>
             </div>
-          </div>
-
-          <div className="info">
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_alvo} alt="" /></span>
-                <h2>Questões no estilo enem</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas.</p>
-              </div>
-            </div>
-
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_cronometro} alt="" /></span>
-                <h2>Estude no seu ritmo</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Organize seu tempo e estude conforme sua rotina.</p>
-              </div>
-            </div>
-
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_grafico} alt="" /></span>
-                <h2>Veja o seu desempenho</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Acompanhe a evolução e melhore suas áreas deficientes.</p>
-              </div>
-            </div>
-
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_trofeu} alt="" /></span>
-                <h2>Ganhe recompensas</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Alcance suas metas e conquiste troféus.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ====================================== */}
-          {/*     CONTADOR REGRESSIVO PARA O ENEM     */}
-          {/* ====================================== */}
-          <div className="home-card">
-            <h2 className="home-title"> Faltam <span className="home-highlight">{diasRestantes}</span> dias para o ENEM 2026!</h2>
-            <p>O tempo está passando... prepare-se diariamente!</p>
           </div>
           
           <div className="home-single-row">
@@ -169,6 +121,50 @@ export default function Inicio() {
 
         </div>
 
+        <div className="info">
+            <h1>Benefícios</h1>
+            <div className="info-informs">
+              <div>
+                <div className="info-titulo">
+                  <span><img src={icon_alvo} alt="" /></span>
+                  <h2>Questões no estilo enem</h2>
+                </div>
+                <div className="info-detalhe">
+                  <p>Simule a prova real com perguntas de provas passadas.</p>
+                </div>
+              </div>
+
+              <div>
+                <div className="info-titulo">
+                  <span><img src={icon_cronometro} alt="" /></span>
+                  <h2>Estude no seu ritmo</h2>
+                </div>
+                <div className="info-detalhe">
+                  <p>Organize seu tempo e estude conforme sua rotina.</p>
+                </div>
+              </div>
+
+              <div>
+                <div className="info-titulo">
+                  <span><img src={icon_grafico} alt="" /></span>
+                  <h2>Veja o seu desempenho</h2>
+                </div>
+                <div className="info-detalhe">
+                  <p>Acompanhe a evolução e melhore suas áreas deficientes.</p>
+                </div>
+              </div>
+
+              <div>
+                <div className="info-titulo">
+                  <span><img src={icon_trofeu} alt="" /></span>
+                  <h2>Ganhe recompensas</h2>
+                </div>
+                <div className="info-detalhe">
+                  <p>Alcance suas metas e conquiste troféus.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
         </section>

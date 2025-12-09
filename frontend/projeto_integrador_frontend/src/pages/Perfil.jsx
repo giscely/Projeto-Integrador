@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Inicio.css";
+import "./Perfil.css";
 import logo from '../assets/logo_XPENEM.png';
-import icon_alvo from '../assets/icon_alvo.png';
-import icon_cronometro from '../assets/icon_cronometro.png';
-import icon_grafico from '../assets/icon_grafico.png';
-import icon_trofeu from '../assets/icon_trofeu.png';
 import Login from "./Login";
 
 export default function Perfil() {
   const [logado, setLogado] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
+
+  // Simulação de dados do usuário (você depois puxa da API)
+  const usuario = {
+    nome: "Ylanne K.",
+    email: "ylanne@example.com",
+    codinome: "MESTRE",
+    foto: "https://i.imgur.com/1Q9Z1ZQ.png",
+    pontuacao: 1250,
+    simuladosFeitos: 8,
+    questoesRespondidas: 642,
+    desafiosCompletos: 12
+  };
 
   useEffect(() => {
       const token = localStorage.getItem("token");
@@ -22,9 +30,11 @@ export default function Perfil() {
     localStorage.removeItem("refresh_token");
     setLogado(false);
   }
+
   return (
     <>
       <div className="main_page">
+        {/* HEADER MANTIDO */}
         <header>
           <div className="img-logo">
             <img src={logo} alt="logo" />
@@ -33,6 +43,7 @@ export default function Perfil() {
             <Link to="/" className="button-menu">Inicio</Link>
             <Link to="/quiz" className="button-menu">Quiz</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
+
             {logado ? (
               <button className="bt-login" onClick={handleLogout}>Logout</button>
             ) : (
@@ -42,69 +53,70 @@ export default function Perfil() {
             <Link to="/perfil" className="icon-perfil">icon</Link>
           </nav>
         </header>
-        <section>
-          <div className="intro">
-            <div className="div_info_intro">
-              <h1>Domine o Enem com confiança!</h1>
-              <p>Aprenda no seu ritmo e conquiste o seu futuro.</p>
-              <button>Começar agora</button>
-            </div>
-          </div>
 
-          {/* <div className="info">
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_alvo} alt="" /></span>
-                <h2>Questões no estilo enem</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Simule a prova real com perguntas de provas passadas.</p>
-              </div>
-            </div>
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_cronometro} alt="" /></span>
-                <h2>Estude no seu ritmo</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Organize seu tempo e estude conforme sua rotina.</p>
-              </div>
-            </div>
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_grafico} alt="" /></span>
-                <h2>Veja o seu desempenho</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Acompanhe a evolução e melhore suas áreas deficientes.</p>
-              </div>
-            </div>
-            <div>
-              <div className="info-titulo">
-                <span><img src={icon_trofeu} alt="" /></span>
-                <h2>Ganhe recompensas</h2>
-              </div>
-              <div className="info-detalhe">
-                <p>Alcance suas metas e conquiste troféus.</p>
-              </div>
-            </div>
-          </div>
+        {/* LAYOUT PRINCIPAL */}
+        <div className="perfil-container">
 
-          <div className="description"></div> */}
-        </section>
+          {/* ⬅️ ASIDE – Informações do usuário */}
+          <aside className="perfil-aside">
+            <div className="foto-wrapper">
+              <img src={usuario.foto} alt="Foto perfil" className="foto-perfil" />
+            </div>
+
+            <h2 className="perfil-nome">{usuario.nome}</h2>
+            <p className="perfil-email">{usuario.email}</p>
+            <p className="perfil-codinome">{usuario.codinome}</p>
+
+            <hr />
+
+            <ul className="menu-perfil">
+              <li>Editar Perfil</li>
+            </ul>
+          </aside>
+
+          {/* ➡️ SECTION – Estatísticas do usuário */}
+          <section className="perfil-section">
+            <h1>Seu Desempenho</h1>
+
+            <div className="grid-infos">
+
+              <div className="card-info">
+                <h3>Pontuação</h3>
+                <span>{usuario.pontuacao}</span>
+              </div>
+
+              <div className="card-info">
+                <h3>Simulados Feitos</h3>
+                <span>{usuario.simuladosFeitos}</span>
+              </div>
+
+              <div className="card-info">
+                <h3>Questões Respondidas</h3>
+                <span>{usuario.questoesRespondidas}</span>
+              </div>
+
+              <div className="card-info">
+                <h3>Desafios Concluídos</h3>
+                <span>{usuario.desafiosCompletos}</span>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
       </div>
 
-        {/* MOSTRAR O MODAL */}
-        {mostrarLogin && (
-          <Login
-            fecharModal={() => setMostrarLogin(false)}
-            onLogin={() => {
-              setLogado(true);      // muda o botão
-              setMostrarLogin(false); // fecha o modal
-            }}
-          />
-        )}
-
+      {/* MODAL LOGIN */}
+      {mostrarLogin && (
+        <Login
+          fecharModal={() => setMostrarLogin(false)}
+          onLogin={() => {
+            setLogado(true);
+            setMostrarLogin(false);
+          }}
+        />
+      )}
     </>
   );
 }

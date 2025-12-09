@@ -1,0 +1,123 @@
+/* CONTAINER GERAL */
+.perfil-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  background-color: white;
+  margin-top: 2%;
+  border-radius: 10px;
+}
+
+/* ASIDE */
+.perfil-aside {
+  background: #ffffff;
+  color: black;
+  padding: 25px;
+  height: 100%;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.foto-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.foto-perfil {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0066ff;
+  margin-bottom: 15px;
+}
+
+.perfil-nome {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.perfil-email {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.perfil-codinome {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0066ff;
+}
+
+/* MENU DO ASIDE */
+.menu-perfil {
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.menu-perfil li {
+  padding: 10px 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu-perfil li:hover {
+  color: #0066ff;
+}
+
+/* SECTION PRINCIPAL */
+.perfil-section {
+  background: #fff;
+  color: black;
+  padding: 25px;
+}
+
+.perfil-section h1 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+/* GRID DE INFORMAÇÕES */
+.grid-infos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card-info {
+  background: #f7f9ff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #e2e8ff;
+}
+
+.card-info h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.card-info span {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0066ff;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .perfil-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-infos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-infos {
+    grid-template-columns: 1fr;
+  }
+}
