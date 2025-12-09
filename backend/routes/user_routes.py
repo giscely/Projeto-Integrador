@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from models import Usuario, Premium, Simulado, ResultadoSimulado
 import datetime
+from werkzeug.security import generate_password_hash
 from dependencies import verificar_token, SessionDep
 
 
@@ -20,6 +21,16 @@ async def perfil_usuario(session: SessionDep, usuario:Usuario = Depends(verifica
         "simulados": simulados
     }
 
+@user_router.put('/editar_perfil')
+async def editar_perfil(session: SessionDep, username:str, email:str, nova_senha: str, usuario:Usuario = Depends(verificar_token)):
+    user = session.query(Usuario).filter(usuario.usu_id == Usuario.usu_id).first()
+    user.usu_nome = username
+    user.usu_email = email
+    user.usu_senha = generate_password_hash(nova_senha)
+    session.commit()
+    return {'mensagem': 'Perfil editado com sucesso'}
+
+
 @user_router.get("/scores")
 async def user_scores(session: SessionDep, usuario: Usuario = Depends(verificar_token)):
     user = session.get(Usuario, usuario.usu_id)
@@ -30,10 +41,10 @@ async def user_scores(session: SessionDep, usuario: Usuario = Depends(verificar_
         .all()
     )
 
-    total_score = sum(r.res_score for r in resultados)
-    if total_score >= 200:
+    total_score = sum(r.res_score for r in resultados) * 10
+    if total_score >= 2000:
         user.usu_badge.value = "Desafiante de Questões"
-    if total_score >= 1000:
+    if total_score >= 10000:
         user.usu_badge.value = "Mestre do Conhecimento"
     return {
         "total_score": total_score,

@@ -148,7 +148,18 @@ async def listar_simulados(session: SessionDep, usuario: Usuario = Depends(verif
 
 # marcella: retirei o response model pois dava erro no console, embora salvasse as informações no branco - , response_model=ResultadoSimuladoSchema
 @simulated_router.post("/{sim_id}/resultado")
-async def resultado_simulado(sim_id: int, respostas: dict, session: SessionDep, usuario: Usuario = Depends(verificar_token)):
+async def resultado_simulado(
+    sim_id: int,
+    respostas: dict, 
+    session: SessionDep,
+    usuario: Usuario = Depends(verificar_token)
+):
+
+    ids_questoes = respostas.get("questoes", [])
+    respostas_usuario = respostas.get("respostas", [])
+
+    if len(ids_questoes) != len(respostas_usuario):
+        raise HTTPException(status_code=400, detail="Formato de respostas inválido")
 
     simulado = (
         session.query(Simulado)
@@ -165,30 +176,34 @@ async def resultado_simulado(sim_id: int, respostas: dict, session: SessionDep, 
     if simulado.sim_completed:
         raise HTTPException(status_code=400, detail="Simulado já foi concluído")
 
-    
     questoes = simulado.sim_questoes
     total_questoes = len(questoes)
+
+    mapa_questoes = {q.qst_id: q for q in questoes}
+
     acertos = 0
 
-    for questao in questoes:
-        qid = str(questao.qst_id)
+    for qid, resp in zip(ids_questoes, respostas_usuario):
 
-        resposta_usuario = respostas.get(qid)
+        questao = mapa_questoes.get(qid)
 
-        if resposta_usuario and resposta_usuario == questao.qst_correct_alternative:
+        if not questao:
+            continue
+
+        if resp == questao.qst_correct_alternative:
             acertos += 1
 
     simulado.sim_completed = True
     session.commit()
 
-    resultado_simulado = ResultadoSimulado(
+    resultado = ResultadoSimulado(
         res_simulado_id=simulado.sim_id,
         res_usuario_id=usuario.usu_id,
         res_respostas=respostas,
         res_score=acertos
     )
 
-    session.add(resultado_simulado)
+    session.add(resultado)
     session.commit()
 
     return {

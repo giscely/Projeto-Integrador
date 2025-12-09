@@ -26,6 +26,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
 
     const [listaRespostas, setListaRespostas] = useState([])
+    const [listaIdsPerguntas, setListaIdsPerguntas] = useState([]);
 
 
 
@@ -104,6 +105,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
 
         setListaRespostas(prev => [...prev, alternativaSelecionada]);
+        setListaIdsPerguntas(prev => [...prev, questao.qst_id]);
 
 
         const respostaCertatext = questao.qst_alternatives.find(a => a.isCorrect);
@@ -149,24 +151,24 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
 
     async function enviarResultado(sim_id) {
-        const respostas = { respostas: listaRespostas };
-
+        const respostas = { 
+            questoes: listaIdsPerguntas, 
+            respostas: listaRespostas
+        };
 
         try {
             const response = await fetch(`http://127.0.0.1:8080/simulados/${sim_id}/resultado`,
             {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(respostas)
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(respostas)
             });
-
 
             const data = await response.json();
             console.log("Resultado enviado:", data);
-
 
         } catch (error) {
             console.error("Erro ao enviar resultado:", error);
