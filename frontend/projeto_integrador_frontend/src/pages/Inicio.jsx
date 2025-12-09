@@ -15,6 +15,7 @@ export default function Inicio() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [logado, setLogado] = useState(false);
+  const [pontuacao, setPontuacao] = useState(0);
 
   const [diasRestantes, setDiasRestantes] = useState(0);
 
@@ -28,6 +29,40 @@ export default function Inicio() {
     const diff = Math.ceil((dataEnem - hoje) / (1000 * 60 * 60 * 24));
     setDiasRestantes(diff);
   }, []);
+
+  useEffect(() => {
+    async function PegarPontuacao() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setPontuacao(0);
+        return;
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:8080/user/scores", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!response.ok) {
+          console.error("Erro na API:", response.status, response.statusText);
+          return;
+        }
+
+        const data = await response.json();
+        setPontuacao(data.total_score || 0);
+
+      } catch (error) {
+        console.error("Erro ao calcular pontuacao:", error);
+      }
+    }
+
+    PegarPontuacao();
+  }, [logado]);
+
 
   function handleLogout() {
     localStorage.removeItem("token");
@@ -89,7 +124,7 @@ export default function Inicio() {
           <div className="home-stats-container">
             <div className="home-stat-card">
               <h3>⭐ Seus pontos</h3>
-              <p className="home-stat-number">420 XP</p>
+              <p className="home-stat-number">{pontuacao} XP</p>
               <p>Mantenha seu ritmo para subir de nível!</p>
             </div>
 
