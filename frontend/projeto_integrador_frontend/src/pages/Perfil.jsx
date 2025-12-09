@@ -81,28 +81,32 @@ export default function Perfil() {
             <div className="grid-infos">
 
               <div className="card-info">
+                <span className="emoji-card">⭐</span>
                 <h3>Pontuação</h3>
                 <span>{usuario.pontuacao}</span>
               </div>
 
               <div className="card-info">
+                <span className="emoji-card">🧠</span>
                 <h3>Simulados Feitos</h3>
                 <span>{usuario.simuladosFeitos}</span>
               </div>
 
               <div className="card-info">
+                <span className="emoji-card">📚</span>
                 <h3>Questões Respondidas</h3>
                 <span>{usuario.questoesRespondidas}</span>
               </div>
 
               <div className="card-info">
+                <span className="emoji-card">🔥</span>
                 <h3>Desafios Concluídos</h3>
                 <span>{usuario.desafiosCompletos}</span>
               </div>
 
             </div>
-
           </section>
+
 
         </div>
       </div>

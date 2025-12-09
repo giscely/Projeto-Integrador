@@ -64,8 +64,9 @@
 
 /* --- ÍCONES DAS OPÇÕES --- */
 .option-icon {
-  width: 48px;
-  height: 48px;
+  width: 35px;
+  height: 35px;
+  margin-top: 10px;
 }
 
 /* --- TÍTULO DO CARD --- */

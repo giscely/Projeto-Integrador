@@ -175,6 +175,9 @@ export default function Quiz() {
             <div>
               <h1>Escolha a área do conhecimento e comece a praticar!</h1>
             </div>
+            <div className="alert-desafio">
+              <h2>Você está participando do desafio semanal !</h2>
+            </div>
             <div className="div_quiz_filtro">
 
               <div className="div_areas">
@@ -187,6 +190,7 @@ export default function Quiz() {
                   <span className="area_text">
                     <h2>Linguagens</h2>
                     <p>Língua Portuguesa e Estrangeira, Artes e Educação Física.</p>
+                    
                   </span>
 
                 </div>
@@ -210,6 +214,7 @@ export default function Quiz() {
                   <span className="area_text">
                     <h2>Ciências Humanas</h2>
                     <p>Filosofia, Geografia, História e Sociologia.</p>
+                    <br/>
                   </span>
 
                 </div>
@@ -232,6 +237,7 @@ export default function Quiz() {
                   <span className="area_text">
                     <h2>Matemática</h2>
                     <p>Matemática aplicada à realidade.</p>
+                    <br/>
                   </span>
 
 
@@ -255,6 +261,7 @@ export default function Quiz() {
                   <span className="area_text">
                     <h2>Ciências da Natureza</h2>
                     <p>Biologia, Física e Química.</p>
+                    <br/>
                   </span>
 
 

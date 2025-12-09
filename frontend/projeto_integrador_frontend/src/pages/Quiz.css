@@ -107,15 +107,24 @@ header nav > .icon-perfil {
   font-weight: 400;
 }
 
+.quiz_filtro .alert-desafio {
+  color: rgb(194, 69, 69);
+  background-color: rgb(250, 244, 244);
+  margin-left: 35%;
+  border: 1px solid red;
+  border-radius: 10px;
+  justify-content: center;
+  width: 26.5%;
+  padding: 10px;
+  font-size: 15px;
+}
+
 .div_quiz_filtro {
   display: flex;
   flex-wrap: wrap;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 24px;
-  background-color: white;
   padding: 3%;
-  border-radius: 10px;
-  border: 1px solid rgb(196,196,196);
   justify-content: center;
 }
 
@@ -127,7 +136,9 @@ header nav > .icon-perfil {
   padding: 3%;
   display: flex;
   flex-direction: column;
-  width: 700px;
+  align-items: center;
+  text-align: center;
+  width: 23%;
   gap: 5px;
   border: 3px solid transparent;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
@@ -156,6 +167,7 @@ header nav > .icon-perfil {
 .div_area {
   display: flex;
   justify-content: start;
+  text-align: center;
   align-items: center;
   flex-direction: column;
   gap: 12px;
@@ -173,7 +185,7 @@ header nav > .icon-perfil {
 .area_text {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -198,10 +210,10 @@ header nav > .icon-perfil {
 
 .info_area {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: end;
+  align-items: end;
   padding-top: 16px;
-  border-top: 2px solid #ddd;
+  flex-direction: column;
 }
 
 .quant_questoes_area {
@@ -223,9 +235,6 @@ header nav > .icon-perfil {
   margin: 0;
 }
 
-.info_area {
-  flex-direction: column;
-}
 
 .info_area button {
   background-color: #1da1f2;
