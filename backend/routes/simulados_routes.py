@@ -10,7 +10,7 @@ simulated_router = APIRouter(prefix="/simulados", tags=["simulados"])
 
 
 
-@simulated_router.post("/simulados/{disciplina}")
+@simulated_router.post("/{disciplina}")
 async def criar_simulado(session: SessionDep, disciplina: str, quantidade_questoes: int, usuario: Usuario = Depends(verificar_token)):
     # Busca questões já usadas
     questoes_usadas = (
@@ -104,6 +104,31 @@ async def criar_simulado(session: SessionDep, disciplina: str, quantidade_questo
     session.commit()
     session.refresh(simulado)
     return simulado
+
+
+@simulated_router.delete("/deletar_simulado/{sim_id}")
+async def deletar_simulado(sim_id: int, session: SessionDep, usuario: Usuario = Depends(verificar_token)):
+    
+    simulado = (
+        session.query(Simulado)
+        .filter(Simulado.sim_id == sim_id, Simulado.sim_usuario_id == usuario.usu_id)
+        .first()
+    )
+
+    
+    if not simulado:
+        return {"mensagem": "Simulado não encontrado ou não pertence a este usuário."}
+
+    
+    session.query(simulado_questoes).filter(
+        simulado_questoes.c.simulado_id == sim_id
+    ).delete()
+
+    
+    session.delete(simulado)
+    session.commit()
+
+    return {"mensagem": "Simulado deletado com sucesso."}
 
 
 
