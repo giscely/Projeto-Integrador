@@ -7,6 +7,7 @@ import humanas from '../assets/icon-humanas.svg';
 import matematica from '../assets/icon-matematica.svg';
 import natureza from '../assets/icon-natureza.svg';
 import Login from "./Login";
+import Cadastro from "./Cadastro"
 import ModalFiltro from "./ModalFiltro";
 import ModalPremium from "./ModalPremium";
 import ModalQuiz from "./ModalQuiz";
@@ -14,6 +15,7 @@ import ModalQuiz from "./ModalQuiz";
 
 export default function Quiz() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [logado, setLogado] = useState(false);
   const [quiz, setQuiz] = useState(false)
   const [questoesQuiz, setQuestoesQuiz] = useState()
@@ -273,9 +275,17 @@ export default function Quiz() {
         </section>
       </div>
 
-        {/* MOSTRAR O MODAL */}
         {mostrarLogin && (
-            <Login fecharModal={() => setMostrarLogin(false)} />
+          <Login
+            fecharModal={() => setMostrarLogin(false)} abrirCadastro={() => {setMostrarCadastro(true); setMostrarLogin(false);}}
+            onLogin={() => {setLogado(true); setMostrarLogin(false);}}
+          />
+        )}
+        
+        {mostrarCadastro && (
+          <Cadastro fecharModal={() => setMostrarCadastro(false)} abrirLogin={() => {setMostrarCadastro(false); setMostrarLogin(true);}}
+            onLogin={() => {setLogado(true); setMostrarCadastro(false);}}
+          />
         )}
 
         {/* MOSTRAR MODAL DE FILTRAR O QUIZ */}
@@ -287,15 +297,7 @@ export default function Quiz() {
 
         {/* MOSTRAR MODAL DE QUESTÕES DO QUIZ */}
         {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes} sim_id={simId}/>}
-        {mostrarLogin && (
-          <Login
-            fecharModal={() => setMostrarLogin(false)}
-            onLogin={() => {
-              setLogado(true);      // muda o botão
-              setMostrarLogin(false); // fecha o modal
-            }}
-          />
-        )}
+        
     </>
   );
 }
