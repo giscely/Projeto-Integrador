@@ -186,16 +186,16 @@
 /* === CONTADOR === */
 .modalQuiz-contador {
   text-align: end;
-  margin-top: 18px;
-  font-size: 16px;
+  margin-top: 20px;
+  font-size: 20px;
   color: #777;
 }
 .quiz-tempo {
     position: absolute;
-    bottom: 25px;
-    left: 5%;
-    margin-top: 18px;
-    font-size: 17px;
+    bottom: 20px;
+    left: 2%;
+    margin-top: 17px;
+    font-size: 20px;
     color: #777;
 }
 
@@ -266,7 +266,58 @@
 @keyframes scaleIn {
     from { transform: scale(0.8); opacity: 0 }
     to { transform: scale(1); opacity: 1 }
+  
 }
+/* ========================= */
+/*    ESTILOS ADICIONAIS     */
+/* ========================= */
+
+/* Ícone superior */
+.quizComecar-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+    animation: floatIcon 2s infinite ease-in-out;
+}
+
+/* Caixa de informações do quiz */
+.quizComecar-infoBox {
+    background: #f5f7fa;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 20px;
+    border-left: 4px solid #007bff;
+}
+
+.quizComecar-infoBox p {
+    font-size: 14px;
+    color: #303030;
+    margin: 4px 0;
+}
+
+/* Barra animada */
+.quizComecar-progress {
+    width: 100%;
+    height: 6px;
+    background: #d9e3ef;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.quizComecar-progressBar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #67b0ff);
+    animation: loadingStart 2.6s forwards ease-in-out;
+}
+
+/* Animação da barra */
+@keyframes loadingStart {
+    from { width: 20%; }
+    to { width: 100%; }
+}
+
 /* === OVERLAY (copiado do seu modelo) === */
 .quizFeedback-overlay {
     position: absolute;
@@ -488,4 +539,138 @@
 /* Muda o texto quando selecionado */
 .modalQuiz-checkboxCard:has(input:checked) .modalQuiz-altTexto {
   color: #1a365d;
+}
+
+
+/* === TELA FINAL DO QUIZ === */
+.quizFinalizar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Card principal */
+.quizFinalizar-card {
+    margin-top: 15%;
+    background: #ffffff;
+    padding: 35px;
+    width: 32%;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    animation: scaleIn 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Ícone grande */
+.quizFinalizar-icone {
+    font-size: 64px;
+    margin-bottom: 10px;
+}
+
+/* Título */
+.quizFinalizar-titulo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 2px;
+    line-height: 1.4;
+}
+
+/* Grupo de informações */
+.quizFinalizar-infoGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    gap: 12px;
+}
+
+.quizFinalizar-info {
+    background: #f8f8f8;
+    padding: 14px 12px;
+    flex: 1;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.quizFinalizar-label {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.quizFinalizar-valor {
+    font-weight: 700;
+    color: #222;
+    font-size: 1.1rem;
+}
+
+.quizFinalizar-valor.xp {
+    color: #1a7d2c;
+}
+
+/* Barra de XP */
+.quizFinalizar-barraXP {
+    width: 100%;
+    height: 12px;
+    background: #e7e7e7;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.quizFinalizar-barraXP-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #12c95c, #0e9d48);
+    width: 0%;
+    border-radius: 12px;
+    animation: loadingEnd 2.6s forwards ease-in-out;
+}
+
+/* Animação da barra */
+@keyframes loadingEnd {
+    from { width: 20%; }
+    to { width: 100%; }
+}
+/* Botão */
+.quizFinalizar-btn {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(59,130,246,0.25);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.quizFinalizar-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
 }
