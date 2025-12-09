@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from main import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
+from main import ALGORITHM, ACCESS_TOKEN_EXPIRE_DAYS, SECRET_KEY
 from dependencies import verificar_token, SessionDep
 from models import Usuario
 from schemas import SignUp, SignIn
@@ -16,7 +16,7 @@ auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 # Função para criar um token JWT
-def criar_token(id_usuario, duracao_token=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)):
+def criar_token(id_usuario, duracao_token=timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS)):
     data_expiracao = datetime.now(timezone.utc) + duracao_token
     dic_info_token = {"sub": str(id_usuario), "exp": data_expiracao}
     jwt_token = jwt.encode(dic_info_token, SECRET_KEY, ALGORITHM)
