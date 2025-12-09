@@ -40,7 +40,7 @@ async def user_scores(session: SessionDep, usuario: Usuario = Depends(verificar_
     }
 
 @user_router.get('/questoes_resolvidas_por_disciplina')
-async def questoes_por_disciplina(session: SessionDep,usuario: Usuario = Depends(verificar_token)):
+async def questoes_por_disciplina(session: SessionDep, usuario: Usuario = Depends(verificar_token)):
     
     simulados = session.query(Simulado).filter(Simulado.sim_usuario_id == usuario.usu_id).all()
 
@@ -51,15 +51,20 @@ async def questoes_por_disciplina(session: SessionDep,usuario: Usuario = Depends
 
     for sim in simulados:
         disciplina = sim.sim_discipline
-        
         qtd = len(sim.sim_questoes)
 
         if disciplina not in resultado:
             resultado[disciplina] = 0
 
         resultado[disciplina] += qtd
-        
-    return resultado
+
+    return {
+        "linguagens": resultado.get("linguagens", 0),
+        "ciencias_humanas": resultado.get("ciencias-humanas", 0),
+        "ciencias_natureza": resultado.get("ciencias-natureza", 0),
+        "matematica": resultado.get("matematica", 0)
+    }
+
 
 
 
