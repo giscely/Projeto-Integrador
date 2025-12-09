@@ -9,9 +9,11 @@ import icon_grafico from '../assets/icon_grafico.png';
 import icon_trofeu from '../assets/icon_trofeu.png';
 
 import Login from "./Login";
+import Cadastro from "./Cadastro";
 
 export default function Inicio() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [logado, setLogado] = useState(false);
 
   useEffect(() => {
@@ -115,12 +117,32 @@ export default function Inicio() {
       {mostrarLogin && (
         <Login
           fecharModal={() => setMostrarLogin(false)}
+          abrirCadastro={() => {
+            setMostrarCadastro(true);
+            setMostrarLogin(false);
+          }}
           onLogin={() => {
             setLogado(true);      // muda o botão
             setMostrarLogin(false); // fecha o modal
           }}
         />
       )}
+
+      {mostrarCadastro && (
+       <Cadastro
+         fecharModal={() => setMostrarCadastro(false)}
+         abrirLogin={() => {
+            setMostrarCadastro(false);
+            setMostrarLogin(true);
+          }}
+         onLogin={() => {
+            setLogado(true);      // muda o botão
+            setMostrarCadastro(false); // fecha o modal
+          }} // <-- passa a função que atualiza estado
+       />
+      )}
+
+
     </>
   );
 }

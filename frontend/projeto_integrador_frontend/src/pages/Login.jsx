@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-export default function Login({ fecharModal, onLogin }) {
+export default function Login({ fecharModal, abrirCadastro, onLogin }) {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -82,8 +82,15 @@ export default function Login({ fecharModal, onLogin }) {
           <button className="bt_enviar" type="submit">Entrar</button>
         </form>
 
-        <p className="cadastro_link">
-          Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a>
+        
+       <p className="cadastro_link">
+        Ainda não tem uma conta?{" "}
+        <span
+          className="link_fake"
+          onClick={() => {abrirCadastro()}}
+        >
+          Cadastre-se
+        </span>
         </p>
       </div>
     </>

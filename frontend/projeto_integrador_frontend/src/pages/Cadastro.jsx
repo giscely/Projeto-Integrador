@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-export default function Cadastro() {
+export default function Cadastro({ fecharModal, abrirLogin, onLogin }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -31,7 +31,11 @@ export default function Cadastro() {
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
         localStorage.setItem("refresh_token", data.refresh_token);
+
+        onLogin();        // avisa o pai que logou
+        fecharModal();
         navigate("/");
+           
       }
     } catch (error) {
       console.error("Erro ao enviar:", error);
@@ -44,9 +48,9 @@ export default function Cadastro() {
 
   return (
     <>
-      <div className="overlay_click"></div>
+      <div className="overlay_click" onClick={fecharModal}></div>
       <div className="login_modal" onClick={(e) => e.stopPropagation()}>
-        <Link className="btn_fechar" to="/">
+        <Link className="btn_fechar" onClick={fecharModal}>
           &times;
         </Link>
 
@@ -86,7 +90,10 @@ export default function Cadastro() {
 
         {mensagem && <p>{mensagem}</p>}
         <p className="cadastro_link">
-          Já tem uma conta? <Link to="/login">Entrar</Link>
+          Já tem uma conta?{" "}
+          <span className="link_fake" onClick={abrirLogin}>
+            Entrar
+          </span>
         </p>
       </div>
     </>
