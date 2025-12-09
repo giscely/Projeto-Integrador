@@ -53,7 +53,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
         tempos: [],
     });
 
-    const [questaoAtual, setQuestaoAtual] = useState(0);
+    const [questaoAtual, setQuestaoAtual] = useState(1);
 
     const questao = questoesQuiz[questaoAtual];
     if (!questao) return null;
@@ -124,6 +124,28 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
             console.error("Erro ao enviar resultado:", error);
         }
     }
+    
+
+    async function SairQuiz(sim_id) {
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8080/simulados/deletar_simulado/${sim_id}`, 
+            {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+            });
+
+            const data = await response.json();
+
+        } catch (error) {
+            console.error("Erro ao deletar o simulado:", error);
+        }
+    }
+
+
     const nomesDisciplinas = {
         "linguagens": "Linguagens",
         "ciencias-natureza": "Ciências da Natureza",
@@ -210,10 +232,17 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
                         <div className="quizSaida-buttons">
                             <button
                                 className="quizSaida-btn sair"
-                                onClick={() => setMostrarQuiz(false)}>Sair do Quiz
+                                onClick={() => {
+                                    SairQuiz(sim_id);        // DELETE no backend
+                                    setMostrarQuiz(false);   // Fecha o modal
+                                }}
+                            >
+                                Sair do Quiz
                             </button>
 
-                            <button className="quizSaida-btn continuar" onClick={() => setConfirmarSaida(false)}
+                            <button
+                                className="quizSaida-btn continuar"
+                                onClick={() => setConfirmarSaida(false)}
                             >
                                 Continuar
                             </button>
@@ -222,6 +251,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
                     </div>
                 </div>
             )}
+
 
 
             {confirmarSaidaHeader && (

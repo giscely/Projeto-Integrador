@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Inicio.css";
 import logo from '../assets/logo_XPENEM.png';
@@ -9,8 +9,19 @@ import icon_trofeu from '../assets/icon_trofeu.png';
 import Login from "./Login";
 
 export default function Perfil() {
+  const [logado, setLogado] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
 
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      setLogado(!!token);
+  }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    setLogado(false);
+  }
   return (
     <>
       <div className="main_page">
@@ -22,7 +33,11 @@ export default function Perfil() {
             <Link to="/" className="button-menu">Inicio</Link>
             <Link to="/quiz" className="button-menu">Quiz</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
-            <button onClick={() => setMostrarLogin(true)}>Login</button>
+            {logado ? (
+              <button className="bt-login" onClick={handleLogout}>Logout</button>
+            ) : (
+              <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
+            )}
 
             <Link to="/perfil" className="icon-perfil">icon</Link>
           </nav>
@@ -81,7 +96,13 @@ export default function Perfil() {
 
         {/* MOSTRAR O MODAL */}
         {mostrarLogin && (
-            <Login fecharModal={() => setMostrarLogin(false)} />
+          <Login
+            fecharModal={() => setMostrarLogin(false)}
+            onLogin={() => {
+              setLogado(true);      // muda o botão
+              setMostrarLogin(false); // fecha o modal
+            }}
+          />
         )}
 
     </>

@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from '../assets/logo_XPENEM.png';
 import "./Inicio.css";
+import Login from "./Login";
+
 
 export default function Sobre() {
+    const [logado, setLogado] = useState(false);
+    const [mostrarLogin, setMostrarLogin] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setLogado(!!token);
+    }, []);
+
+    function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    setLogado(false);
+    }
 
 return (
     <>
@@ -16,7 +31,11 @@ return (
                 <Link to="/" className="button-menu">Inicio</Link>
                 <Link to="/quiz" className="button-menu">Quiz</Link>
                 <Link to="/sobre" className="button-menu menu-select">Sobre</Link>
-                <button onClick={() => setMostrarLogin(true)}>Login</button>
+                {logado ? (
+                    <button className="bt-login" onClick={handleLogout}>Logout</button>
+                ) : (
+                    <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
+                )}
 
                 <Link to="/perfil" className="icon-perfil">icon</Link>
             </nav>
@@ -50,6 +69,15 @@ Já ajudamos mais de 50 mil estudantes a simularem suas notas no ENEM.
 Temos uma playlist no Spotify chamada “Foco e Café” feita especialmente para quem estuda à noite. ☕🎶</h3>
         </section>
     </div>
+    {mostrarLogin && (
+        <Login
+        fecharModal={() => setMostrarLogin(false)}
+        onLogin={() => {
+            setLogado(true);      // muda o botão
+            setMostrarLogin(false); // fecha o modal
+        }}
+        />
+    )}
     </>
 )
 }

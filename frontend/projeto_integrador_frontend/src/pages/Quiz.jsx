@@ -14,7 +14,7 @@ import ModalQuiz from "./ModalQuiz";
 
 export default function Quiz() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
-
+  const [logado, setLogado] = useState(false);
   const [quiz, setQuiz] = useState(false)
   const [questoesQuiz, setQuestoesQuiz] = useState()
   const [disciplina, setDisciplina] = useState('');
@@ -30,14 +30,22 @@ export default function Quiz() {
   }
 
   const token = localStorage.getItem("token");
+  useEffect(() => {
+    setLogado(!!token);
+  }, []);
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    setLogado(false);
+  }
   useEffect(() => {
     if (quiz === true) {
 
       const criarECarregarSimulado = async () => {
         try {
           // CRIAR O SIMULADO (post)
-          const resposta = await fetch(`http://127.0.0.1:8080/simulados/simulados/${disciplina}?quantidade_questoes=${quantQuestoes}`,
+          const resposta = await fetch(`http://127.0.0.1:8080/simulados/${disciplina}?quantidade_questoes=${quantQuestoes}`,
             {
               method: "POST",
               headers: {
@@ -113,7 +121,11 @@ export default function Quiz() {
             <Link to="/" className="button-menu">Inicio</Link>
             <Link to="/quiz" className="button-menu menu-select">Quiz</Link>
             <Link to="/sobre" className="button-menu">Sobre</Link>
-            <button onClick={() => setMostrarLogin(true)}>Login</button>
+            {logado ? (
+              <button className="bt-login" onClick={handleLogout}>Logout</button>
+            ) : (
+              <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
+            )}
 
             <Link to="/perfil" className="icon-perfil">icon</Link>
           </nav>
@@ -238,7 +250,15 @@ export default function Quiz() {
 
         {/* MOSTRAR MODAL DE QUESTÕES DO QUIZ */}
         {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes} sim_id={simId}/>}
-
+        {mostrarLogin && (
+          <Login
+            fecharModal={() => setMostrarLogin(false)}
+            onLogin={() => {
+              setLogado(true);      // muda o botão
+              setMostrarLogin(false); // fecha o modal
+            }}
+          />
+        )}
     </>
   );
 }
