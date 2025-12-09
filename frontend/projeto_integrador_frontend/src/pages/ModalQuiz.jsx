@@ -228,7 +228,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
                 <div className="quizComecar-icon">🧠</div>
 
                 {/* Título */}
-                <h2>Prepare-se para o desafio!</h2>
+                <h2>Prepare-se para as questões!</h2>
                 <p className="quizComecar-subtitle">
                     Leia com atenção, mantenha a calma e dê o seu melhor.
                 </p>
