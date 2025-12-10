@@ -544,11 +544,19 @@ select:focus {
 /* -------- IMAGEM -------- */
 
 .premium-img {
-  width: 40%;
-  background: url('https://i.imgur.com/IlZ1e7Q.png') center/cover no-repeat;
-  border-radius: 16px;
+  width: 40%; /* Largura do contêiner */
+  border-radius: 16px; /* Bordas arredondadas */
+  /* padding: 2px; Espaçamento interno */
+  display: flex; /* Alinhamento flexível dos elementos */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
 }
 
+.premium-img img {
+  max-width: 100%; /* Faz a imagem não exceder o contêiner */
+  height: auto; /* Mantém a proporção da imagem */
+  border-radius: 16px; /* Bordas arredondadas para a imagem também */
+}
 /* -------- RESPONSIVIDADE -------- */
 
 @media (max-width: 840px) {
