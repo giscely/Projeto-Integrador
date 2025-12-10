@@ -221,13 +221,13 @@ export default function Inicio() {
             <div className="home-stat-card">
               <h3>⭐ Seus pontos</h3>
               <p className="home-stat-number">{pontuacao} XP</p>
-              <p>Mantenha seu ritmo para subir de nível!</p>
+              <p>Quanto mais pontos mais conquistas!</p>
             </div>
 
             <div className="home-stat-card">
-              <h3>🎯 Questões hoje</h3>
-              <p className="home-stat-number">18</p>
-              <p>Meta diária: 20</p>
+              <h3>🎯 Total de questões</h3>
+              <p className="home-stat-number">{questoesResolvidas.linguagens + questoesResolvidas.ciencias_humanas + questoesResolvidas.matematica + questoesResolvidas.ciencias_natureza}</p>
+              <p>Mantenha seu ritmo para subir de nível!</p>
             </div>
           </div>
 
