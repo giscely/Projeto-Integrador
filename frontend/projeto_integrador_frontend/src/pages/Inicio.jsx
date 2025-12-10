@@ -156,7 +156,7 @@ export default function Inicio() {
           <nav>
             <Link to="/" className="button-menu menu-select">Inicio</Link>
             <Link to="/quiz" className="button-menu">Simulado</Link>
-            <Link to="/sobre" className="button-menu">Sobre</Link>
+            {/* <Link to="/sobre" className="button-menu">Sobre</Link> */}
 
             {logado ? (
               <button className="bt-login" onClick={handleLogout}>Logout</button>
