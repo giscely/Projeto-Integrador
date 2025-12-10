@@ -5,7 +5,8 @@
   gap: 30px;
   padding: 30px;
   margin-top: 25px;
-  background: transparent;
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
 }
 
 /* 🔵 ASIDE */
@@ -14,26 +15,37 @@
   color: #000;
   padding: 30px 20px;
   text-align: center;
-  
   border-radius: 16px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   border: 1px solid #e4e9f5;
+  height: fit-content;
+  position: sticky;
+  top: 30px;
 }
 
-/* FOTO */
+/* FOTO - AGORA COM EMOJI */
 .foto-wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
 }
 
-.foto-perfil {
-  width: 120px;
-  height: 120px;
+.emoji-perfil-grande {
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  background: white;
   border: 4px solid #0066ff;
   box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.emoji-perfil-grande:hover {
+  transform: scale(1.05);
 }
 
 /* NOME + EMAIL */
@@ -83,11 +95,155 @@
   cursor: pointer;
   transition: 0.3s;
   border-radius: 8px;
+  background: #f9fbff;
+  margin-bottom: 8px;
+  border: 1px solid #e4e9f7;
 }
 
 .menu-perfil li:hover {
   background: #f0f6ff;
   color: #0066ff;
+  border-color: #0066ff;
+  transform: translateX(5px);
+}
+
+/* ============================
+   CUSTOMIZAÇÃO 
+   ============================*/
+.customizacao-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid #e4e9f5;
+}
+
+.customizacao-container h3 {
+  color: #003b9e;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.customizacao-option {
+  margin-bottom: 25px;
+}
+
+.customizacao-option p {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.emoji-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.emoji-btn {
+  font-size: 24px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-btn:hover {
+  transform: scale(1.1);
+  border-color: #4CAF50;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.emoji-btn.selected {
+  border-color: #4CAF50;
+  background-color: #E8F5E9;
+  transform: scale(1.1);
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+}
+
+.cor-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.cor-picker {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid #ddd;
+}
+
+.cor-hex {
+  font-family: monospace;
+  background: #f9fbff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: 1px solid #e4e9f7;
+}
+
+.cores-predefinidas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cor-predefinida {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cor-predefinida:hover {
+  transform: scale(1.1);
+  border-color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.btn-reset {
+  background: linear-gradient(90deg, #f0f6ff, #e4e9f7);
+  border: 1px solid #e4e9f7;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  width: 100%;
+  margin-top: 10px;
+  color: #0066ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-reset:hover {
+  background: linear-gradient(90deg, #e4e9f7, #d9e2f3);
+  border-color: #0066ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
 }
 
 /* ============================
@@ -106,6 +262,9 @@
   font-size: 2rem;
   font-weight: 700;
   color: #003b9e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* 🔵 GRID DAS ESTATÍSTICAS */
@@ -113,6 +272,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
+  margin-bottom: 40px;
 }
 
 /* 🔵 CARD DE INFO */
@@ -123,8 +283,6 @@
   text-align: center;
   border: 1px solid #e4e9f7;
   position: relative;
-
-  /* Sombras estilosas */
   box-shadow: 0px 4px 10px rgba(0,0,0,0.04);
   transition: 0.25s;
 }
@@ -148,16 +306,184 @@
   margin-bottom: 10px;
 }
 
-.card-info span {
+.valor-destaque {
   font-size: 2rem;
   font-weight: 700;
   color: #0066ff;
+  display: block;
+  margin-top: 10px;
 }
 
 /* Hover premium */
 .card-info:hover {
   transform: translateY(-5px);
   box-shadow: 0px 8px 20px rgba(0,0,0,0.09);
+}
+
+.emoji-card {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ============================
+   CONQUISTAS 
+   ============================*/
+.conquistas-container {
+  margin-top: 40px;
+  padding: 30px;
+  background: #f9fbff;
+  border-radius: 16px;
+  border: 1px solid #e4e9f5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.conquistas-container h1 {
+  color: #003b9e;
+  margin-bottom: 10px;
+}
+
+.conquistas-container .subtitle {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.conquistas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.conquista-card {
+  padding: 25px 20px;
+  border-radius: 14px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  text-align: center;
+  border: 1px solid #e4e9f7;
+}
+
+.conquista-card.obtida {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fbff 100%);
+  border: 2px solid #4CAF50;
+}
+
+.conquista-card.bloqueada {
+  background: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  opacity: 0.8;
+}
+
+.conquista-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.conquista-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.conquista-icone {
+  font-size: 40px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.badge-obtida {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+}
+
+.conquista-card h4 {
+  margin: 10px 0 5px;
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.conquista-descricao {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  min-height: 40px;
+  line-height: 1.4;
+}
+
+.conquista-data {
+  font-size: 0.85rem;
+  color: #4CAF50;
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
+  background: #E8F5E9;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.progresso-container {
+  margin-top: 15px;
+}
+
+.progresso-bar {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progresso-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0066ff, #4a90e2);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.conquista-progresso {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ============================
+   HEADER COM EMOJI
+   ============================*/
+.icon-perfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: white;
+  border-radius: 50%;
+  text-decoration: none;
+  border: 2px solid #0066ff;
+  font-size: 20px;
+  color: #0066ff;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.1);
+}
+
+.icon-perfil:hover {
+  background: #f0f6ff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
 }
 
 /* ============================
@@ -168,9 +494,17 @@
     grid-template-columns: 1fr;
     padding: 15px;
   }
+  
+  .perfil-aside {
+    position: static;
+  }
 
   .grid-infos {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .conquistas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
 }
 
@@ -178,31 +512,112 @@
   .grid-infos {
     grid-template-columns: 1fr;
   }
+  
+  .conquistas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .perfil-section {
+    padding: 20px;
+  }
+  
+  .conquistas-container {
+    padding: 20px;
+  }
+  
+  .customizacao-container {
+    padding: 15px;
+  }
+  
+  .emoji-lista {
+    gap: 6px;
+  }
+  
+  .emoji-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
 }
 
-.emoji-card {
-  font-size: 2.2rem;
-  display: block;
-  margin-bottom: 8px;
+/* Animação para destacar nova customização */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.emoji-perfil-grande.updated {
+  animation: pulse 0.5s ease;
+}
+
+/* Tooltip para conquistas */
+.conquista-card .tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
   text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
-.grid-infos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
+.conquista-card:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
-.card-info {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 18px;
-  text-align: center;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  transition: 0.25s;
+/* Efeito de brilho para conquistas obtidas */
+.conquista-card.obtida::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #4CAF50, #8BC34A, #4CAF50);
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.card-info:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+.conquista-card.obtida:hover::after {
+  opacity: 0.3;
 }
+
+
+/* 🔵 ÍCONE DO HEADER - FUNDO BRANCO */
+.icon-perfil {
+  background: white !important;
+  border: 2px solid #0066ff !important;
+}
+
+/* Remove qualquer estilo inline que force azul */
+.icon-perfil[style] {
+  background: white !important;
+}
+
+/* Remove especificamente background-color inline */
+.icon-perfil[style*="background-color"] {
+  background: white !important;
+}
+
+/* Remove especificamente backgroundColor inline */
+.icon-perfil[style*="backgroundColor"] {
+  background: white !important;
+}
+
+/* Remove qualquer fundo do elemento pai também */
+header nav .icon-perfil {
+  background: white !important;
+}
+
