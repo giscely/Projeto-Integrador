@@ -283,6 +283,20 @@ export default function Quiz() {
           </div> 
 
         </section>
+        <footer style={{
+    position: "fixed",
+    bottom: "0px",
+    width: "98%",
+  }} className="footer">
+          <div className="footer-container">
+            <p className="footer-texto">
+              XPENEM — Plataforma de estudos focada no ENEM
+            </p>
+            <p className="footer-copy">
+              © {new Date().getFullYear()} XPENEM. Todos os direitos reservados.
+            </p>
+          </div>
+        </footer>
       </div>
 
 {mostrarLogin && (
