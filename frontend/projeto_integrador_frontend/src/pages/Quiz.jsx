@@ -17,6 +17,7 @@ export default function Quiz() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
   const [logado, setLogado] = useState(false);
+  const [mostrarMsgLogin, setMostrarMsgLogin] = useState(false);
   const [quiz, setQuiz] = useState(false)
   const [questoesQuiz, setQuestoesQuiz] = useState()
   const [disciplina, setDisciplina] = useState('');
@@ -175,9 +176,6 @@ export default function Quiz() {
             <div>
               <h1>Escolha a área do conhecimento e comece a praticar!</h1>
             </div>
-            <div className="alert-desafio">
-              <h2>Você está participando do desafio semanal !</h2>
-            </div>
             <div className="div_quiz_filtro">
 
               <div className="div_areas">
@@ -282,18 +280,35 @@ export default function Quiz() {
         </section>
       </div>
 
-        {mostrarLogin && (
-          <Login
-            fecharModal={() => setMostrarLogin(false)} abrirCadastro={() => {setMostrarCadastro(true); setMostrarLogin(false);}}
-            onLogin={() => {setLogado(true); setMostrarLogin(false);}}
-          />
-        )}
-        
-        {mostrarCadastro && (
-          <Cadastro fecharModal={() => setMostrarCadastro(false)} abrirLogin={() => {setMostrarCadastro(false); setMostrarLogin(true);}}
-            onLogin={() => {setLogado(true); setMostrarCadastro(false);}}
-          />
-        )}
+{mostrarLogin && (
+        <Login
+          fecharModal={() => setMostrarLogin(false)}
+          abrirCadastro={() => {
+            setMostrarCadastro(true);
+            setMostrarLogin(false);
+          }}
+          onLogin={() => {
+            setLogado(true);
+            setMostrarLogin(false);
+            setMostrarMsgLogin(true)
+          }}
+        />
+      )}
+
+      {mostrarCadastro && (
+        <Cadastro
+          fecharModal={() => setMostrarCadastro(false)}
+          abrirLogin={() => {
+            setMostrarCadastro(false);
+            setMostrarLogin(true);
+          }}
+          onLogin={() => {
+            setLogado(true);
+            setMostrarCadastro(false);
+            setMostrarMsgLogin(true)
+          }}
+        />
+      )}
 
         {/* MOSTRAR MODAL DE FILTRAR O QUIZ */}
         {mostrarFiltro && <ModalFiltro setMostrarFiltro={setMostrarFiltro} setMostrarPremium={setMostrarPremium} setQuantQuestoes={setQuantQuestoes} setQuiz={setQuiz}/>}

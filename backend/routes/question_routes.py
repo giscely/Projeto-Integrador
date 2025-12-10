@@ -13,22 +13,30 @@ async def armazenar_questoes(session: SessionDep, year: int):
     limit = 50
     offset = 0
     total_adicionadas = 0
+    total_ignoradas = 0
 
     URI = "https://api.enem.dev/v1/exams/{year}/questions?limit={limit}&offset={offset}"
 
     while True:
-        # Busca um lote de até 50 questões
         r = requests.get(URI.format(year=year, limit=limit, offset=offset))
         dados = r.json()
 
         questoes = dados.get("questions", [])
 
-        # Se vier vazio, terminou
         if not questoes:
             break
 
-        # Salvar no banco
         for item in questoes:
+
+            alternativas = item["alternatives"]
+
+            alternativas_invalidas = any(
+                alt.get("text") is None for alt in alternativas
+            )
+
+            if alternativas_invalidas:
+                total_ignoradas += 1
+                continue  # pula a questão
 
             questao = Questao(
                 qst_title=item["title"],
@@ -38,20 +46,23 @@ async def armazenar_questoes(session: SessionDep, year: int):
                 qst_year=item["year"],
                 qst_context=item["context"],
                 qst_question=item["alternativesIntroduction"],
-                qst_alternatives=item["alternatives"],
+                qst_alternatives=alternativas,
                 qst_correct_alternative=item["correctAlternative"],
                 qst_file_url=item.get("files")
             )
 
             session.add(questao)
+            total_adicionadas += 1
 
         session.commit()
-        total_adicionadas += len(questoes)
 
-        # Atualiza o offset para o próximo bloco
         offset += limit + 1
 
-    return {"mensagem": f"{total_adicionadas} questões adicionadas do ENEM {year}."}
+    return {
+        "mensagem": f"{total_adicionadas} questões adicionadas do ENEM {year}.",
+        "ignoradas": total_ignoradas
+    }
+
 
 
 @question_router.post("/carregar-todas-as-questoes")

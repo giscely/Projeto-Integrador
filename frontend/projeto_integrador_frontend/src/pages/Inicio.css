@@ -331,6 +331,75 @@ select:focus {
   gap: 30px;
 }
 
+
+
+/* === CARD PRINCIPAL (mais moderno) === */
+.home-ranking-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f7f8fc 100%);
+  border-radius: 18px;
+  padding: 5px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  animation: fadeIn 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-ranking-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Título */
+.home-ranking-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: -0.3px;
+  margin-left: 15px;
+}
+
+/* Subtítulo */
+.ranking-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  letter-spacing: -0.2px;
+}
+
+/* Wrapper do gráfico */
+.ranking-grafico-wrapper {
+  width: 100%;
+  height: 75%;
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 14px;
+
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.06);
+}
+
+/* Tooltip (mais bonito) */
+.recharts-tooltip-wrapper {
+  background: #ffffff !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ====================================== */
 /*            DESAFIO DA SEMANA           */
 /* ====================================== */
@@ -422,7 +491,7 @@ select:focus {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} 
 
 
 /* ====================================== */

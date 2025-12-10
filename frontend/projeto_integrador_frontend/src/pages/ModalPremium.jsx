@@ -9,12 +9,11 @@ function ModalPremium({ setMostrarPremium }) {
         <div className="premium-icon">⭐</div>
 
         <h2 className="premium-title">
-          Descubra sua nota e treine pelas<br />
-          competências do ENEM
+          Responda simulados completos e ilimitados para o ENEM
         </h2>
 
         <p className="premium-subtext">
-          Assine o respostaCerta Premium e tenha acesso a essa e outras funcionalidades.
+          Tenha acesso a simulados extensos, sem limites por dia, e treine como no dia da prova para aumentar seu desempenho e sua confiança.
         </p>
 
         <button className="btn-primary">
