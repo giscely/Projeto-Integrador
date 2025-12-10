@@ -42,31 +42,19 @@ return (
         </header>
         <section>
             <h2>🧭 Sobre Nós: Bem-vindo ao XPEnem, uma plataforma criada para transformar a forma como os estudantes se preparam para o ENEM e vestibulares! 🚀 Nosso objetivo é tornar o aprendizado mais leve, eficiente e personalizado, ajudando cada aluno a entender seus pontos fortes e onde pode melhorar. Desde 2023, reunimos uma equipe apaixonada por educação, tecnologia e design para criar ferramentas interativas, simulados inteligentes e dashboards de desempenho que ajudam você a evoluir de verdade.</h2>
-            <h3>💡 O Que Fazemos
+            <h3>
+                👥 Nossa Equipe
 
-📊 Painéis Inteligentes: Acompanhe seu progresso com gráficos dinâmicos e relatórios detalhados.
+                Somos um grupo de alunos de Informática e que assim como os alunos, acreditam que aprender pode (e deve!) ser divertido.
 
-🧠 Simulados Personalizados: Gere provas adaptadas ao seu nível e área de interesse.
+                📍 Curiosidades Aleatórias
 
-🎯 Sistema de Recompensas: Ganhe pontos e badges ao alcançar metas e desafios semanais.
+                A ideia do XPEnem veio de uma conversa de bar sobre como a preparação para o ENEM poderia ser menos estressante. Assim, juntamos nosso conhecimento em tecnologia e educação para criar algo inovador.
 
-🤝 Comunidade de Estudo: Participe de grupos e troque experiências com outros alunos.
+                Nosso mascote se chama Pixel, e ele nasceu de um erro de código que virou piada interna. 😅
 
-🌟 Nossa Missão
-
-Democratizar o acesso a uma educação de qualidade, combinando dados, tecnologia e empatia para impulsionar o potencial de cada estudante.
-
-👥 Nossa Equipe
-
-Somos um grupo diverso de professores, desenvolvedores e designers que acreditam que aprender pode (e deve!) ser divertido.
-
-📍 Curiosidades Aleatórias
-
-Nosso mascote se chama Pixel, e ele nasceu de um erro de código que virou piada interna. 😅
-
-Já ajudamos mais de 50 mil estudantes a simularem suas notas no ENEM.
-
-Temos uma playlist no Spotify chamada “Foco e Café” feita especialmente para quem estuda à noite. ☕🎶</h3>
+                Já ajudamos mais de 50 mil estudantes a simularem suas notas no ENEM.
+                </h3>
         </section>
     </div>
     {mostrarLogin && (
