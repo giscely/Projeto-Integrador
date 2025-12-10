@@ -7,23 +7,43 @@ import icon_alvo from '../assets/icon_alvo.png';
 import icon_cronometro from '../assets/icon_cronometro.png';
 import icon_grafico from '../assets/icon_grafico.png';
 import icon_trofeu from '../assets/icon_trofeu.png';
-
+import img_premium from '../assets/img_premium_inicio.jpeg';
 import Login from "./Login";
 import Cadastro from "./Cadastro";
+import ModalPremium from "./ModalPremium";
 
 export default function Inicio() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [mostrarCadastro, setMostrarCadastro] = useState(false);
+  const [mostrarPremium, setMostrarPremium] = useState(false);
   const [logado, setLogado] = useState(false);
   const [pontuacao, setPontuacao] = useState(0);
 
   const [diasRestantes, setDiasRestantes] = useState(0);
 
+  const [mostrarMsgLogin, setMostrarMsgLogin] = useState(false);
+
+
+  // Mensagem de login
+  useEffect(() => {
+    setTimeout(() => setMostrarMsgLogin(false), 4000);
+    }
+  ,[mostrarMsgLogin]);
+
+
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const jaVisitou = sessionStorage.getItem("ja_visitou"); // aqui
     setLogado(!!token);
 
-    // === CONTADOR REGRESSIVO PARA O ENEM ===
+    // Mostrar modal inicial apenas na primeira visita na aba e se não estiver logado
+    if (!jaVisitou && !token) {
+      setMostrarLogin(true);
+      sessionStorage.setItem("ja_visitou", "true"); // marca que já visitou na aba
+    }
+
+
+    // CONTADOR REGRESSIVO DO ENEM
     const dataEnem = new Date("2026-11-09");
     const hoje = new Date();
     const diff = Math.ceil((dataEnem - hoje) / (1000 * 60 * 60 * 24));
@@ -64,11 +84,16 @@ export default function Inicio() {
   }, [logado]);
 
 
+
   function handleLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh_token");
     setLogado(false);
+    setMostrarMsgLogin(true)
   }
+
+
+
 
   return (
     <>
@@ -94,6 +119,18 @@ export default function Inicio() {
         </header>
 
         <section>
+
+          {mostrarMsgLogin && (
+            logado ? (
+              <div className="alert-sucesso">
+                Login realizado com sucesso!
+              </div>
+            ) : (
+              <div className="alert-sucesso">
+                Logout realizado com sucesso!
+              </div>
+            )
+          )}
           <div className="intro">
             <div className="div_info_intro">
             <div className="home-card">
@@ -138,7 +175,7 @@ export default function Inicio() {
           {/* PREMIUM */}
           <div className="home-premium-card">
             <div className="premium-info">
-              <h2>💎 XP Premium</h2>
+              <h2>XP Premium</h2>
               <p>Desbloqueie recursos exclusivos e acelere sua evolução.</p>
 
               <ul>
@@ -148,10 +185,13 @@ export default function Inicio() {
                 <li>🧠 Análises inteligentes por competências</li>
               </ul>
 
-              <button className="premium-btn">Conhecer o Premium</button>
+              <button className="premium-btn" onClick={() => setMostrarPremium(true)}>Conhecer o Premium</button>
             </div>
 
-            <div className="premium-img"></div>
+            <div className="premium-img">
+                <img src={img_premium} alt="Descrição da imagem" />
+            </div>
+
           </div>
 
         </div>
@@ -226,6 +266,7 @@ export default function Inicio() {
           onLogin={() => {
             setLogado(true);
             setMostrarLogin(false);
+            setMostrarMsgLogin(true)
           }}
         />
       )}
@@ -240,9 +281,15 @@ export default function Inicio() {
           onLogin={() => {
             setLogado(true);
             setMostrarCadastro(false);
+            setMostrarMsgLogin(true)
           }}
         />
       )}
+
+      {/* MOSTRAR MODAL DE PREMIUM O QUIZ */}
+      {mostrarPremium && <ModalPremium setMostrarPremium={setMostrarPremium}/>}
+
+
     </>
   );
 }

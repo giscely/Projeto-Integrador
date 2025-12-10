@@ -1,76 +1,168 @@
+/* Fundo escurecido */
 .overlay_click {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 900;
+  background-color: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(3px);
+  z-index: 900;
 }
 
+/* MODAL PRINCIPAL */
 .login_modal {
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  color: rgb(29, 29, 121);
-  padding: 2rem;
-  border-radius: 8px;
-  z-index: 1000;
-  width: 35%;
-  height: 45%;
-}
-.forms-login {
+  width: 930px;              /* largura igual ao da imagem */
+  height: 500px;             /* altura semelhante ao mockup */
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;          /* necessário para cortar bordas da imagem esquerda */
   display: flex;
-  flex-direction: column;
-  padding: 20px;
-  width: 80%;
-  height: 70%;
+  z-index: 1000;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
 }
 
-.forms-login input {
-  border: 1px solid gray;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 5px;
-}
-
+/* Botão Fechar */
 .btn_fechar {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 20px;
   font-size: 2rem;
   background: transparent;
   border: none;
-  cursor: pointer;
   color: #dd1c1c;
+  cursor: pointer;
+  z-index: 20;
 }
 
-.bt_enviar{
-  margin-top: 15px;
-  background-color: rgb(247, 207, 78);
-  color: black;
+/* CONTAINER INTERNO DO MODAL */
+.login_modal_content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================== */
+/*       LADO ESQUERDO        */
+/* ========================== */
+.login_lado_esquerdo {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+
+.login_lado_esquerdo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* sombra/escurecimento */
+  z-index: 1; /* fica atrás do texto */
+}
+
+.login_overlay_texto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2; /* fica na frente do overlay */
+}
+
+.login_imagem_fundo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  position: relative;
+}
+
+
+.login_overlay_texto h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login_overlay_texto p {
+  font-size: 1.1rem;
+}
+
+/* ========================== */
+/*        LADO DIREITO        */
+/* ========================== */
+.login_lado_direito {
+  width: 50%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_titulo {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: rgb(29, 29, 121);
+  font-weight: 700;
+}
+
+/* FORM */
+.forms-login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.forms-login input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Botão */
+.bt_enviar {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
   border: none;
+  background-color: rgb(247, 207, 78);
   border-radius: 10px;
-  margin: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.cadastro_link{
-  color: black;
-  margin: 10px;
-  margin-top: 3%;
+.bt_enviar:hover {
+  background-color: rgb(230, 193, 72);
 }
 
-.cadastro_link a {
-  color: rgb(100, 100, 255);
+/* Link de cadastro */
+.cadastro_link {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #000;
+}
+
+.link_fake {
+  color: rgb(48, 48, 200);
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .msg-erro-login {
   color: #dd1c1c;
-  margin: 10px;
+  font-size: 0.9rem;
+  margin-top: -5px;
 }

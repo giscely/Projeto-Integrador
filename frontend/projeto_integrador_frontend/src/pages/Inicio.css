@@ -20,6 +20,7 @@ body {
   max-width: 99%;
   margin: 0 auto;
   padding: 15px;
+  position: relative;
 }
 
 /* ============================
@@ -543,11 +544,19 @@ select:focus {
 /* -------- IMAGEM -------- */
 
 .premium-img {
-  width: 40%;
-  background: url('https://i.imgur.com/IlZ1e7Q.png') center/cover no-repeat;
-  border-radius: 16px;
+  width: 40%; /* Largura do contêiner */
+  border-radius: 16px; /* Bordas arredondadas */
+  /* padding: 2px; Espaçamento interno */
+  display: flex; /* Alinhamento flexível dos elementos */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
 }
 
+.premium-img img {
+  max-width: 100%; /* Faz a imagem não exceder o contêiner */
+  height: auto; /* Mantém a proporção da imagem */
+  border-radius: 16px; /* Bordas arredondadas para a imagem também */
+}
 /* -------- RESPONSIVIDADE -------- */
 
 @media (max-width: 840px) {
@@ -561,4 +570,45 @@ select:focus {
     width: 100%;
     height: 220px;
   }
+}
+
+/* ALERTA DENTRO DA PÁGINA (absolute) */
+.alert-sucesso {
+  position: absolute;
+  top: 2%;             /* distância do topo do container */
+  right: 40%;           /* distância da direita */
+  background: #4CAF50;
+  color: white;
+  padding: 35px 45px;
+  border-radius: 10px;
+  min-width: 230px;
+  font-weight: bold;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: fadein 0.4s ease;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Animação ao aparecer */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Barra de progresso embaixo */
+.alert-sucesso::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: rgba(255,255,255,0.9);
+  width: 0%;
+  animation: barraProgresso 2.8s linear forwards;
+}
+
+@keyframes barraProgresso {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
