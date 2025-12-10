@@ -9,8 +9,153 @@ export default function Perfil() {
   const [mostrarLogin, setMostrarLogin] = useState(false);
   const [emojiPerfil, setEmojiPerfil] = useState("😎");
   const [showCustomizacao, setShowCustomizacao] = useState(false);
+  const [dadosuser,setDadosuser] = useState(null)
+  const [pontuacao,setPontuacao] = useState(0)
+  const [questoes,setQuestoes] = useState(null)
+  const [simulado,setSimulados] = useState(0)
 
-  // Simulação de dados do usuário
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLogado(!!token);
+    
+    // Carregar preferência salva
+    const savedEmoji = localStorage.getItem("perfil_emoji");
+    if (savedEmoji) setEmojiPerfil(savedEmoji);
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    
+    async function pegarDadosUser() {
+      try {
+        const buscarPerfil = await fetch(
+          `http://127.0.0.1:8080/user/perfil`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": "Bearer " + token
+            }
+          }
+        );
+
+        const dados = await buscarPerfil.json();
+
+        setDadosuser(dados)
+
+      } catch (erro) {
+        console.error("ERRO AO buscar perfil:", erro);
+      }
+    };
+
+    pegarDadosUser();
+  }, []);
+
+  useEffect(() => {
+    async function PegarPontuacao() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setPontuacao(0);
+        return;
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:8080/user/scores", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!response.ok) {
+          console.error("Erro na API:", response.status, response.statusText);
+          return;
+        }
+
+        const data = await response.json();
+        setPontuacao(data.total_score || 0);
+
+      } catch (error) {
+        console.error("Erro ao calcular pontuacao:", error);
+      }
+    }
+
+    PegarPontuacao();
+  }, [logado]);
+
+  useEffect(() => {
+    async function PegarQuantQuest() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setQuestoes(null);
+        return;
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:8080/user/questoes_resolvidas_por_disciplina", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!response.ok) {
+          console.error("Erro na API:", response.status, response.statusText);
+          return;
+        }
+
+        const dados = await response.json();
+        const total = 
+          dados.linguagens +
+          dados.ciencias_humanas +
+          dados.ciencias_natureza +
+          dados.matematica;
+        setQuestoes(total);
+
+      } catch (error) {
+        console.error("Erro ao pegar questões:", error);
+      }
+    }
+
+    PegarQuantQuest();
+  }, [logado]);
+
+useEffect(() => {
+    async function PegarQuantSimulados() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setSimulados(null);
+        return;
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:8080/simulados/", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!response.ok) {
+          console.error("Erro na API:", response.status, response.statusText);
+          return;
+        }
+
+        const dados = await response.json();
+        const total = dados.length;
+
+        setSimulados(total);
+
+      } catch (error) {
+        console.error("Erro ao pegar simulados:", error);
+      }
+    }
+
+    PegarQuantSimulados();
+  }, [logado]);
+
   const usuario = {
     nome: "Ylanne K.",
     email: "ylanne@example.com",
@@ -72,15 +217,6 @@ export default function Perfil() {
     }
   ];
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setLogado(!!token);
-    
-    // Carregar preferência salva
-    const savedEmoji = localStorage.getItem("perfil_emoji");
-    if (savedEmoji) setEmojiPerfil(savedEmoji);
-  }, []);
-
   function handleLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh_token");
@@ -134,9 +270,10 @@ export default function Perfil() {
                 </div>
               </div>
 
-              <h2 className="perfil-nome">{usuario.nome}</h2>
-              <p className="perfil-email">{usuario.email}</p>
-              <p className="perfil-codinome">{usuario.codinome}</p>
+              <h2 className="perfil-nome">{dadosuser?.nome}</h2>
+              <p className="perfil-email">{dadosuser?.email}</p>
+              <p className="perfil-codinome">{dadosuser?.badge}</p>
+
 
               <hr />
 
@@ -193,19 +330,19 @@ export default function Perfil() {
                   <div className="card-info">
                     <span className="emoji-card">⭐</span>
                     <h3>Pontuação</h3>
-                    <span className="valor-destaque">{usuario.pontuacao}</span>
+                    <span className="valor-destaque">{pontuacao}</span>
                   </div>
 
                   <div className="card-info">
                     <span className="emoji-card">🧠</span>
                     <h3>Simulados Feitos</h3>
-                    <span className="valor-destaque">{usuario.simuladosFeitos}</span>
+                    <span className="valor-destaque">{simulado}</span>
                   </div>
 
                   <div className="card-info">
                     <span className="emoji-card">📚</span>
                     <h3>Questões Respondidas</h3>
-                    <span className="valor-destaque">{usuario.questoesRespondidas}</span>
+                    <span className="valor-destaque">{questoes}</span>
                   </div>
 
                   <div className="card-info">
