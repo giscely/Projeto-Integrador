@@ -11,7 +11,7 @@ import logo from '../assets/logo_XPENEM.png';
 import { useUser } from "../context/UserContext";
 
 
-function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, sim_id}) {
+function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, sim_id, logado}) {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const formRef = useRef(null);
@@ -33,7 +33,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
 
     const [confirmarSaidaHeader, setConfirmarSaidaHeader] = useState(false);
-    const [rotaDestino, setRotaDestino] = useState("");  // nova rota escolhida
+    const [rotaDestino, setRotaDestino] = useState("/");  // nova rota escolhida
 
 
     const [alternativaSelecionada, setAlternativaSelecionada] = useState("");
@@ -456,13 +456,14 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
 
                     <button className="button-menu menu-select" >Quiz</button>
 
+                    {/* <button className="button-menu" onClick={() => { setRotaDestino("/sobre"); setConfirmarSaidaHeader(true); }}>Sobre</button>
+ */}
 
-                    <button className="button-menu" onClick={() => { setRotaDestino("/sobre"); setConfirmarSaidaHeader(true); }}>Sobre</button>
-
-
-                    <button>Login</button>
-
-
+                    {logado ? (
+                        <button className="bt-login" onClick={() => {setConfirmarSaidaHeader(true)}}>Logout</button>
+                        ) : (
+                        <button className="bt-login" onClick={() => {setConfirmarSaidaHeader(true)}}>Login</button>
+                        )}
                     
                     <button className="icon-perfil" onClick={() => { setRotaDestino("/perfil"); setConfirmarSaidaHeader(true); }}>
                         <span style={{ fontSize: "24px" }}>{emojiPerfil}</span>

@@ -35,9 +35,19 @@ export default function Quiz() {
 });
 
   const handleDisciplina = (disciplina) => {
-    setDisciplina(disciplina)
-    setMostrarFiltro(true)
-  }
+    const token = localStorage.getItem("token");
+
+    // trata tokens inválidos que aparecem como strings
+    if (!token || token === "undefined" || token === "null") {
+      console.log("Token inválido:", token);
+      setMostrarLogin(true); // abre modal de login
+      return;
+    }
+
+    // usuário logado -> segue para as questões
+    setDisciplina(disciplina);
+    setMostrarFiltro(true);
+  };
 
   const { emojiPerfil } = useUser();
 
@@ -337,7 +347,7 @@ export default function Quiz() {
 
 
         {/* MOSTRAR MODAL DE QUESTÕES DO QUIZ */}
-        {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes} sim_id={simId}/>}
+        {mostrarQuiz && <ModalQuiz setMostrarQuiz={setMostrarQuiz} questoesQuiz={questoesQuiz} disciplina={disciplina} quantQuestoes={quantQuestoes} sim_id={simId} logado={logado}/>}
         
     </>
   );

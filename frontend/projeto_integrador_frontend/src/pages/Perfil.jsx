@@ -345,11 +345,11 @@ export default function Perfil() {
                     <span className="valor-destaque">{questoes}</span>
                   </div>
 
-                  <div className="card-info">
+                  {/* <div className="card-info">
                     <span className="emoji-card">🔥</span>
                     <h3>Desafios Concluídos</h3>
                     <span className="valor-destaque">{usuario.desafiosCompletos}</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

@@ -3,15 +3,7 @@ import { Link } from "react-router-dom";
 import "./Inicio.css";
 import { useUser } from "../context/UserContext"; // <-- ADICIONAR IMPORT
 
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer
-} from "recharts";
+import {BarChart,Bar,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer} from "recharts";
 // npm install recharts
 
 import logo from '../assets/logo_XPENEM.png';

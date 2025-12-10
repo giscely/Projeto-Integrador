@@ -4,8 +4,9 @@
   grid-template-columns: 260px 1fr;
   gap: 30px;
   padding: 30px;
-  margin-top: 25px;
+  margin-top: -30px;
   min-height: 100vh;
+  
   transition: background-color 0.3s ease;
 }
 
@@ -19,8 +20,9 @@
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   border: 1px solid #e4e9f5;
   height: fit-content;
-  position: sticky;
-  top: 30px;
+  position: relative;
+  top: 1.5rem;
+  
 }
 
 /* FOTO - AGORA COM EMOJI */
@@ -270,8 +272,8 @@
 /* 🔵 GRID DAS ESTATÍSTICAS */
 .grid-infos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
   margin-bottom: 40px;
 }
 
