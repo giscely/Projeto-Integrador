@@ -2,6 +2,17 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Inicio.css";
 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from "recharts";
+// npm install recharts
+
 import logo from '../assets/logo_XPENEM.png';
 import icon_alvo from '../assets/icon_alvo.png';
 import icon_cronometro from '../assets/icon_cronometro.png';
@@ -23,10 +34,17 @@ export default function Inicio() {
 
   const [mostrarMsgLogin, setMostrarMsgLogin] = useState(false);
 
+  const [questoesResolvidas, setQuestoesResolvidas] = useState({
+  linguagens: 0,
+  ciencias_humanas: 0,
+  matematica: 0,
+  ciencias_natureza: 0
+});
 
   // Mensagem de login
   useEffect(() => {
     setTimeout(() => setMostrarMsgLogin(false), 4000);
+
     }
   ,[mostrarMsgLogin]);
 
@@ -93,6 +111,38 @@ export default function Inicio() {
   }
 
 
+  useEffect(() => {
+    const BuscarQuestoesResolvidas = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const resposta = await fetch(
+          `http://127.0.0.1:8080/user/questoes_resolvidas_por_disciplina`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": "Bearer " + token,
+              "Content-Type": "application/json"
+            }
+          }
+        );
+
+        const dados = await resposta.json();
+
+        setQuestoesResolvidas({
+          linguagens: dados.linguagens ?? 0,
+          ciencias_humanas: dados.ciencias_humanas ?? 0,
+          matematica: dados.matematica ?? 0,
+          ciencias_natureza: dados.ciencias_natureza ?? 0
+        });
+
+      } catch (erro) {
+        console.error("Erro ao buscar questões resolvidas:", erro);
+      }
+    };
+
+    BuscarQuestoesResolvidas();
+  }, []);
+
 
 
   return (
@@ -143,18 +193,27 @@ export default function Inicio() {
           
           <div className="home-single-row">
 
-          {/* DESAFIO DA SEMANA */}
-          <div className="home-desafio-card">
-            <h2>🏆 Desafio da Semana</h2>
-            <p>Complete as missões e ganhe +150 XP bônus!</p>
+          {/* 🏆 Ranking de Disciplinas */}
+          <div className="home-ranking-card">
+            <h2>Ranking de Disciplinas</h2>
+            <p className="ranking-subtitle">Quantidade de questões respondidas por disciplina</p>
 
-            <ul className="home-desafio-list">
-              <li>✔ Responder 100 questões</li>
-              <li>✔ Responder 20 questões de Matemática</li>
-              <li>✔ Finalizar 1 simulado completo</li>
-            </ul>
-
-            <button className="home-desafio-btn">Participar do desafio</button>
+            <div className="ranking-grafico-wrapper">
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={[
+                  { nome: "Linguagens", valor: questoesResolvidas.linguagens },
+                  { nome: "Humanas", valor: questoesResolvidas.ciencias_humanas },
+                  { nome: "Matemática", valor: questoesResolvidas.matematica },
+                  { nome: "Natureza", valor: questoesResolvidas.ciencias_natureza }
+                ]}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="nome" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Bar dataKey="valor" fill="#4e9ee4ff" radius={[10, 10, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           {/* ESTATÍSTICAS */}

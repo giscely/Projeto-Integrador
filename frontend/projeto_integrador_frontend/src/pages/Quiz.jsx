@@ -175,9 +175,6 @@ export default function Quiz() {
             <div>
               <h1>Escolha a área do conhecimento e comece a praticar!</h1>
             </div>
-            <div className="alert-desafio">
-              <h2>Você está participando do desafio semanal !</h2>
-            </div>
             <div className="div_quiz_filtro">
 
               <div className="div_areas">
