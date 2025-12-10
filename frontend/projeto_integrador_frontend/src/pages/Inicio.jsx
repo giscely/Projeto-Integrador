@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Inicio.css";
+import { useUser } from "../context/UserContext"; // <-- ADICIONAR IMPORT
 
 import {
   BarChart,
@@ -29,37 +30,34 @@ export default function Inicio() {
   const [mostrarPremium, setMostrarPremium] = useState(false);
   const [logado, setLogado] = useState(false);
   const [pontuacao, setPontuacao] = useState(0);
-
   const [diasRestantes, setDiasRestantes] = useState(0);
-
   const [mostrarMsgLogin, setMostrarMsgLogin] = useState(false);
 
   const [questoesResolvidas, setQuestoesResolvidas] = useState({
-  linguagens: 0,
-  ciencias_humanas: 0,
-  matematica: 0,
-  ciencias_natureza: 0
-});
+    linguagens: 0,
+    ciencias_humanas: 0,
+    matematica: 0,
+    ciencias_natureza: 0
+  });
+
+  // USAR O CONTEXTO PARA OBTER O EMOJI
+  const { emojiPerfil } = useUser();
 
   // Mensagem de login
   useEffect(() => {
     setTimeout(() => setMostrarMsgLogin(false), 4000);
-
-    }
-  ,[mostrarMsgLogin]);
-
+  }, [mostrarMsgLogin]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const jaVisitou = sessionStorage.getItem("ja_visitou"); // aqui
+    const jaVisitou = sessionStorage.getItem("ja_visitou");
     setLogado(!!token);
 
     // Mostrar modal inicial apenas na primeira visita na aba e se não estiver logado
     if (!jaVisitou && !token) {
       setMostrarLogin(true);
-      sessionStorage.setItem("ja_visitou", "true"); // marca que já visitou na aba
+      sessionStorage.setItem("ja_visitou", "true");
     }
-
 
     // CONTADOR REGRESSIVO DO ENEM
     const dataEnem = new Date("2026-11-09");
@@ -101,15 +99,12 @@ export default function Inicio() {
     PegarPontuacao();
   }, [logado]);
 
-
-
   function handleLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh_token");
     setLogado(false);
-    setMostrarMsgLogin(true)
+    setMostrarMsgLogin(true);
   }
-
 
   useEffect(() => {
     const BuscarQuestoesResolvidas = async () => {
@@ -143,8 +138,6 @@ export default function Inicio() {
     BuscarQuestoesResolvidas();
   }, []);
 
-
-
   return (
     <>
       <div className="main_page">
@@ -164,12 +157,14 @@ export default function Inicio() {
               <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
             )}
 
-            <Link to="/perfil" className="icon-perfil">icon</Link>
+            {/* ÍCONE DO PERFIL AGORA VEM DO CONTEXTO */}
+            <Link to="/perfil" className="icon-perfil">
+              <span style={{ fontSize: "24px" }}>{emojiPerfil}</span>
+            </Link>
           </nav>
         </header>
 
         <section>
-
           {mostrarMsgLogin && (
             logado ? (
               <div className="alert-sucesso">
@@ -181,81 +176,79 @@ export default function Inicio() {
               </div>
             )
           )}
+          
           <div className="intro">
             <div className="div_info_intro">
-            <div className="home-card">
-              <h2 className="home-title"> Faltam <span className="home-highlight">{diasRestantes}</span> dias para o ENEM 2026!</h2>
-              <p>O tempo está passando... prepare-se diariamente e domine o ENEM com confiança!</p>
-            </div>
+              <div className="home-card">
+                <h2 className="home-title"> Faltam <span className="home-highlight">{diasRestantes}</span> dias para o ENEM 2026!</h2>
+                <p>O tempo está passando... prepare-se diariamente e domine o ENEM com confiança!</p>
+              </div>
               <Link to="/quiz" className="button-intro">Começar agora</Link>
             </div>
           </div>
           
           <div className="home-single-row">
+            {/* 🏆 Ranking de Disciplinas */}
+            <div className="home-ranking-card">
+              <h2>Ranking de Disciplinas</h2>
+              <p className="ranking-subtitle">Quantidade de questões respondidas por disciplina</p>
 
-          {/* 🏆 Ranking de Disciplinas */}
-          <div className="home-ranking-card">
-            <h2>Ranking de Disciplinas</h2>
-            <p className="ranking-subtitle">Quantidade de questões respondidas por disciplina</p>
-
-            <div className="ranking-grafico-wrapper">
-              <ResponsiveContainer width="100%" height={250}>
-                <BarChart data={[
-                  { nome: "Linguagens", valor: questoesResolvidas.linguagens },
-                  { nome: "Humanas", valor: questoesResolvidas.ciencias_humanas },
-                  { nome: "Matemática", valor: questoesResolvidas.matematica },
-                  { nome: "Natureza", valor: questoesResolvidas.ciencias_natureza }
-                ]}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="nome" />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Bar dataKey="valor" fill="#4e9ee4ff" radius={[10, 10, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* ESTATÍSTICAS */}
-          <div className="home-stats-container">
-            <div className="home-stat-card">
-              <h3>⭐ Seus pontos</h3>
-              <p className="home-stat-number">{pontuacao} XP</p>
-              <p>Quanto mais pontos mais conquistas!</p>
+              <div className="ranking-grafico-wrapper">
+                <ResponsiveContainer width="100%" height={250}>
+                  <BarChart data={[
+                    { nome: "Linguagens", valor: questoesResolvidas.linguagens },
+                    { nome: "Humanas", valor: questoesResolvidas.ciencias_humanas },
+                    { nome: "Matemática", valor: questoesResolvidas.matematica },
+                    { nome: "Natureza", valor: questoesResolvidas.ciencias_natureza }
+                  ]}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="nome" />
+                    <YAxis allowDecimals={false} />
+                    <Tooltip />
+                    <Bar dataKey="valor" fill="#4e9ee4ff" radius={[10, 10, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
 
-            <div className="home-stat-card">
-              <h3>🎯 Total de questões</h3>
-              <p className="home-stat-number">{questoesResolvidas.linguagens + questoesResolvidas.ciencias_humanas + questoesResolvidas.matematica + questoesResolvidas.ciencias_natureza}</p>
-              <p>Mantenha seu ritmo para subir de nível!</p>
-            </div>
-          </div>
+            {/* ESTATÍSTICAS */}
+            <div className="home-stats-container">
+              <div className="home-stat-card">
+                <h3>⭐ Seus pontos</h3>
+                <p className="home-stat-number">{pontuacao} XP</p>
+                <p>Quanto mais pontos mais conquistas!</p>
+              </div>
 
-          {/* PREMIUM */}
-          <div className="home-premium-card">
-            <div className="premium-info">
-              <h2>XP Premium</h2>
-              <p>Desbloqueie recursos exclusivos e acelere sua evolução.</p>
-
-              <ul>
-                <li>✨ Questões exclusivas por habilidade</li>
-                <li>📊 Estatísticas avançadas detalhadas</li>
-                <li>📘 Simulados ilimitados</li>
-                <li>🧠 Análises inteligentes por competências</li>
-              </ul>
-
-              <button className="premium-btn" onClick={() => setMostrarPremium(true)}>Conhecer o Premium</button>
+              <div className="home-stat-card">
+                <h3>🎯 Total de questões</h3>
+                <p className="home-stat-number">{questoesResolvidas.linguagens + questoesResolvidas.ciencias_humanas + questoesResolvidas.matematica + questoesResolvidas.ciencias_natureza}</p>
+                <p>Mantenha seu ritmo para subir de nível!</p>
+              </div>
             </div>
 
-            <div className="premium-img">
+            {/* PREMIUM */}
+            <div className="home-premium-card">
+              <div className="premium-info">
+                <h2>XP Premium</h2>
+                <p>Desbloqueie recursos exclusivos e acelere sua evolução.</p>
+
+                <ul>
+                  <li>✨ Questões exclusivas por habilidade</li>
+                  <li>📊 Estatísticas avançadas detalhadas</li>
+                  <li>📘 Simulados ilimitados</li>
+                  <li>🧠 Análises inteligentes por competências</li>
+                </ul>
+
+                <button className="premium-btn" onClick={() => setMostrarPremium(true)}>Conhecer o Premium</button>
+              </div>
+
+              <div className="premium-img">
                 <img src={img_premium} alt="Descrição da imagem" />
+              </div>
             </div>
-
           </div>
 
-        </div>
-
-        <div className="info">
+          <div className="info">
             <h1>Benefícios</h1>
             <div className="info-informs">
               <div>
@@ -299,8 +292,6 @@ export default function Inicio() {
               </div>
             </div>
           </div>
-
-
         </section>
 
         <footer className="footer">
@@ -325,7 +316,7 @@ export default function Inicio() {
           onLogin={() => {
             setLogado(true);
             setMostrarLogin(false);
-            setMostrarMsgLogin(true)
+            setMostrarMsgLogin(true);
           }}
         />
       )}
@@ -340,15 +331,13 @@ export default function Inicio() {
           onLogin={() => {
             setLogado(true);
             setMostrarCadastro(false);
-            setMostrarMsgLogin(true)
+            setMostrarMsgLogin(true);
           }}
         />
       )}
 
       {/* MOSTRAR MODAL DE PREMIUM O QUIZ */}
       {mostrarPremium && <ModalPremium setMostrarPremium={setMostrarPremium}/>}
-
-
     </>
   );
 }

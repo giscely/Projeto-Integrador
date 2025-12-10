@@ -64,8 +64,8 @@
 
 /* --- ÍCONES DAS OPÇÕES --- */
 .option-icon {
-  width: 35px;
-  height: 35px;
+  width: 60px;    /* Ou 60px se quiser ainda maior */
+  height: 60px;
   margin-top: 10px;
 }
 

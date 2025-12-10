@@ -11,6 +11,7 @@ import Cadastro from "./Cadastro"
 import ModalFiltro from "./ModalFiltro";
 import ModalPremium from "./ModalPremium";
 import ModalQuiz from "./ModalQuiz";
+import { useUser } from "../context/UserContext";
 
 
 export default function Quiz() {
@@ -37,6 +38,8 @@ export default function Quiz() {
     setDisciplina(disciplina)
     setMostrarFiltro(true)
   }
+
+  const { emojiPerfil } = useUser();
 
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -167,7 +170,9 @@ export default function Quiz() {
               <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
             )}
 
-            <Link to="/perfil" className="icon-perfil">icon</Link>
+            <Link to="/perfil" className="icon-perfil">
+              <span style={{ fontSize: "24px" }}>{emojiPerfil}</span>
+            </Link>
           </nav>
         </header>
 

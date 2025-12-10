@@ -1,6 +1,8 @@
 import React from "react";
 import "./ModalFiltro.css";
-import blocoquest from '../assets/icon-bloco-quest.svg';
+import bloco5 from '../assets/bloco5.svg';
+import bloco10 from '../assets/bloco10.svg';
+import blocoquest from '../assets/blocoquest.svg';
 import logo from '../assets/logo_XPENEM.png';
 
 
@@ -28,7 +30,7 @@ function ModalFiltro({ setMostrarFiltro, setMostrarPremium, setQuantQuestoes, se
 
         <div className="options">
           <button className="option-card" onClick={() => handleQuestoes(5)}>
-            <img src={blocoquest} alt="Icone bloco" className="option-icon" />
+            <img src={bloco5} alt="Icone bloco" className="option-icon" />
             <div>
               <h3>Bloco de 5</h3>
               <p>
@@ -38,7 +40,7 @@ function ModalFiltro({ setMostrarFiltro, setMostrarPremium, setQuantQuestoes, se
           </button>
 
           <button className="option-card" onClick={() => handleQuestoes(10)}>
-            <img src={blocoquest} alt="Icone bloco" className="option-icon" />
+            <img src={bloco10} alt="Icone bloco" className="option-icon" />
             <div>
               <h3>Bloco de 10</h3>
               <p>

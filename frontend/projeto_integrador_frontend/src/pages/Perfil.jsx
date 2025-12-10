@@ -3,24 +3,25 @@ import { Link } from "react-router-dom";
 import "./Perfil.css";
 import logo from '../assets/logo_XPENEM.png';
 import Login from "./Login";
+import { useUser } from "../context/UserContext"; // <-- ADICIONAR IMPORT
 
 export default function Perfil() {
   const [logado, setLogado] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
-  const [emojiPerfil, setEmojiPerfil] = useState("😎");
   const [showCustomizacao, setShowCustomizacao] = useState(false);
-  const [dadosuser,setDadosuser] = useState(null)
-  const [pontuacao,setPontuacao] = useState(0)
-  const [questoes,setQuestoes] = useState(null)
-  const [simulado,setSimulados] = useState(0)
+  const [dadosuser, setDadosuser] = useState(null);
+  const [pontuacao, setPontuacao] = useState(0);
+  const [questoes, setQuestoes] = useState(null);
+  const [simulado, setSimulados] = useState(0);
+
+  // USAR O CONTEXTO EM VEZ DO ESTADO LOCAL
+  const { emojiPerfil, updateEmoji } = useUser();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setLogado(!!token);
     
-    // Carregar preferência salva
-    const savedEmoji = localStorage.getItem("perfil_emoji");
-    if (savedEmoji) setEmojiPerfil(savedEmoji);
+    // REMOVER O CARREGAMENTO DO LOCALSTORAGE AQUI (AGORA É FEITO NO CONTEXTO)
   }, []);
 
   useEffect(() => {
@@ -39,15 +40,16 @@ export default function Perfil() {
         );
 
         const dados = await buscarPerfil.json();
-
-        setDadosuser(dados)
+        setDadosuser(dados);
 
       } catch (erro) {
         console.error("ERRO AO buscar perfil:", erro);
       }
     };
 
-    pegarDadosUser();
+    if (token) {
+      pegarDadosUser();
+    }
   }, []);
 
   useEffect(() => {
@@ -121,7 +123,7 @@ export default function Perfil() {
     PegarQuantQuest();
   }, [logado]);
 
-useEffect(() => {
+  useEffect(() => {
     async function PegarQuantSimulados() {
       const token = localStorage.getItem("token");
 
@@ -223,14 +225,14 @@ useEffect(() => {
     setLogado(false);
   }
 
+  // ATUALIZAR USANDO A FUNÇÃO DO CONTEXTO
   const handleEmojiChange = (novoEmoji) => {
-    setEmojiPerfil(novoEmoji);
-    localStorage.setItem("perfil_emoji", novoEmoji);
+    updateEmoji(novoEmoji);
   };
 
+  // ATUALIZAR USANDO A FUNÇÃO DO CONTEXTO
   const handleResetCustomizacao = () => {
-    setEmojiPerfil("😎");
-    localStorage.removeItem("perfil_emoji");
+    updateEmoji("😎");
   };
 
   return (
@@ -244,7 +246,6 @@ useEffect(() => {
           <nav>
             <Link to="/" className="button-menu">Inicio</Link>
             <Link to="/quiz" className="button-menu">Simulado</Link>
-            {/* <Link to="/sobre" className="button-menu">Sobre</Link> */}
 
             {logado ? (
               <button className="bt-login" onClick={handleLogout}>Logout</button>
@@ -252,7 +253,7 @@ useEffect(() => {
               <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
             )}
 
-            {/* ÍCONE DO PERFIL */}
+            {/* ÍCONE DO PERFIL - AGORA VEM DO CONTEXTO */}
             <Link to="/perfil" className="icon-perfil">
               <span style={{ fontSize: "24px" }}>{emojiPerfil}</span>
             </Link>
@@ -273,7 +274,6 @@ useEffect(() => {
               <h2 className="perfil-nome">{dadosuser?.nome}</h2>
               <p className="perfil-email">{dadosuser?.email}</p>
               <p className="perfil-codinome">{dadosuser?.badge}</p>
-
 
               <hr />
 

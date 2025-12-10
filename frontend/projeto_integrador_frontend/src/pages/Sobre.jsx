@@ -4,10 +4,13 @@ import logo from "../assets/logo_XPENEM.png";
 import "./Sobre.css";
 import "./Inicio.css";
 import Login from "./Login";
+import { useUser } from "../context/UserContext";
 
 export default function Sobre() {
   const [logado, setLogado] = useState(false);
   const [mostrarLogin, setMostrarLogin] = useState(false);
+
+  const { emojiPerfil } = useUser();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,7 +44,9 @@ export default function Sobre() {
               <button className="bt-login" onClick={() => setMostrarLogin(true)}>Login</button>
             )}
 
-            <Link to="/perfil" className="icon-perfil">icon</Link>
+            <Link to="/perfil" className="icon-perfil">
+              <span style={{ fontSize: "24px" }}>{emojiPerfil}</span>
+            </Link>
           </nav>
         </header>
 

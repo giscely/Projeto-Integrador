@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./Inicio.css";
 import "./ModalQuiz.css"
 import logo from '../assets/logo_XPENEM.png';
+import { useUser } from "../context/UserContext";
 
 
 function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, sim_id}) {
@@ -16,7 +17,7 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
     const formRef = useRef(null);
 
 
-
+    const { emojiPerfil } = useUser();
 
     const [mostrarComecar, setMostrarComecar] = useState(true);
     const [confirmarSaida, setConfirmarSaida] = useState(false);
@@ -462,7 +463,12 @@ function ModalQuiz({ setMostrarQuiz, questoesQuiz, disciplina, quantQuestoes, si
                     <button>Login</button>
 
 
-                    <button className="icon-perfil" onClick={() => { setRotaDestino("/perfil"); setConfirmarSaidaHeader(true); }}>icon</button>
+                    
+                    <button className="icon-perfil" onClick={() => { setRotaDestino("/perfil"); setConfirmarSaidaHeader(true); }}>
+                        <span style={{ fontSize: "24px" }}>{emojiPerfil}</span>
+                    </button>
+
+
                 </nav>
             </header>
 
